@@ -177,6 +177,11 @@ export default {
     this.form = this.$form.createForm(this);
     this.changePwForm = this.$form.createForm(this);
   },
+  created () {
+    this.isLogin = this.userid ? true : false;
+    this.avatar_userid = this.userid ? this.userid : '';
+    this.isAdmin = this.groups ? this.groups.includes('5000') : false;
+  },
   computed: {
     ...mapState({
       // 动态主路由

@@ -38,13 +38,17 @@ const err = error => {
 service.interceptors.request.use(config => {
   const token = store.getters.token;
   if (token) {
-    config.headers['Access-Token'] = token; // 让每个请求携带自定义tokens
+    config.headers['token'] = token; // 让每个请求携带自定义tokens
   }
   return config;
 }, err);
 
 // response interceptor
 service.interceptors.response.use(response => {
+  const token = response.headers.token;
+  if (token) {
+    store.dispatch('renewToken', token);
+  }
   return response.data;
 }, err);
 

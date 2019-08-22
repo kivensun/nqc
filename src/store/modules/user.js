@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { login, logout } from '@/api/user';
 const user = {
   state: {
@@ -25,11 +26,13 @@ const user = {
             console.log(response);
             const { flag, data, errMsg } = response;
             if (flag) {
-              //Vue.ls.set(ACCESS_TOKEN, data.token, 7 * 24 * 60 * 60 * 1000);
               const groups = data.groups.split(',');
               commit('SET_NAME', userInfo.userId);
               commit('SET_TOKEN', data.token);
               commit('SET_GROUPS', groups);
+              Vue.ls.set('TOKEN', data.token);
+              Vue.ls.set('NAME', userInfo.userId);
+              Vue.ls.set('GROUPS', groups);
             } else {
               reject(errMsg);
             }
@@ -46,6 +49,9 @@ const user = {
         commit('SET_TOKEN', '');
         commit('SET_GROUPS', ['1000', '3000', '4000']);
         commit('SET_NAME', '');
+        Vue.ls.set('TOKEN', '');
+        Vue.ls.set('NAME', '');
+        Vue.ls.set('GROUPS', ['1000', '3000', '4000']);
         logout(state.token)
           .then(() => {
             resolve();
@@ -53,6 +59,28 @@ const user = {
           .catch(() => {
             resolve();
           });
+      });
+    },
+    // 更新token
+    renewToken({ commit }, token) {
+      return new Promise(resolve => {
+        console.log('RenewToken:' + token);
+        commit('SET_TOKEN', token);
+        Vue.ls.set('TOKEN', token);
+        resolve();
+      });
+    },
+    //根据vue-ls更新本地文件
+    refreshUser({ commit }) {
+      return new Promise(resolve => {
+        console.log('刷新重新初始化Vuex');
+        const name = Vue.ls.get('NAME') ? Vue.ls.get('NAME') : '';
+        const token = Vue.ls.get('TOKEN') ? Vue.ls.get('TOKEN') : '';
+        const groups = Vue.ls.get('GROUPS') ? Vue.ls.get('GROUPS') : ['1000', '3000', '4000'];
+        commit('SET_NAME', name);
+        commit('SET_TOKEN', token);
+        commit('SET_GROUPS', groups);
+        resolve();
       });
     }
   }

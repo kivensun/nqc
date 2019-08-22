@@ -87,8 +87,16 @@ export default {
       cardMenu: state => state.permission.allowedMenuMap
     }),
   },
+  created () {
+    this.reGetDateOnRefresh();
+    this.InitMenu(this.groups);
+
+  },
+  // mounted () {
+  //   this.reGetDateOnRefresh();
+  // },
   methods: {
-    ...mapActions(['RenewMenu', 'Login']),
+    ...mapActions(['RenewMenu', 'Login', 'InitMenu', 'refreshUser']),
     changeMenu () {
       this.RenewMenu(this.groups);
       console.log('');
@@ -102,6 +110,9 @@ export default {
     },
     onDrawerClose () {
       this.visible = false
+    },
+    reGetDateOnRefresh () {
+      this.refreshUser();
     },
   }
 }

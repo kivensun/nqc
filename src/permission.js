@@ -1,20 +1,30 @@
 import router from './router';
 import store from './store/';
-
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
 
 router.beforeEach((to, from, next) => {
   NProgress.start(); // start progress bar
 
-  if (store.getters.name === '') {
-    store.dispatch('InitMenu', store.getters.groups).then(() => {
-      next();
-    });
-  }
+  // if (store.getters.name === '') {
+  //   store.dispatch('InitMenu', store.getters.groups).then(() => {
+  //     next();
+  //   });
+  // }
+  if (to.meta.permission) {
+    if (!store.getters.groups.includes(to.meta.permission[0])) {
+      console.log('没有权限');
 
-  next();
-  NProgress.done();
+      next(from.fullPath);
+      NProgress.done;
+    } else {
+      next();
+      NProgress.done();
+    }
+  } else {
+    next();
+    NProgress.done();
+  }
 });
 
 router.afterEach(() => {
