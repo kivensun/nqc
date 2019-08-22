@@ -55,7 +55,7 @@ export default new Router({
         {
           path: '/publicinfo/orderreceive',
           name: 'OrderReceive',
-          component: () => import('@/views/404.vue'),
+          component: () => import('@/views/orderreceive.vue'),
           meta: { title: '单证中心船舶接单公告', permission: ['3000'] }
         },
         {
