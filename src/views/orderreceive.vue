@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <span>公告时间：</span>
+      <h3>公告时间：{{curDt}}</h3>
       <a-table bordered :dataSource="ocs" :columns="columns"/>
     </div>
   </div>
@@ -14,36 +14,37 @@ import U from '@/utils/utils.vue';
 export default {
   data() {
     return {
+      curDt: U.formatDate(new Date(), 'yyyy-MM-dd'),
       columns: [
         {
           title: '船名',
           dataIndex: 'cName',
-          width: 20
+          width: "15%"
         },
         {
           title: '英文船名',
           dataIndex: 'eName',
-          width: 100
+          width: "10%"
         },
         {
           title: '航次',
           dataIndex: 'voyage',
-          width: 100
+          width: "10%"
         },
         {
           title: '截单时间',
           dataIndex: 'closeDt',
-          width: 100
+          width: "15%"
         },
         {
           title: '计划加载截至时间',
           dataIndex: 'loadDt',
-          width: 100
+          width: "15%"
         },
         {
           title: '备注',
           dataIndex: 'mark',
-          width: 100
+          width: "30%"
         }
       ],
       ocs: [], //
