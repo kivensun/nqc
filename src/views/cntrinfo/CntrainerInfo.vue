@@ -4,7 +4,7 @@
       <a-col :span="16"
              :offset="4"
              justify="center">
-        <a-input-search placeholder="输入箱号"
+        <a-input-search placeholder="输入箱号o"
                         @search="onSearch"
                         enterButton="查 找"
                         size="large"
