@@ -18,7 +18,8 @@
         <a-skeleton :loading="loading">
           <a-card style="width: 100%">
             <a-row>
-              <a-col :span="6"></a-col>
+              <a-col :span="20"></a-col>
+              <img src="../../assets/homebar1.jpg" />
 
             </a-row>
           </a-card>

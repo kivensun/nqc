@@ -9,7 +9,9 @@
                    :key="itemIndex">
         <a-button type="link"
                   :block="true"
-                  @click=showModel(submenu.path,submenu.title)>
+                  @click="showModel(
+                  submenu.path,
+                  {parent: menu.title,children: submenu.title})">
           <p>{{submenu.title}}</p>
         </a-button>
       </a-card-grid>
@@ -36,8 +38,8 @@ export default {
   methods: {
     showRoute () {
     },
-    showModel (path, title) {
-      this.$emit('showDrawer', { path, title });
+    showModel (path, data) {
+      this.$emit('showDrawer', { path, data });
     }
   }
 

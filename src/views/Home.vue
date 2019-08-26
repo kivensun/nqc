@@ -1,8 +1,8 @@
 <template>
   <div>
-    <a-layout style="min-height: 100vh">
+    <a-layout style="min-height: 100vh;">
       <a-layout-header class="global-header"></a-layout-header>
-      <a-layout-content style="textAlign:center;padding: 0 50px">
+      <a-layout-content style="textAlign:center;padding: 0 50px;margin:0 auto;max-width:80vw">
         <a-row type="flex"
                justify="center"
                style="margin:30px 0px 30px 0px;">
@@ -46,23 +46,23 @@ margin: auto;" />
                        @showDrawer="showDrawer" />
           </a-col>
         </a-row>
+
       </a-layout-content>
       <a-layout-footer class="global-footer">NBCTCustomerQuery ©2018 Created by Ant </a-layout-footer>
     </a-layout>
-    <a-drawer :title="aDrawerTitle"
-              placement="bottom"
-              :closable="true"
-              @close="onDrawerClose"
-              :visible="visible"
-              :destroyOnClose="true"
-              height="95%">
+    <sun-drawer :visible="visible"
+                @close="onDrawerClose"
+                width="80%"
+                height="95%"
+                :title="aDrawerTitle">
       <route-view @closeDrawer="onDrawerClose" />
-    </a-drawer>
+    </sun-drawer>
   </div>
 </template>
 <script>
 import CardMenu from '@/components/CardMenu';
 import User from '@/components/User';
+import SunDrawer from '@/components/SunDrawer';
 import RouteView from '@/views/RouteView'
 import { mapState, mapActions } from 'vuex'
 
@@ -72,12 +72,13 @@ export default {
     return {
       visible: false,
       placement: 'left',
-      aDrawerTitle: ''
+      aDrawerTitle: {}
     }
   },
   components: {
     CardMenu,
     User,
+    SunDrawer,
     RouteView
   },
   computed: {
@@ -103,8 +104,8 @@ export default {
     },
     showDrawer (param) {
       console.log("router");
-      const { path, title } = param;
-      this.aDrawerTitle = title;
+      const { path, data } = param;
+      this.aDrawerTitle = data;
       this.$router.push({ path: path });
       this.visible = true;
     },
