@@ -292,12 +292,13 @@ export default {
 <style lang="less" scoped>
 .login-form {
   min-height: 300px;
-  min-width: 240px;
+  min-width: 210px;
   max-width: 300px;
   border: #ebeef5;
   background: #ffffff;
   padding: 15px 15px;
   margin: 0 10px 0 10px;
+  text-align: center;
 }
 .logined {
   height: 100%;

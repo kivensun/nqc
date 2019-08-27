@@ -4,50 +4,61 @@
               @after-leave="afterLeave">
     <div class="drawer-dialog"
          v-show="visible">
-      <div class="drawer-container"
-           :style="[{width: width },{height: height }]"
-           @click.self="handleWrapperClick">
-        <div class="drawer-header">
-          <a-row type="flex"
-                 justify="space-around"
-                 align="middle"
-                 style="height:100%">
-            <a-col :span="24">
+      <a-row type="flex"
+             justify="space-around"
+             align="middle">
+        <a-col :xs="24"
+               :sm="24"
+               :md="17"
+               :lg="17"
+               :xl="17"
+               style="height:100vh">
+          <div class="drawer-container"
+               :style="[{width: width },{height: height }]"
+               @click.self="handleWrapperClick">
+            <div class="drawer-header">
               <a-row type="flex"
-                     justify="space-between">
-                <a-col :span="7"
-                       style="margin-left:30px;">
-                  <a-breadcrumb>
-                    <a-breadcrumb-item href="">
-                      <a-icon type="home" />
-                    </a-breadcrumb-item>
-                    <a-breadcrumb-item href="">
-                      <span>{{title.parent}}</span>
-                    </a-breadcrumb-item>
-                    <a-breadcrumb-item>
-                      {{title.children}}
-                    </a-breadcrumb-item>
-                  </a-breadcrumb>
-                </a-col>
-                <a-col :span="7"
-                       style="text-align:right;margin-right:15px;">
-                  <a-button type="primary"
-                            @click="closeDrawer">
-                    关闭当前页
-                  </a-button>
+                     justify="space-around"
+                     align="middle"
+                     style="height:100%">
+                <a-col :span="24">
+                  <a-row type="flex"
+                         justify="space-between">
+                    <a-col :span="7"
+                           style="margin-left:30px;">
+                      <a-breadcrumb>
+                        <a-breadcrumb-item href="">
+                          <a-icon type="home" />
+                        </a-breadcrumb-item>
+                        <a-breadcrumb-item href="">
+                          <span>{{title.parent}}</span>
+                        </a-breadcrumb-item>
+                        <a-breadcrumb-item>
+                          {{title.children}}
+                        </a-breadcrumb-item>
+                      </a-breadcrumb>
+                    </a-col>
+                    <a-col :span="7"
+                           style="text-align:right;margin-right:15px;">
+                      <a-button type="primary"
+                                @click="closeDrawer">
+                        关闭当前页
+                      </a-button>
+                    </a-col>
+                  </a-row>
                 </a-col>
               </a-row>
-            </a-col>
-          </a-row>
 
-        </div>
-        <a-divider style="margin-top:0px" />
-        <div>
-          <section>
-            <slot></slot>
-          </section>
-        </div>
-      </div>
+            </div>
+            <a-divider style="margin-top:0px;margin-bottom:0px" />
+            <div class="drawer-body">
+              <section>
+                <slot></slot>
+              </section>
+            </div>
+          </div>
+        </a-col>
+      </a-row>
     </div>
 
   </transition>
@@ -124,7 +135,6 @@ export default {
 .drawer-container {
   background: #fff;
   position: absolute;
-  border-radius: 15px;
   right: 0;
   left: 0;
   bottom: 0;
@@ -132,6 +142,9 @@ export default {
 }
 .drawer-header {
   height: 60px;
+}
+.drawer-body {
+  padding: 30px;
 }
 
 .sun-drawer-fade-enter-active,

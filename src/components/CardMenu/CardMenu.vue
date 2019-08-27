@@ -4,7 +4,7 @@
             class="card-menu"
             v-for="(menu,itemIndex) in menus"
             :key="itemIndex">
-      <a-card-grid style="width:25%;textAlign:'center';min-width:160px;"
+      <a-card-grid style="width:25%;textAlign:'center';min-width:250px;"
                    v-for="(submenu,itemIndex) in menu.children"
                    :key="itemIndex">
         <a-button type="link"
@@ -12,7 +12,7 @@
                   @click="showModel(
                   submenu.path,
                   {parent: menu.title,children: submenu.title})">
-          <p>{{submenu.title}}</p>
+          <div>{{submenu.title}}</div>
         </a-button>
       </a-card-grid>
     </a-card>

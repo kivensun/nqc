@@ -2,61 +2,85 @@
   <div>
     <a-layout style="min-height: 100vh;">
       <a-layout-header class="global-header"></a-layout-header>
-      <a-layout-content style="textAlign:center;padding: 0 50px;margin:0 auto;max-width:80vw">
+      <a-layout-content>
         <a-row type="flex"
-               justify="center"
-               style="margin:30px 0px 30px 0px;">
-          <a-col :span="16"
-                 style="background: #ffffff;">
-            <a-carousel autoplay>
-              <div>
-                <img alt="example"
-                     src="../assets/homebar1.jpg"
-                     slot="cover"
-                     style="display: block;
-margin: auto;" />
-              </div>
-              <div>
-                <img alt="example"
-                     src="../assets/homebar2.jpg"
-                     slot="cover" />
-              </div>
-              <div>
-                <img alt="example"
-                     src="../assets/homebar3.jpg"
-                     slot="cover" />
-              </div>
-              <div>
-                <img alt="example"
-                     src="../assets/homebar4.jpg"
-                     slot="cover"
-                     style="display: block;
-margin: auto;" />
-              </div>
-            </a-carousel>
-          </a-col>
-          <a-col :span="4">
-            <user @changeMenu="changeMenu" />
-          </a-col>
-        </a-row>
-        <a-row type="flex"
-               justify="center">
-          <a-col :span="20">
-            <card-menu :menus=cardMenu
-                       @showDrawer="showDrawer" />
+               justify="space-around"
+               align="middle">
+          <a-col :xs="24"
+                 :sm="24"
+                 :md="21"
+                 :lg="21"
+                 :xl="19">
+            <a-row type="flex"
+                   justify="center"
+                   style="margin-top:30px;">
+              <a-col :xs="20"
+                     :sm="20"
+                     :md="20"
+                     :lg="15"
+                     :xl="15"
+                     style="background: #ffffff;">
+                <a-carousel autoplay>
+                  <div>
+                    <img alt="example"
+                         src="../assets/homebar1.jpg"
+                         slot="cover"
+                         style="display: block;margin: auto;" />
+                  </div>
+                  <div>
+                    <img alt="example"
+                         src="../assets/homebar2.jpg"
+                         slot="cover" />
+                  </div>
+                  <div>
+                    <img alt="example"
+                         src="../assets/homebar3.jpg"
+                         slot="cover" />
+                  </div>
+                  <div>
+                    <img alt="example"
+                         src="../assets/homebar4.jpg"
+                         slot="cover"
+                         style="display: block;margin: auto;" />
+                  </div>
+                </a-carousel>
+              </a-col>
+              <a-col :xs="20"
+                     :sm="20"
+                     :md="20"
+                     :lg="4"
+                     :xl="4"
+                     style="background:#fff;width:100% text-align:center; ">
+                <user @changeMenu="changeMenu"
+                      style="margin:auto;" />
+              </a-col>
+            </a-row>
+            <a-row type="flex"
+                   justify="center">
+              <a-col :xs="20"
+                     :sm="20"
+                     :md="20"
+                     :lg="19"
+                     :xl="19">
+                <card-menu :menus=cardMenu
+                           @showDrawer="showDrawer" />
+              </a-col>
+            </a-row>
           </a-col>
         </a-row>
 
       </a-layout-content>
       <a-layout-footer class="global-footer">NBCTCustomerQuery ©2018 Created by Ant </a-layout-footer>
     </a-layout>
+
     <sun-drawer :visible="visible"
                 @close="onDrawerClose"
-                width="80%"
+                width="95%"
                 height="95%"
                 :title="aDrawerTitle">
       <route-view @closeDrawer="onDrawerClose" />
     </sun-drawer>
+
   </div>
 </template>
 <script>
@@ -137,6 +161,10 @@ export default {
   height: 40px;
 }
 .global-footer {
+  background: #002f7b;
+  color: #fff;
+  height: 50px;
+  padding-top: 16px;
   text-align: center;
 }
 
