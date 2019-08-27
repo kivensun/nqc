@@ -4,8 +4,8 @@ import { VueAxios } from './axios';
 import store from '@/store';
 // 创建axios实例
 const service = axios.create({
-  //baseURL: process.env.VUE_APP_API_BASE_URL,
-  baseURL: "http://localhost:8864",
+  baseURL: process.env.VUE_APP_API_BASE_URL,
+  //baseURL: "http://localhost:8864",
   timeout: 6000
 });
 
