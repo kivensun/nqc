@@ -60,10 +60,10 @@ export default new Router({
           meta: { title: '单证中心船舶接单公告', permission: ['3000'] }
         },
         {
-          path: '/publicinfo/trucknouse',
-          name: 'TruckNoUse',
+          path: '/publicinfo/yardtruck',
+          name: 'YardTruck',
           component: () => import('@/views/404.vue'),
-          meta: { title: '集卡停牌查询', permission: ['3000'] }
+          meta: { title: '在场集卡列表', permission: ['3000'] }
         },
         {
           path: '/publicinfo/ysktxl',

@@ -40,8 +40,8 @@ export const menuMap = [
         title: '单证中心船舶接单公告'
       },
       {
-        path: '/publicinfo/trucknouse',
-        title: '集卡停牌查询'
+        path: '/publicinfo/yardtruck',
+        title: '在场集卡列表'
       },
       {
         path: '/publicinfo/ysktxl',
