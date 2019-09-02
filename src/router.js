@@ -115,6 +115,11 @@ export default new Router({
       path: '/404',
       name: '404',
       component: () => import('@/views/404.vue')
+    },
+    {
+      path: '/helloworld',
+      name: '404',
+      component: () => import('@/components/HelloWorld.vue')
     }
   ]
 });
