@@ -130,7 +130,7 @@ export default {
       console.log("router");
       const { path, data } = param;
       this.aDrawerTitle = data;
-      this.$router.push({ path: path });
+      this.$router.push({ path: path }, () => { });
       this.visible = true;
     },
     onDrawerClose () {
