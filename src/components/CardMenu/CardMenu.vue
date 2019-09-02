@@ -2,6 +2,7 @@
   <div :key="menuKey">
     <a-card :title=menu.title
             class="card-menu"
+            :headStyle="cardTileStyle"
             v-for="(menu,itemIndex) in menus"
             :key="itemIndex">
       <a-card-grid style="width:25%;textAlign:'center';min-width:250px;"
@@ -29,7 +30,12 @@ export default {
   },
   data () {
     return {
-      menuKey: 1
+      menuKey: 1,
+      cardTileStyle: {
+        background: '#ff9933',
+        color: '#000000',
+        borderBottom: '1px solid #1d2c6a'
+      }
     }
   },
   mounted () {

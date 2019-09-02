@@ -17,32 +17,35 @@
              justify="center">
         <a-skeleton :loading="loading">
           <a-card style="width: 100%;text-align: left; background:#f5f7fa">
-            <a-row>
+            <a-row type="flex">
               <a-col :span="3">
-                <p>箱号:</p>
+                <div>箱号:</div>
               </a-col>
-              <a-col :span="5"
-                     s>
-                <p>{{container.cntrId}}</p>
+              <a-col :span="5">
+                <div class="wrap-content">
+                  {{container.cntrId }}
+                </div>
               </a-col>
               <a-col :span="3">
                 <p>进港类型:</p>
               </a-col>
-              <a-col :span="5">{{container.inPortType}}</a-col>
+              <a-col :span="5">
+                <div class="wrap-content">{{container.inPortType}}</div>
+              </a-col>
             </a-row>
             <a-divider />
-            <a-row>
+            <a-row type="flex">
               <a-col :span="3">
                 <div>进口船名/航次:</div>
               </a-col>
               <a-col :span="5">
-                <div>{{container.imvsvy}}</div>
+                <div class="wrap-content">{{container.imvsvy}}</div>
               </a-col>
               <a-col :span="3">
                 <div>出口船名/航次:</div>
               </a-col>
               <a-col :span="5">
-                <div>{{container.exvsvy}}</div>
+                <div class="wrap-content">{{container.exvsvy}}</div>
               </a-col>
               <a-col :span="3">
                 <div>是否装船:</div>
@@ -52,28 +55,28 @@
               </a-col>
             </a-row>
             <a-divider />
-            <a-row>
+            <a-row type="flex">
               <a-col :span="3">
                 <div>进场时间:</div>
               </a-col>
               <a-col :span="5">
-                <div>{{container.inYardDt}}</div>
+                <div class="wrap-content">{{container.inYardDt}}</div>
               </a-col>
               <a-col :span="3">
                 <div>出场时间:</div>
               </a-col>
               <a-col :span="5">
-                <div>{{container.outYardDt}}</div>
+                <div class="wrap-content">{{container.outYardDt}}</div>
               </a-col>
               <a-col :span="3">
                 <div>堆存天数: </div>
               </a-col>
               <a-col :span="5">
-                <div>{{container.storageDays ? container.storageDays + '天 (非费收依据)' : ''}} </div>
+                <div class="wrap-content">{{container.storageDays ? container.storageDays + '天 (非费收依据)' : ''}} </div>
               </a-col>
             </a-row>
             <a-divider />
-            <a-row>
+            <a-row type="flex">
               <a-col :span="2">
                 <p>箱主:</p>
               </a-col>
@@ -103,36 +106,36 @@
               </a-col>
             </a-row>
             <a-divider />
-            <a-row>
+            <a-row type="flex">
               <a-col :span="2">
                 <div>
                   装/卸货港:</div>
               </a-col>
               <a-col :span="4">
-                <div>{{container.port}}</div>
+                <div class="wrap-content">{{container.port}}</div>
               </a-col>
               <a-col :span="2">
                 <div>提单号:</div>
               </a-col>
               <a-col :span="4">
-                <div>{{container.cabl}}</div>
+                <div class="wrap-content">{{container.cabl}}</div>
               </a-col>
               <a-col :span="2">
                 <div>货代代码:</div>
               </a-col>
               <a-col :span="4">
-                <div>{{container.caag}}</div>
+                <div class="wrap-content">{{container.caag}}</div>
               </a-col>
               <a-col :span="2">
                 <div>输单重量:</div>
               </a-col>
               <a-col :span="4">
-                <div>{{container.weight ? container.weight + '千克':''}} </div>
+                <div class="wrap-content">{{container.weight ? container.weight + '千克':''}} </div>
               </a-col>
             </a-row>
             <a-divider />
 
-            <a-row>
+            <a-row type="flex">
               <a-col :span="3">
                 <div>海关是否放行:</div>
               </a-col>
@@ -147,9 +150,9 @@
               </a-col>
             </a-row>
             <a-divider />
-            <a-row>
+            <a-row type="flex">
               <a-col :span="3">
-                <div> VGM称重方式:</div>
+                <div class="wrap-content"> VGM称重方式:</div>
               </a-col>
               <a-col :span="3">
                 <div> {{container.weighingWayVGM === 'null' ? '':container.weighingWayVGM}}</div>
@@ -168,7 +171,7 @@
               </a-col>
             </a-row>
             <a-divider />
-            <a-row>
+            <a-row type="flex">
               <a-col :span="3">
                 <div> 超限箱: </div>
               </a-col>
@@ -222,6 +225,7 @@ export default {
   },
   methods: {
     onSearch (value) {
+      this.loading = true;
       console.log('箱号:' + value);
       if (value === '') {
         this.$notification.error({
@@ -229,6 +233,7 @@ export default {
           description: '请输入箱号'
         });
         this.container = {};
+        this.loading = false;
         return false;
       }
       const params = {};
@@ -240,17 +245,25 @@ export default {
           if (data) {
             this.container = data;
           }
+          this.loading = false;
 
         } else {
           this.$notification.error({
             message: '出错',
             description: '出错信息' + errMsg
           });
+          this.loading = false;
         }
 
       });
+
     }
   }
 }
 
 </script>
+<style lang="less" scoped>
+.wrap-content {
+  word-break: break-all;
+}
+</style>

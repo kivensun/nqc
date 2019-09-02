@@ -6,7 +6,8 @@ import store from '@/store';
 const service = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_URL,
   //baseURL: "http://localhost:8864",
-  timeout: 6000
+  timeout: 6000,
+  withCredentials: true
 });
 
 const err = error => {

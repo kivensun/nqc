@@ -2,7 +2,9 @@
   <div>
     <div>
       <h3>公告时间：{{curDt}}</h3>
-      <a-table bordered :dataSource="ocs" :columns="columns"/>
+      <a-table bordered
+               :dataSource="ocs"
+               :columns="columns" />
     </div>
   </div>
 </template>
@@ -12,7 +14,7 @@ import { orderreceive } from '@/api/api';
 import U from '@/utils/utils.vue';
 
 export default {
-  data() {
+  data () {
     return {
       curDt: U.formatDate(new Date(), 'yyyy-MM-dd'),
       columns: [
@@ -51,7 +53,7 @@ export default {
     };
   },
   methods: {
-    list() {
+    list () {
       let me = this;
       let dt = parseInt(U.formatDate(new Date(), 'yyyyMMdd'));
       let params = { dt };
@@ -61,13 +63,14 @@ export default {
           this.$message.error(errMsg);
         } else {
           console.info(data);
-          me.ocs = data.map(function(item){
+          me.ocs = data.map(function (item, index) {
             let oc = {}
+            oc.key = index;
             oc.cName = item.cnnmvr;
             oc.eName = item.vscdcs;
             oc.voyage = U.trim(item.exvycs);
-            oc.closeDt = U.convertNumToDate(item.dtcscs,item.tmcscs);
-            oc.loadDt = U.convertNumToDate(item.dtldcs,item.tmldcs);
+            oc.closeDt = U.convertNumToDate(item.dtcscs, item.tmcscs);
+            oc.loadDt = U.convertNumToDate(item.dtldcs, item.tmldcs);
             oc.mark = U.trim(item.remkcs);
             return oc;
           });
@@ -75,7 +78,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     this.list();
   }
 };

@@ -9,6 +9,7 @@ if (process.env.NODE_ENV === 'mojck' || process.env.VUE_APP_PREVIEW === 'ture') 
   console.log('mock mouting');
   require('./services/user');
   require('./services/containerInfo');
+  require('./services/cntrInCloseDate');
 
   Mock.setup({
     timeout: 800

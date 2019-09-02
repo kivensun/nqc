@@ -43,13 +43,14 @@ export default new Router({
         {
           path: '/publicinfo/sailingdatenotice',
           name: 'CailingDateNotice',
-          component: () => import('@/views/404.vue'),
+          component: () => import('@/views/publicinfo/SailingDateNotice.vue'),
           meta: { title: '集装箱船舶船期信息', permission: ['3000'] }
         },
         // 外部链接
         {
           path: '/publicinfo/cntrinclosedate',
           name: 'CntrInCloseDate',
+          component: () => import('@/views/publicinfo/CntrInCloseDate.vue'),
           meta: { title: '集装箱进箱/截箱时间公告', permission: ['3000'] }
         },
         {

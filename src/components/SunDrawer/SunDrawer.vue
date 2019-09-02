@@ -142,6 +142,8 @@ export default {
 }
 .drawer-header {
   height: 60px;
+  background: #ff9933;
+  border-bottom: 2px solid #1d2c6a;
 }
 .drawer-body {
   padding: 30px;
