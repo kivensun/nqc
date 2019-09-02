@@ -43,27 +43,11 @@
                   <a-col :span="5">
                     <div class="wrap-content">{{ctnrInfo.vscn + '/' + ctnrInfo.vsvy + '-'+ ctnrInfo.vsdr}}</div>
                   </a-col>
-                </a-row>
-
-                <a-divider />
-                <a-row>
                   <a-col :span="3">
-                    <div>提单号:</div>
+                    <div>港口:</div>
                   </a-col>
                   <a-col :span="5">
-                    <div class="wrap-content">{{ctnrInfo.cabl}}</div>
-                  </a-col>
-                  <a-col :span="3">
-                    <div>位置:</div>
-                  </a-col>
-                  <a-col :span="5">
-                    <div class="wrap-content">{{ctnrInfo.yardcn}}</div>
-                  </a-col>
-                  <a-col :span="3">
-                    <div>是否转关箱:</div>
-                  </a-col>
-                  <a-col :span="5">
-                    <div class="wrap-content">{{ctnrInfo.istp}}</div>
+                    <div class="wrap-content">{{ctnrInfo.ptds}}</div>
                   </a-col>
                 </a-row>
               </a-card>
@@ -76,7 +60,7 @@
   </div>
 </template>
 <script>
-import { imCustomPassInfo } from "@/api/containerInfo";
+import { exportPassiInfo } from "@/api/containerInfo";
 export default {
   data () {
     return {
@@ -91,9 +75,7 @@ export default {
         vscn: '',
         vsvy: '',
         vsdr: '',
-        cabl: '',
-        yardcn: '',
-        istp: ''
+        ptds: ''
       }
     }
   },
@@ -112,16 +94,14 @@ export default {
           vscn: '',
           vsvy: '',
           vsdr: '',
-          cabl: '',
-          yardcn: '',
-          istp: ''
+          ptds: ''
         };
         this.loading = false;
         return false;
       }
       const params = {};
       params.cntrid = value;
-      imCustomPassInfo(params).then(response => {
+      exportPassiInfo(params).then(response => {
         console.log(response);
         const { flag, data, errMsg, outMsg } = response;
         if (flag) {

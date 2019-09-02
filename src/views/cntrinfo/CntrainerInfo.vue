@@ -226,6 +226,7 @@ export default {
   methods: {
     onSearch (value) {
       this.loading = true;
+      value = value.trim();
       console.log('箱号:' + value);
       if (value === '') {
         this.$notification.error({

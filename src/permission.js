@@ -11,6 +11,9 @@ router.beforeEach((to, from, next) => {
   //     next();
   //   });
   // }
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
   if (to.meta.permission) {
     if (!store.getters.groups.includes(to.meta.permission[0])) {
       console.log('没有权限');

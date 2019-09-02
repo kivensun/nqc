@@ -15,6 +15,7 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: Home,
+      meta: { title: 'NBCTCustomerQuery' },
       children: [
         {
           path: '/cntrinfo/cntrainerinfo',
@@ -25,19 +26,19 @@ export default new Router({
         {
           path: '/cntrinfo/imcustompassinfo',
           name: 'ImCustomPassInfo',
-          component: () => import('@/views/cntrinfo/CntrainerInfo.vue'),
+          component: () => import('@/views/cntrinfo/ImCustomPassInfo.vue'),
           meta: { title: '进口箱海关放行信息查询', permission: ['1000'] }
         },
         {
           path: '/cntrinfo/exportpassinfo',
           name: 'ExportPassInfo',
-          component: () => import('@/views/404.vue'),
-          meta: { title: '出口箱码头场站收据放行查询', permission: ['1000'] }
+          component: () => import('@/views/cntrinfo/ExportPassInfo.vue'),
+          meta: { title: '出口箱码头放行信息查询', permission: ['1000'] }
         },
         {
           path: '/cntrinfo/checkmovecntrinfo',
           name: 'CheckMoveCntrInfo',
-          component: () => import('@/views/404.vue'),
+          component: () => import('@/views/cntrinfo/CheckMoveCntrInfo.vue'),
           meta: { title: '查验箱移箱/归位情况查询', permission: ['1000'] }
         },
         {

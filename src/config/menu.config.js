@@ -14,7 +14,7 @@ export const menuMap = [
       },
       {
         path: '/cntrinfo/exportpassinfo',
-        title: '出口箱码头场站收据放行查询'
+        title: '出口箱码头放行信息查询'
       },
       {
         path: '/cntrinfo/checkmovecntrinfo',

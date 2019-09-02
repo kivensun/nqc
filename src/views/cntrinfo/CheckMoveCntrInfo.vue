@@ -44,26 +44,26 @@
                     <div class="wrap-content">{{ctnrInfo.vscn + '/' + ctnrInfo.vsvy + '-'+ ctnrInfo.vsdr}}</div>
                   </a-col>
                 </a-row>
-
                 <a-divider />
-                <a-row>
+                <a-row type="flex"
+                       justify="start">
                   <a-col :span="3">
-                    <div>提单号:</div>
+                    <div>查验状态:</div>
                   </a-col>
                   <a-col :span="5">
-                    <div class="wrap-content">{{ctnrInfo.cabl}}</div>
+                    <div class="wrap-content">{{ctnrInfo.ckstatuscn}}</div>
                   </a-col>
                   <a-col :span="3">
-                    <div>位置:</div>
+                    <div>查验地点:</div>
                   </a-col>
                   <a-col :span="5">
-                    <div class="wrap-content">{{ctnrInfo.yardcn}}</div>
+                    <div class="wrap-content">{{ctnrInfo.ckyardcn}}</div>
                   </a-col>
                   <a-col :span="3">
-                    <div>是否转关箱:</div>
+                    <div>归位状态:</div>
                   </a-col>
                   <a-col :span="5">
-                    <div class="wrap-content">{{ctnrInfo.istp}}</div>
+                    <div class="wrap-content">{{ctnrInfo.posstatuscn}}</div>
                   </a-col>
                 </a-row>
               </a-card>
@@ -76,7 +76,7 @@
   </div>
 </template>
 <script>
-import { imCustomPassInfo } from "@/api/containerInfo";
+import { checkMoveCntrInfo } from "@/api/containerInfo";
 export default {
   data () {
     return {
@@ -91,9 +91,9 @@ export default {
         vscn: '',
         vsvy: '',
         vsdr: '',
-        cabl: '',
-        yardcn: '',
-        istp: ''
+        ckstatuscn: '',
+        ckyardcn: '',
+        posstatuscn: ''
       }
     }
   },
@@ -112,23 +112,23 @@ export default {
           vscn: '',
           vsvy: '',
           vsdr: '',
-          cabl: '',
-          yardcn: '',
-          istp: ''
+          ckstatuscn: '',
+          ckyardcn: '',
+          posstatuscn: ''
         };
         this.loading = false;
         return false;
       }
       const params = {};
       params.cntrid = value;
-      imCustomPassInfo(params).then(response => {
+      checkMoveCntrInfo(params).then(response => {
         console.log(response);
-        const { flag, data, errMsg, outMsg } = response;
+        const { flag, data, errMsg } = response;
         if (flag) {
           this.showResults = true;
           this.hadCustRelease = true;
           this.alertType = "success";
-          this.alertMessage = outMsg;
+          this.alertMessage = '有查验指令';
           this.alertTitle = "成功";
           if (data) {
             this.ctnrInfo = data;
