@@ -39,3 +39,14 @@ export function sailingDateNotice(parameter) {
     }
   });
 }
+
+/**
+ * yadTruck func
+ * 无参数
+ * }
+ * @returns {*}
+ */
+export const yardTruck = params => {
+  return axios.post(`/yardtruck`, params).then(res => res);
+};
+

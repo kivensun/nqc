@@ -61,9 +61,9 @@ export default new Router({
           meta: { title: '单证中心船舶接单公告', permission: ['3000'] }
         },
         {
-          path: '/publicinfo/yardtruck',
+          path: '/publicinfo/YardTruck',
           name: 'YardTruck',
-          component: () => import('@/views/404.vue'),
+          component: () => import('@/views/publicinfo/YardTruck.vue'),
           meta: { title: '在场集卡列表', permission: ['3000'] }
         },
         {
@@ -124,3 +124,4 @@ export default new Router({
     }
   ]
 });
+
