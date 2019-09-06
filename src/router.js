@@ -76,49 +76,55 @@ export default new Router({
           path: '/customerquery/exportinorldinfor',
           name: 'ExportInOrLdInfor',
           component: () => import('@/views/404.vue'),
-          meta: { title: '出口箱在场/装船信息查询', permission: ['2000'] }
+          meta: { title: '出口箱在场/装船信息查询', permission: ['2001'] }
         },
         {
           path: '/customerquery/2002',
           name: '2002',
           component: () => import('@/views/404.vue'),
-          meta: { title: '进口箱信息查询', permission: ['2000'] }
+          meta: { title: '进口箱信息查询', permission: ['2001'] }
         },
         {
           path: '/customerquery/2003',
           name: '2003',
           component: () => import('@/views/404.vue'),
-          meta: { title: '历史空箱在场查询', permission: ['2000'] }
+          meta: { title: '历史空箱在场查询', permission: ['2001'] }
         },
         {
           path: '/customerquery/2004',
           name: '2004',
           component: () => import('@/views/404.vue'),
-          meta: { title: '在场空箱实时查询', permission: ['2000'] }
+          meta: { title: '在场空箱实时查询', permission: ['2001', '2003'] }
         },
         {
           path: '/customerquery/2005',
-          name: '2004',
+          name: '2005',
           component: () => import('@/views/404.vue'),
           meta: { title: '货代出口箱在场箱信息', permission: ['2002'] }
         },
         {
           path: '/customerquery/2006',
-          name: '2004',
+          name: '2006',
           component: () => import('@/views/404.vue'),
           meta: { title: '货代出口箱按航次查询', permission: ['2002'] }
         },
         {
           path: '/customerquery/2007',
-          name: '2004',
+          name: '2007',
           component: () => import('@/views/404.vue'),
           meta: { title: '货代对帐单下载', permission: ['2002'] }
         },
         {
           path: '/customerquery/2008',
-          name: '2004',
+          name: '2008',
           component: () => import('@/views/404.vue'),
           meta: { title: '堆场驳箱查询', permission: ['2003'] }
+        },
+        {
+          path: '/customerquery/2009',
+          name: '2009',
+          component: () => import('@/views/404.vue'),
+          meta: { title: '集装箱历史信息查询', permission: ['2004'] }
         },
         {
           path: '/usermanage',
@@ -135,4 +141,3 @@ export default new Router({
     }
   ]
 });
-

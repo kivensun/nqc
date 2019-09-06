@@ -98,6 +98,11 @@ export const menuMap = [
         path: '/customerquery/2008',
         title: '堆场驳箱查询',
         permission: ['2003']
+      },
+      {
+        path: '/customerquery/2007',
+        title: '集装箱历史信息查询',
+        permission: ['2004']
       }
     ]
   }
