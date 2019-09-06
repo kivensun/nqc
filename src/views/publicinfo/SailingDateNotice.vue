@@ -10,7 +10,7 @@
                         :placeholder="['开始日期', '结束日期']"
                         v-model="selDates" />
       </a-col>
-      <a-col :span="1"
+      <a-col :span="2"
              :offset="1">
         <a-button type="primary"
                   @click="getData">查 找</a-button>
@@ -53,65 +53,75 @@ export default {
         {
           title: "船公司",
           dataIndex: "lncd",
-          width: 80
+          width: 80,
+          key: 1
         },
         {
           title: "中文船名",
           dataIndex: "cnvsname",
-          width: 150
+          width: 150,
+          key: 2
         },
         {
           title: "英文船名",
           dataIndex: "engvsname",
-          width: 150
+          width: 150,
+          key: 3
         },
         {
           title: "航次",
           dataIndex: "vsvy",
-          width: 150
+          width: 150,
+          key: 4
         },
         {
           title: "泊位号",
           dataIndex: "btno",
-          width: 150
+          width: 150,
+          key: 5
         },
         {
           title: "计划靠泊时间",
           dataIndex: "estberthdate",
-          width: 250
+          width: 250,
+          key: 6
         },
         {
           title: "计划离泊时间",
           dataIndex: "estunberthdate",
-          width: 150
+          width: 150,
+          key: 7
         },
         {
           title: "实际靠泊时间",
           dataIndex: "realberthdate",
-          width: 150
+          width: 150,
+          key: 8
         },
         {
           title: "实际离泊时间",
           dataIndex: "realunberthdate",
-          width: 150
+          width: 150,
+          key: 9
         },
         {
           title: "进箱时间",
           dataIndex: "cntrindate",
-          width: 150
+          width: 150,
+          key: 10
         },
         {
           title: "截箱时间",
           dataIndex: "cntroutdate",
-          width: 250
+          width: 250,
+          key: 11
         },
         {
           title: "发布时间",
           dataIndex: "pubdate",
-          width: 250
+          width: 250,
+          key: 12
         }
-
-
       ],
       tableData: [],
       cardTitle: ""

@@ -17,28 +17,57 @@ const permission = {
     InitMenu({ commit }, groups) {
       return new Promise(resolve => {
         commit('SET_ALLMENUMAP', menuMap);
-        const filtedMenuMap = menuMap.filter(menu => {
-          if (groups.includes(menu.permission)) {
-            return true;
-          } else {
-            return false;
+
+        let filterdMenuMap = [];
+        menuMap.forEach(menu => {
+          let filterdMenuChildren = menu.children.filter(childrenMenu => {
+            let permissions = childrenMenu.permission.filter(permission => {
+              if (groups.includes(permission)) {
+                return true;
+              } else {
+                return false;
+              }
+            });
+            if (permissions.length > 0) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          if (filterdMenuChildren.length !== 0) {
+            filterdMenuMap.push({ title: menu.title, children: filterdMenuChildren });
           }
         });
-        commit('SET_ALLOWEDMENUMAP', filtedMenuMap);
+
+        commit('SET_ALLOWEDMENUMAP', filterdMenuMap);
         resolve();
       });
     },
 
     RenewMenu({ commit }, groups) {
       return new Promise(resolve => {
-        const filtedMenuMap = this.state.permission.allMenuMap.filter(menu => {
-          if (groups.includes(menu.permission)) {
-            return true;
-          } else {
-            return false;
+        const filterdMenuMap = [];
+        this.state.permission.allMenuMap.forEach(menu => {
+          let filterdMenuChildren = menu.children.filter(childrenMenu => {
+            let permissions = childrenMenu.permission.filter(permission => {
+              if (groups.includes(permission)) {
+                return true;
+              } else {
+                return false;
+              }
+            });
+            if (permissions.length > 0) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          if (filterdMenuChildren.length !== 0) {
+            filterdMenuMap.push({ title: menu.title, children: filterdMenuChildren });
           }
         });
-        commit('SET_ALLOWEDMENUMAP', filtedMenuMap);
+
+        commit('SET_ALLOWEDMENUMAP', filterdMenuMap);
         resolve();
       });
     }

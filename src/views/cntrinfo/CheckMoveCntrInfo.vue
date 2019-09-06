@@ -120,7 +120,7 @@ export default {
         return false;
       }
       const params = {};
-      params.cntrid = value;
+      params.cntrId = value;
       checkMoveCntrInfo(params).then(response => {
         console.log(response);
         const { flag, data, errMsg } = response;

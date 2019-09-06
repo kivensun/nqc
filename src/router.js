@@ -82,33 +82,49 @@ export default new Router({
           path: '/customerquery/2002',
           name: '2002',
           component: () => import('@/views/404.vue'),
-          meta: { title: '出口箱在场/装船信息查询', permission: ['2000'] }
+          meta: { title: '进口箱信息查询', permission: ['2000'] }
         },
         {
           path: '/customerquery/2003',
           name: '2003',
           component: () => import('@/views/404.vue'),
-          meta: { title: '出口箱在场/装船信息查询', permission: ['2000'] }
+          meta: { title: '历史空箱在场查询', permission: ['2000'] }
         },
         {
           path: '/customerquery/2004',
           name: '2004',
           component: () => import('@/views/404.vue'),
-          meta: { title: '出口箱在场/装船信息查询', permission: ['2000'] }
+          meta: { title: '在场空箱实时查询', permission: ['2000'] }
         },
         {
-          path: '/user',
-          name: 'User',
-          redirect: '/user/rightmanage',
-          meta: { title: '用户维护', permission: ['5000'] },
-          children: [
-            {
-              path: '/user/rightmanage',
-              name: 'RightManage',
-              component: () => import('@/views/404.vue'),
-              meta: { title: '用户管理', permission: ['5000'] }
-            }
-          ]
+          path: '/customerquery/2005',
+          name: '2004',
+          component: () => import('@/views/404.vue'),
+          meta: { title: '货代出口箱在场箱信息', permission: ['2002'] }
+        },
+        {
+          path: '/customerquery/2006',
+          name: '2004',
+          component: () => import('@/views/404.vue'),
+          meta: { title: '货代出口箱按航次查询', permission: ['2002'] }
+        },
+        {
+          path: '/customerquery/2007',
+          name: '2004',
+          component: () => import('@/views/404.vue'),
+          meta: { title: '货代对帐单下载', permission: ['2002'] }
+        },
+        {
+          path: '/customerquery/2008',
+          name: '2004',
+          component: () => import('@/views/404.vue'),
+          meta: { title: '堆场驳箱查询', permission: ['2003'] }
+        },
+        {
+          path: '/usermanage',
+          name: 'UserManage',
+          component: () => import('@/views/usermanage/usermanage.vue'),
+          meta: { title: '用户管理', permission: ['5000'] }
         }
       ]
     },
@@ -116,11 +132,6 @@ export default new Router({
       path: '/404',
       name: '404',
       component: () => import('@/views/404.vue')
-    },
-    {
-      path: '/helloworld',
-      name: '404',
-      component: () => import('@/components/HelloWorld.vue')
     }
   ]
 });
