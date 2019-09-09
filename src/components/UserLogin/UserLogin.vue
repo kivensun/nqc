@@ -63,7 +63,9 @@
         <a-row>
           <div v-if="isAdmin">
             <a-col :span="8">
-              <a-button type="link">管理权限</a-button>
+              <a-button type="link"
+                        @click="handleManageUserModel">
+                用户管理</a-button>
             </a-col>
             <a-col :span="8">
               <a-button type="link"
@@ -162,7 +164,7 @@
 import * as utility from 'utility';
 import { mapState, mapActions } from 'vuex';
 export default {
-  name: 'user',
+  name: 'userLogin',
   data () {
     return {
       avatar_userid: '',
@@ -178,15 +180,15 @@ export default {
     this.changePwForm = this.$form.createForm(this);
   },
   created () {
-    this.isLogin = this.userid ? true : false;
-    this.avatar_userid = this.userid ? this.userid : '';
+    this.isLogin = this.userId ? true : false;
+    this.avatar_userid = this.userId ? this.userId : '';
     this.isAdmin = this.groups ? this.groups.includes('5000') : false;
   },
   computed: {
     ...mapState({
       // 动态主路由
       groups: state => state.user.groups,
-      userid: state => state.user.name
+      userId: state => state.user.userId
     }),
   },
   methods: {
@@ -217,7 +219,7 @@ export default {
         });
         this.isLogin = true;
         this.isAdmin = this.groups.includes('5000');
-        this.avatar_userid = this.userid;
+        this.avatar_userid = this.userId;
         this.$emit('changeMenu');
       }, 1000);
     },
@@ -251,7 +253,7 @@ export default {
     handleChangePwModeOk (e) {
 
       e.preventDefault();
-      this.changePwForm.validateFields((err, values) => {
+      this.changePwForm.validateFields((err) => {
         if (!err) {
           this.changePwModeloading = true;
           setTimeout(() => {
@@ -283,6 +285,13 @@ export default {
         form.validateFields(['confirm'], { force: true });
       }
       callback();
+    },
+    handleManageUserModel () {
+      let data = {};
+      data.parent = '首页';
+      data.children = '用户管理';
+      let path = "/usermanage";
+      this.$emit('showDrawer', { path, data });
     }
 
   }

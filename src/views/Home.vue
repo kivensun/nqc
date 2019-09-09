@@ -51,8 +51,9 @@
                      :lg="4"
                      :xl="4"
                      style="background:#fff;width:100% text-align:center; ">
-                <user @changeMenu="changeMenu"
-                      style="margin:auto;" />
+                <user-login @changeMenu="changeMenu"
+                            @showDrawer="showDrawer"
+                            style="margin:auto;" />
               </a-col>
             </a-row>
             <a-row type="flex"
@@ -85,7 +86,7 @@
 </template>
 <script>
 import CardMenu from '@/components/CardMenu';
-import User from '@/components/User';
+import UserLogin from '@/components/UserLogin';
 import SunDrawer from '@/components/SunDrawer';
 import RouteView from '@/views/RouteView'
 import { mapState, mapActions } from 'vuex'
@@ -101,7 +102,7 @@ export default {
   },
   components: {
     CardMenu,
-    User,
+    UserLogin,
     SunDrawer,
     RouteView
   },
