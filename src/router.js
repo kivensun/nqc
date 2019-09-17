@@ -129,7 +129,7 @@ export default new Router({
         {
           path: '/usermanage',
           name: 'UserManage',
-          component: () => import('@/views/usermanage/usermanage.vue'),
+          component: () => import('@/views/usermanage/UserManage.vue'),
           meta: { title: '用户管理', permission: ['5000'] }
         }
       ]
