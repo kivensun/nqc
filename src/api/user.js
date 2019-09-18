@@ -130,3 +130,19 @@ export function getUsers() {
     }
   });
 }
+
+/**
+ * getUsercompanyHadCodes func
+ * @param
+ * @returns {*}
+ */
+export function getUsercompanyHadCodes(parameter) {
+  return axios({
+    url: '/getusercompanyhadcodes',
+    method: 'post',
+    data: parameter,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+}

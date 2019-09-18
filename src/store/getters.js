@@ -4,6 +4,7 @@ const getters = {
   companyId: state => state.user.companyId,
   userType: state => state.user.userType,
   token: state => state.user.token,
+  companyHadCodes: state => state.user.companyHadCodes,
   allmenumap: state => state.permission.allMenuMap,
   allowedmenumap: state => state.permission.allowedMenuMap
 };
