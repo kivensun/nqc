@@ -85,9 +85,9 @@ export default new Router({
           meta: { title: '进口箱信息查询', permission: ['2001'] }
         },
         {
-          path: '/customerquery/2003',
-          name: '2003',
-          component: () => import('@/views/404.vue'),
+          path: '/customerquery/emptycontainerinyardhis',
+          name: 'EmptyContainerInYardHis',
+          component: () => import('@/views/customerinfo/EmptyContainerInYardHis.vue'),
           meta: { title: '历史空箱在场查询', permission: ['2001'] }
         },
         {

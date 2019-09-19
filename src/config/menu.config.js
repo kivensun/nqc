@@ -70,7 +70,7 @@ export const menuMap = [
         permission: ['2001']
       },
       {
-        path: '/customerquery/2003',
+        path: '/customerquery/emptycontainerinyardhis',
         title: '历史空箱在场查询',
         permission: ['2001']
       },
