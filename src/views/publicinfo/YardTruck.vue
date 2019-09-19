@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     list(){
-      //let me=this;
+      //let me=this;//test
       yardTruck().then(res =>{
         let {flag,data, errMsg}=res;
         if(!flag){

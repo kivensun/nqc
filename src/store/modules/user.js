@@ -1,12 +1,13 @@
 import Vue from 'vue';
-import { login, logout } from '@/api/user';
+import { login, logout, getUsercompanyHadCodes } from '@/api/user';
 const user = {
   state: {
     token: '',
     userId: '',
     groups: ['1000', '3000', '4000'],
     companyId: '',
-    userType: ''
+    userType: '',
+    companyHadCodes: []
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -23,6 +24,9 @@ const user = {
     },
     SET_USERTYPE: (state, userType) => {
       state.userType = userType;
+    },
+    SET_COMPANYHADCODES: (state, companyHadCodes) => {
+      state.companyHadCodes = companyHadCodes;
     }
   },
   actions: {
@@ -46,6 +50,19 @@ const user = {
               Vue.ls.set('GROUPS', groups);
               Vue.ls.set('COMPANYID', user.companyId === null ? '' : user.companyId);
               Vue.ls.set('USERTYPE', user.userType === null ? '' : user.userType);
+              if (user.companyId) {
+                let params = {};
+                params.companyId = user.companyId;
+                params.userType = user.userType;
+                getUsercompanyHadCodes(params).then(res => {
+                  let { flag, data } = res;
+                  if (flag) {
+                    let codes = data === null ? [] : data.sort();
+                    commit('SET_COMPANYHADCODES', codes);
+                    Vue.ls.set('COMPANYHADCODES', codes);
+                  }
+                });
+              }
             } else {
               reject(errMsg);
             }
@@ -64,11 +81,13 @@ const user = {
         commit('SET_USERID', '');
         commit('SET_COMPANYID', '');
         commit('SET_USERTYPE', '');
+        commit('SET_COMPANYHADCODES', []);
         Vue.ls.set('TOKEN', '');
         Vue.ls.set('USERID', '');
         Vue.ls.set('GROUPS', ['1000', '3000', '4000']);
         Vue.ls.set('COMPANYID', '');
         Vue.ls.set('USERTYPE', '');
+        Vue.ls.set('COMPANYHADCODES', []);
         logout(state.token)
           .then(() => {
             resolve();
@@ -96,11 +115,13 @@ const user = {
         const groups = Vue.ls.get('GROUPS') ? Vue.ls.get('GROUPS') : ['1000', '3000', '4000'];
         const companyId = Vue.ls.get('COMPANYID') ? Vue.ls.get('COMPANYID') : '';
         const userType = Vue.ls.get('USERTYPE') ? Vue.ls.get('USERTYPE') : '';
+        const companyHadCodes = Vue.ls.get('COMPANYHADCODES');
         commit('SET_USERID', userId);
         commit('SET_TOKEN', token);
         commit('SET_GROUPS', groups);
         commit('SET_COMPANYID', companyId);
         commit('SET_USERTYPE', userType);
+        commit('SET_COMPANYHADCODES', companyHadCodes);
         resolve();
       });
     }
