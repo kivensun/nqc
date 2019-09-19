@@ -75,7 +75,7 @@ export const menuMap = [
         permission: ['2001']
       },
       {
-        path: '/customerquery/2004',
+        path: '/customerquery/EmptyContainer',
         title: '在场空箱实时查询',
         permission: ['2001', '2003']
       },
