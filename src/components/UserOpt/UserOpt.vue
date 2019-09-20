@@ -194,7 +194,7 @@ export default {
               params.groups = '1000,2002,3000,4000';
               break;
             case 'V':
-              params.groups = '1000,2001,,3000,4000';
+              params.groups = '1000,2001,3000,4000';
               break;
           }
           params.telephone = values.telephone ? values.telephone : '';

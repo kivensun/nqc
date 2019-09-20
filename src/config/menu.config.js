@@ -90,7 +90,7 @@ export const menuMap = [
         permission: ['2002']
       },
       {
-        path: '/customerquery/2007',
+        path: '/customerquery/efinreportdownload',
         title: '货代对帐单下载',
         permission: ['2002']
       },
