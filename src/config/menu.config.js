@@ -65,12 +65,12 @@ export const menuMap = [
     title: '客户信息查询',
     children: [
       {
-        path: '/customerquery/exportinorldinfor',
-        title: '出口箱在场/装船信息查询',
+        path: '/customerquery/exvoyagecntrquery',
+        title: '出口箱信息查询',
         permission: ['2001']
       },
       {
-        path: '/customerquery/2002',
+        path: '/customerquery/imvoyagecntrquery',
         title: '进口箱信息查询',
         permission: ['2001']
       },
