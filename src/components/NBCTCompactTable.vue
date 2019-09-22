@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="row in rows" :key="row.key">
+          <tr v-for="row in curPageRows" :key="row.key">
             <td v-for="col in columns" :key="col.dataIndex" v-html="row[col.dataIndex]"></td>
           </tr>
         </tbody>
@@ -26,12 +26,61 @@
           </tr>
         </tfoot>
       </table>
+      <div v-show="pagination" style="margin-top:10px;">
+        <a-pagination
+          showSizeChanger
+          :pageSize.sync="pageSize"
+          :defaultCurrent="1"
+          :total="rows.length"
+          :showTotal="total => `总数： ${total} 条记录`"
+          v-model="currentPage"
+          style="font-size:16px;"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      currentPage: 1,
+      pageSize: 15,
+      curPageRows: []
+    };
+  },
+  methods: {
+    initPage() {},
+    adjuestPage() {
+      let me = this;
+      me.curPageRows = me.rows.filter((item, index) => {
+        if (index >= (me.currentPage - 1) * me.pageSize && index <= me.currentPage * me.pageSize - 1) {
+          return true;
+        }
+      });
+    }
+  },
+  watch: {
+    rows(val) {
+      let me = this;
+      if (!me.pagination) {
+        me.curPageRows = val;
+      } else {
+        me.curPageRows = val.filter((item, index) => {
+          if (index <= me.pageSize - 1) {
+            return true;
+          }
+        });
+      }
+    },
+    pageSize() {
+      this.adjuestPage();
+    },
+    currentPage() {
+      this.adjuestPage();
+    }
+  },
   props: {
     //表格列定义
     columns: {
@@ -57,6 +106,11 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    //分页
+    pagination: {
+      type: Boolean,
+      default: true
     }
   }
 };
