@@ -70,14 +70,13 @@
           <a-icon type="left" />航次列表
         </a-button>
       </div>
-      <div style="margin-top:10px;" v-show="!loading">
-        <nbctCompactTable
-          :columns="columns"
-          :rows="cntrs"
-          :footer="statistcsStr"
-          :loading="loading"
-        />
-      </div>
+      <nbctCompactTable
+        :columns="columns"
+        :rows="cntrs"
+        :footer="statistcsStr"
+        :loading="loading"
+        style="margin-top:10px;"
+      />
     </div>
   </div>
 </template>

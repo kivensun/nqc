@@ -70,10 +70,7 @@
           <a-icon type="left" />航次列表
         </a-button>
       </div>
-      <div class="loading" v-show="loading">
-        <a-spin size="large" style="margin-top:100px;" />
-      </div>
-      <div style="margin-top:10px;text-align:left;" v-show="!loading">
+      <div style="margin-top:10px;text-align:left;">
         <hr />
         <nbctCompactTable
           :header="unloadHeader"
@@ -358,19 +355,19 @@ export default {
           //
           me.unloadStatistcs = data.total1;
           me.unloadHeader =
-            "<span>未装船箱信息：</span>" +
+            '<span>未装船箱信息：</span>' +
             "<span style='margin-left:100px;'>已放行：" +
             me.unloadStatistcs.rnum +
-            "</span>" +
+            '</span>' +
             "<span style='margin-left:20px;'>未放行：" +
             me.unloadStatistcs.hnum +
-            "</span>" +
+            '</span>' +
             "<span style='margin-left:20px;'>国际中转：" +
             me.unloadStatistcs.znum +
-            "</span>" +
+            '</span>' +
             "<span style='margin-left:20px;'>内支中转：" +
             me.unloadStatistcs.bnum +
-            "</span>";
+            '</span>';
           me.unloadStatistcsStr =
             "<span style='margin-left:20px;'>统计：</span>" +
             "<span style='margin-left:20px;'>已放行：" +
