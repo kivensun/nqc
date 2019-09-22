@@ -75,123 +75,21 @@
       </div>
       <div style="margin-top:10px;text-align:left;" v-show="!loading">
         <hr />
-        <div style="font: bold 15px/20px arial,sans-serif;">
-          <span>未装船箱信息：</span>
-          <span style="margin-left:100px;">已放行：{{unloadStatistcs.rnum}}</span>
-          <a-divider type="vertical" />
-          <span>未放行：{{unloadStatistcs.hnum}}</span>
-          <a-divider type="vertical" />
-          <span>国际中转：{{unloadStatistcs.znum}}</span>
-          <a-divider type="vertical" />
-          <span>内支中转：{{unloadStatistcs.bnum}}</span>
-        </div>
-        <table border="1" style="width:100%;table-layout: fixed;">
-          <thead style="background:#80b3ff;">
-            <tr>
-              <th
-                v-for="col in unloadColumns"
-                :key="col.dataIndex"
-                :style="{width:col.width+'px'}"
-              >{{col.title}}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="row in unloadCntrs" :key="row.key">
-              <td>{{row.key}}</td>
-              <td>{{row.cntrId}}</td>
-              <td>{{row.ptds}}</td>
-              <td>{{row.szty}}</td>
-              <td>{{row.ctgw}}</td>
-              <td>{{row.trwt}}</td>
-              <td>{{row.holdPass}}</td>
-              <td>{{row.passTime}}</td>
-              <td>{{row.infe}}</td>
-              <td v-html="row.cabl"></td>
-              <td>{{row.ctsn}}</td>
-              <td>{{row.inTime}}</td>
-              <td>{{row.inog}}</td>
-              <td>{{row.lncd}}</td>
-              <td>{{row.inth}}</td>
-              <td>{{row.inhz}}</td>
-              <td>{{row.hzcl}}</td>
-              <td>{{row.ints}}</td>
-              <td>{{row.isck}}</td>
-              <td>{{row.issrt}}</td>
-              <td>{{row.vgmw}}</td>
-              <td>{{row.vgmm}}</td>
-              <td>{{row.vgms}}</td>
-              <td>{{row.nzw}}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="24" style="font-size:16px;">
-                <span style="margin-left:20px;">统计：</span>
-                <span style="margin-left:20px;">已放行：{{unloadStatistcs.rnum}}</span>
-                <span style="margin-left:20px;">未放行：{{unloadStatistcs.hnum}}</span>
-                <span style="margin-left:20px;">国际中转：{{unloadStatistcs.znum}}</span>
-                <span style="margin-left:20px;">内支中转：{{unloadStatistcs.bnum}}</span>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+        <nbctCompactTable
+          :header="unloadHeader"
+          :columns="unloadColumns"
+          :rows="unloadCntrs"
+          :footer="unloadStatistcsStr"
+          :loading="loading"
+        />
         <hr />
-        <div style="font: bold 15px/20px arial,sans-serif;">
-          <span>已装船箱信息：</span>
-          <span style="margin-left:100px;">国际中转：{{loadStatistcs.znum}}</span>
-          <a-divider type="vertical" />
-          <span>内支中转：{{loadStatistcs.bnum}}</span>
-        </div>
-        <table border="1" style="width:100%;table-layout: fixed;" id="tables">
-          <thead style="background:#80b3ff;">
-            <tr>
-              <th
-                v-for="col in loadColumns"
-                :key="col.dataIndex"
-                :style="{width:col.width+'px'}"
-              >{{col.title}}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="row in loadCntrs" :key="row.key">
-              <td>{{row.key}}</td>
-              <td>{{row.cntrId}}</td>
-              <td>{{row.ptds}}</td>
-              <td>{{row.szty}}</td>
-              <td>{{row.ctgw}}</td>
-              <td>{{row.trwt}}</td>
-              <td>{{row.vsLoc}}</td>
-              <td>{{row.holdPass}}</td>
-              <td>{{row.passTime}}</td>
-              <td>{{row.infe}}</td>
-              <td v-html="row.cabl"></td>
-              <td>{{row.ctsn}}</td>
-              <td>{{row.inTime}}</td>
-              <td>{{row.outTime}}</td>
-              <td>{{row.inog}}</td>
-              <td>{{row.lncd}}</td>
-              <td>{{row.inth}}</td>
-              <td>{{row.inhz}}</td>
-              <td>{{row.hzcl}}</td>
-              <td>{{row.ints}}</td>
-              <td>{{row.isck}}</td>
-              <td>{{row.issrt}}</td>
-              <td>{{row.vgmw}}</td>
-              <td>{{row.vgmm}}</td>
-              <td>{{row.vgms}}</td>
-              <td>{{row.nzw}}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="24" style="font-size:16px;">
-                <span style="margin-left:20px;">统计：</span>
-                <span style="margin-left:20px;">国际中转：{{loadStatistcs.znum}}</span>
-                <span style="margin-left:20px;">内支中转：{{loadStatistcs.bnum}}</span>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+        <nbctCompactTable
+          :header="loadHeader"
+          :columns="loadColumns"
+          :rows="loadCntrs"
+          :footer="loadStatistcsStr"
+          :loading="loading"
+        />
       </div>
     </div>
   </div>
@@ -217,6 +115,7 @@ import { voyagelist, excontainerlist } from '@/api/api';
 import U from '@/utils/utils.vue';
 import { mapState } from 'vuex';
 import xlsx from '@/utils/xlsx';
+import nbctCompactTable from '@/components/NBCTCompactTable.vue';
 
 const loadColumns = [
   {
@@ -351,129 +250,6 @@ const loadColumns = [
   }
 ];
 
-const unloadColumns = [
-  {
-    title: '序号',
-    width: 20,
-    dataIndex: 'key'
-  },
-  {
-    title: '箱号',
-    width: 90,
-    dataIndex: 'cntrId'
-  },
-  {
-    title: '港口',
-    width: 50,
-    dataIndex: 'ptds'
-  },
-  {
-    title: '尺寸类型',
-    dataIndex: 'szty',
-    width: 40
-  },
-  {
-    title: '重量',
-    dataIndex: 'ctgw',
-    width: 40
-  },
-  {
-    title: '过磅重量(仅供参考)',
-    dataIndex: 'trwt',
-    width: 40
-  },
-  {
-    title: '扣留/放行',
-    dataIndex: 'holdPass',
-    width: 20
-  },
-  {
-    title: '放行时间',
-    dataIndex: 'passTime',
-    width: 120
-  },
-  {
-    title: '空/重',
-    dataIndex: 'infe',
-    width: 20
-  },
-  {
-    title: '提单号',
-    dataIndex: 'cabl',
-    width: 100
-  },
-  {
-    title: '铅封号',
-    dataIndex: 'ctsn',
-    width: 100
-  },
-  {
-    title: '进场时间',
-    dataIndex: 'inTime',
-    width: 120
-  },
-  {
-    title: '超限',
-    dataIndex: 'inog',
-    width: 20
-  },
-  {
-    title: '箱主',
-    dataIndex: 'lncd',
-    width: 30
-  },
-  {
-    title: '冷藏',
-    dataIndex: 'inth',
-    width: 20
-  },
-  {
-    title: '危品',
-    dataIndex: 'inhz',
-    width: 20
-  },
-  {
-    title: '危品等级',
-    dataIndex: 'hzcl',
-    width: 30
-  },
-  {
-    title: '中转',
-    dataIndex: 'ints',
-    width: 20
-  },
-  {
-    title: '查验箱',
-    dataIndex: 'isck',
-    width: 20
-  },
-  {
-    title: '海铁箱',
-    dataIndex: 'issrt',
-    width: 20
-  },
-  {
-    title: 'VGM重量',
-    dataIndex: 'vgmw',
-    width: 40
-  },
-  {
-    title: 'VGM称重方式',
-    dataIndex: 'vgmm',
-    width: 20
-  },
-  {
-    title: 'VGM签名',
-    dataIndex: 'vgms',
-    width: 60
-  },
-  {
-    title: '内转外',
-    dataIndex: 'nzw',
-    width: 20
-  }
-];
-
 export default {
   data() {
     return {
@@ -489,13 +265,17 @@ export default {
       filterOption: 'PORT', //过滤条件
       loading: false,
       //voyage cntrs - load
+      loadHeader: '',
+      loadColumns, //表格标题
       loadCntrs: [], //箱信息列表
       loadStatistcs: '', //统计信息
-      loadColumns, //表格标题
+      loadStatistcsStr: '',
       //voyage cntrs - unload
+      unloadHeader: '',
+      unloadColumns: [], //表格标题
       unloadCntrs: [], //箱信息列表
       unloadStatistcs: '', //统计信息
-      unloadColumns, //表格标题
+      unloadStatistcsStr: '',
       //excel export
       headers: [],
       contents: []
@@ -533,7 +313,7 @@ export default {
           '内支中转：' +
           me.unloadStatistcs.bnum;
         me.contents.push({ 序号: foot });
-        xlsx(me.headers, me.contents, me.curVoy.vscd + '-' + me.curVoy.vsvy + '未装船箱信息', 'LASTISFOOT');
+        xlsx(me.headers, me.contents, me.curVoy.vscd + '-' + me.curVoy.vsvy + '未装船箱信息', 'LAST');
       }
       //2.已装船
       if (me.loadCntrs.length > 0) {
@@ -549,7 +329,7 @@ export default {
         });
         let foot = '统计：' + '国际中转：' + me.loadStatistcs.znum + '内支中转：' + me.loadStatistcs.bnum;
         me.contents.push({ 序号: foot });
-        xlsx(me.headers, me.contents, me.curVoy.vscd + '-' + me.curVoy.vsvy + '已装船箱信息', 'LASTISFOOT');
+        xlsx(me.headers, me.contents, me.curVoy.vscd + '-' + me.curVoy.vsvy + '已装船箱信息', 'LAST');
       }
     },
     selFilterOption() {
@@ -577,6 +357,34 @@ export default {
           me.loading = false;
           //
           me.unloadStatistcs = data.total1;
+          me.unloadHeader =
+            "<span>未装船箱信息：</span>" +
+            "<span style='margin-left:100px;'>已放行：" +
+            me.unloadStatistcs.rnum +
+            "</span>" +
+            "<span style='margin-left:20px;'>未放行：" +
+            me.unloadStatistcs.hnum +
+            "</span>" +
+            "<span style='margin-left:20px;'>国际中转：" +
+            me.unloadStatistcs.znum +
+            "</span>" +
+            "<span style='margin-left:20px;'>内支中转：" +
+            me.unloadStatistcs.bnum +
+            "</span>";
+          me.unloadStatistcsStr =
+            "<span style='margin-left:20px;'>统计：</span>" +
+            "<span style='margin-left:20px;'>已放行：" +
+            me.unloadStatistcs.rnum +
+            '</span>' +
+            "<span style='margin-left:20px;'>未放行：" +
+            me.unloadStatistcs.hnum +
+            '</span>' +
+            "<span style='margin-left:20px;'>国际中转：" +
+            me.unloadStatistcs.znum +
+            '</span>' +
+            "<span style='margin-left:20px;'>内支中转：" +
+            me.unloadStatistcs.bnum +
+            '</span>';
           me.unloadCntrs = data.list1 == null ? [] : data.list1;
           me.unloadCntrs = me.unloadCntrs.map(function(item, index) {
             let c = {};
@@ -608,6 +416,22 @@ export default {
           });
           //
           me.loadStatistcs = data.total2;
+          me.loadStatistcsStr =
+            "<span style='margin-left:20px;'>统计：</span>" +
+            "<span style='margin-left:20px;'>国际中转：" +
+            me.loadStatistcs.znum +
+            '</span>' +
+            "<span style='margin-left:20px;'>内支中转：" +
+            me.loadStatistcs.bnum +
+            '</span>';
+          me.loadHeader =
+            '<span>已装船箱信息：</span>' +
+            "<span style='margin-left:100px;'>国际中转：" +
+            me.loadStatistcs.znum +
+            '</span>' +
+            "<span style='margin-left:20px;'>内支中转：" +
+            me.loadStatistcs.bnum +
+            '</span>';
           me.loadCntrs = data.list2 == null ? [] : data.list2;
           me.loadCntrs = me.loadCntrs.map(function(item, index) {
             let c = {};
@@ -698,9 +522,18 @@ export default {
       me.voyList(params, fn);
     }
   },
+  components: {
+    nbctCompactTable
+  },
   mounted() {
     this.companyVoyList();
     this.weekVoyList();
+    this.unloadColumns = loadColumns.filter(item => {
+      if (item.dataIndex == 'vsLoc' || item.dataIndex == 'outTime') {
+        return false;
+      }
+      return true;
+    });
   }
 };
 </script>
@@ -715,7 +548,4 @@ export default {
   margin-top: 10px;
   text-align: left;
 }
-</style>
-
-<style scoped>
 </style>

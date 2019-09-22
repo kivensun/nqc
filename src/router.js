@@ -73,15 +73,15 @@ export default new Router({
           meta: { title: '延伸可提箱量查询', permission: ['3000'] }
         },
         {
-          path: '/customerquery/exportinorldinfor',
-          name: 'ExportInOrLdInfor',
-          component: () => import('@/views/404.vue'),
-          meta: { title: '出口箱在场/装船信息查询', permission: ['2001'] }
+          path: '/customerquery/exvoyagecntrquery',
+          name: 'ExVoyageCntrQuery',
+          component: () => import('@/views/customerinfo/exvoyagecntrquery.vue'),
+          meta: { title: '出口箱信息查询', permission: ['2001'] }
         },
         {
-          path: '/customerquery/2002',
-          name: '2002',
-          component: () => import('@/views/404.vue'),
+          path: '/customerquery/imvoyagecntrquery',
+          name: 'ImVoyageCntrQuery',
+          component: () => import('@/views/customerinfo/imvoyagecntrquery.vue'),
           meta: { title: '进口箱信息查询', permission: ['2001'] }
         },
         {

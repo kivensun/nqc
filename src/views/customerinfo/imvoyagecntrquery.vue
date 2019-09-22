@@ -70,81 +70,24 @@
           <a-icon type="left" />航次列表
         </a-button>
       </div>
-      <div class="loading" v-show="loading">
-        <a-spin size="large" style="margin-top:100px;"/>
-      </div>
       <div style="margin-top:10px;" v-show="!loading">
-        <table border="1" style="width:100%;table-layout: fixed;" id="tables">
-          <thead style="background:#80b3ff;">
-            <tr>
-              <th
-                v-for="col in columns"
-                :key="col.dataIndex"
-                :style="{width:col.width+'px'}"
-              >{{col.title}}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="row in cntrs" :key="row.key">
-              <td>{{row.key}}</td>
-              <td>{{row.cntrId}}</td>
-              <td>{{row.szty}}</td>
-              <td>{{row.weight}}</td>
-              <td>{{row.infe}}</td>
-              <td>{{row.cabl}}</td>
-              <td>{{row.ctsn}}</td>
-              <td>{{row.inTime}}</td>
-              <td>{{row.outTime}}</td>
-              <td>{{row.inog}}</td>
-              <td>{{row.lncd}}</td>
-              <td>{{row.inth}}</td>
-              <td>{{row.inhz}}</td>
-              <td>{{row.hzcl}}</td>
-              <td>{{row.intd}}</td>
-              <td>{{row.ints}}</td>
-              <td>{{row.nzw}}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="17" style="font-size:16px;">
-                <span style="margin-left:20px;">统计：</span>
-                <span style="margin-left:20px;">20箱量：{{statistcs.ct20}}</span>
-                <span style="margin-left:20px;">40箱量：{{statistcs.ct40}}</span>
-                <span style="margin-left:20px;">总箱量：{{statistcs.teu}}TEU</span>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+        <nbctCompactTable
+          :columns="columns"
+          :rows="cntrs"
+          :footer="statistcsStr"
+          :loading="loading"
+        />
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-td {
-  width: 100%;
-  word-break: keep-all;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 8px;
-  text-align: left;
-}
-.loading {
-  text-align: center;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  padding: 30px 50px;
-  margin: 20px 0;
-}
-</style>
 
 <script>
 import { voyagelist, imcontainerlist } from '@/api/api';
 import U from '@/utils/utils.vue';
 import { mapState } from 'vuex';
 import xlsx from '@/utils/xlsx';
+import nbctCompactTable from '@/components/NBCTCompactTable.vue';
 
 const columns = [
   {
@@ -250,7 +193,8 @@ export default {
       curVoy: '', //当前进口航次
       filterOption: 'PORT', //过滤条件
       cntrs: [], //箱信息列表
-      statistcs: '', //统计信息
+      statistcs: '', //统计信息对象
+      statistcsStr: '', //统计信息对象字符串
       pagination: {},
       loading: false,
       columns, //表格标题
@@ -277,17 +221,8 @@ export default {
         });
         return JSON.parse(tmpStr);
       });
-      let foot =
-        '统计：' +
-        '20箱量：' +
-        me.statistcs.ct20 +
-        '40箱量：' +
-        me.statistcs.ct40 +
-        '总箱量：' +
-        me.statistcs.teu +
-        'TEU';
-      me.contents.push({ 序号: foot });
-      xlsx(me.headers, me.contents, me.curVoy.vscd + '-' + me.curVoy.vsvy + '箱信息', 'LASTISFOOT');
+      me.contents.push({ 序号: me.statistcsStr });
+      xlsx(me.headers, me.contents, me.curVoy.vscd + '-' + me.curVoy.vsvy + '箱信息', 'LAST');
     },
     selFilterOption() {
       let me = this;
@@ -306,6 +241,15 @@ export default {
         } else {
           me.loading = false;
           me.statistcs = data.total;
+          me.statistcsStr =
+            '统计：' +
+            '20箱量：' +
+            me.statistcs.ct20 +
+            '40箱量：' +
+            me.statistcs.ct40 +
+            '总箱量：' +
+            me.statistcs.teu +
+            'TEU';
           me.cntrs = data.list.map(function(item, index) {
             let c = {};
             c.key = index + 1;
@@ -385,6 +329,9 @@ export default {
       };
       me.voyList(params, fn);
     }
+  },
+  components: {
+    nbctCompactTable
   },
   mounted() {
     this.companyVoyList();
