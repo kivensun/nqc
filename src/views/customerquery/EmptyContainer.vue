@@ -2,11 +2,11 @@
   <div style="height:60px;padding:10px;border:1px solid black;">
     <div style="overflow:hidden;text-align:left;">
       <span style="float:left;margin-top:15px;margin-left:120px;" class="title">输入箱主：</span>
-      <a-input style="width: 80px;margin-top:14px;margin-left:5px;" size="small" v-model="lncd" />
+      <a-input style="width: 80px;margin-top:14px;margin-left:5px;" @change="lncdtoUpper()" size="small" v-model="lncd" />
       <span style="margin-top:15px;margin-left:20px;" class="title">输入箱型：</span>
-      <a-input style="width: 80px;margin-top:14px;margin-left:5px;" size="small" v-model="ctty" />
-      <a-button style="margin-left:20px;" @click="getData1()" size="small">查找</a-button>
-      <a-button style="margin-left:20px;" size="small">下载</a-button>
+      <a-input style="width: 80px;margin-top:14px;margin-left:5px;"  @change="cttytoUpper()" size="small" v-model="ctty" />
+      <a-button style="margin-left:20px;" @click="getData()"  size="small">查找</a-button>
+      <a-button style="margin-left:20px;" @click="getDownload()" size="small">下载</a-button>
     </div>
     <div style="margin-top:20px;padding:5px;border:1px solid black;">
       <nbctCompactTable :columns="columns" :rows="rows" :loading="loading" />
@@ -21,50 +21,52 @@ import nbctCompactTable from '@/components/NBCTCompactTable.vue';
 export default {
   data() {
     return {
-      lncd: 'CMA', //
-      ctty: 'GP', //
+      lncd: '', //
+      ctty: '', //
       columns: [
+        {
+          title: '序号',
+          dataIndex: 'key',
+          width: 50,
+        },
         {
           title: '箱号',
           dataIndex: 'cntrid',
-          width: 100,
-          key: 1
+          width: 120,
         },
         {
           title: '船舶代码',
           dataIndex: 'vscd',
-          width: 50,
-          key: 2
+          width: 70,
         },
         {
           title: '航次',
           dataIndex: 'vsvy',
-          width: 80,
-          key: 3
+          width: 70,
         },
         {
           title: '尺寸',
           dataIndex: 'ctsz',
           width: 50,
-          key: 4
         },
         {
           title: '箱型',
           dataIndex: 'ctty',
           width: 50,
-          key: 5
         },
         {
           title: '残损',
-          dataIndex: 'lndm',
+          dataIndex: 'indm',
           width: 50,
-          key: 5
         },
         {
           title: '箱主',
           dataIndex: 'lncd',
-          width: 50,
-          key: 5
+          width: 70,
+        },
+        {
+          title: ' ',
+          dataIndex: 'blank',
         }
       ],
       rows: [] //
@@ -74,7 +76,7 @@ export default {
     nbctCompactTable
   },
   methods: {
-    getData1() {
+    getData() {
       getEmptyContainer({
         lncd: this.lncd,
         ctty: this.ctty
@@ -82,7 +84,17 @@ export default {
         let { flag, data } = res;
         if (flag) {
           this.rows = data.map((item,index) =>{
-            
+            let rows = {};
+            rows.key = index+1;
+            rows.cntrid = item.cntrid;
+            rows.vscd = item.vscdco;
+            rows.vsvy = item.vsvyco;
+            rows.vsdr = item.vsdrco;
+            rows.ctsz = item.ctszco;
+            rows.ctty = item.cttyco;
+            rows.indm = item.indmco;
+            rows.lncd = item.lncdco;
+            return rows;
           });
         } else {
           this.$notification.error({
@@ -91,6 +103,31 @@ export default {
           });
         }
       });
+    },
+    lncdtoUpper(){
+      this.lncd = this.lncd.toUpperCase();
+    },
+    cttytoUpper(){
+      this.ctty = this.ctty.toUpperCase();
+    },
+      getDownload() {
+      const header = this.columns.map(item => {
+        let tmp = "";
+        tmp = item.title;
+        return tmp;
+      });
+      console.log(header);
+      const exportData = this.tableData.map(item => {
+        delete item.lncd;
+        let tmpStr = JSON.stringify(item);
+        this.columns.forEach(item => {
+          tmpStr = tmpStr.replace(item.dataIndex, item.title);
+        })
+        return JSON.parse(tmpStr);
+      });
+      console.log(exportData);
+      let title = '在场空箱实时查询';
+      xlsx(header, exportData, title);
     }
   }
 };
