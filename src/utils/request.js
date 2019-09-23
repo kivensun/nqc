@@ -20,10 +20,10 @@ const err = error => {
         description: data.message
       });
     }
-    if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
+    if (error.response.status === 401) {
       notification.error({
-        message: 'Unauthorized',
-        description: 'Authorized verification failed'
+        message: '身份认证失败,请重新登录',
+        description: '安全认证错误'
       });
       if (token) {
         store.dispath('Logout').then(() => {
