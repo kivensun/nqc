@@ -9,7 +9,7 @@
       <a-button style="margin-left:20px;" @click="getDownload()" size="small">下载</a-button>
     </div>
     <div style="margin-top:20px;padding:5px;border:1px solid black;">
-      <nbctCompactTable :columns="columns" :rows="rows" :loading="loading" />
+      <nbctCompactTable :columns="columns" :rows="rows" />
     </div>
   </div>
 </template>
@@ -17,6 +17,7 @@
 <script>
 import { getEmptyContainer } from '@/api/api';
 import nbctCompactTable from '@/components/NBCTCompactTable.vue';
+import xlsx from '@/utils/xlsx';
 
 export default {
   data() {
@@ -117,8 +118,8 @@ export default {
         return tmp;
       });
       console.log(header);
-      const exportData = this.tableData.map(item => {
-        delete item.lncd;
+      const exportData = this.rows.map(item => {
+        delete item.blank;
         let tmpStr = JSON.stringify(item);
         this.columns.forEach(item => {
           tmpStr = tmpStr.replace(item.dataIndex, item.title);

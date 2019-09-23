@@ -22,8 +22,8 @@ const err = error => {
     }
     if (error.response.status === 401) {
       notification.error({
-        message: '身份认证失败,请重新登录',
-        description: '安全认证错误'
+        message: 'Unauthorized',
+        description: 'Authorized verification failed'
       });
       if (token) {
         store.dispath('Logout').then(() => {
