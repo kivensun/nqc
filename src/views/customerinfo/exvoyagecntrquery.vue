@@ -346,42 +346,31 @@ export default {
         ordertype: me.filterOption
       };
       excontainerlist(params).then(res => {
+        let swrap = title => {
+          return `<span>${title}：</span>`;
+        };
+        let smwrap = (title, num) => {
+          return `<span style='margin-left:20px;'>${title}：<b>${num}</b></span>`;
+        };
         let { flag, data, errMsg } = res;
         if (!flag) {
           me.loading = false;
           me.$message.error(errMsg);
         } else {
           me.loading = false;
-          //
           me.unloadStatistcs = data.total1;
           me.unloadHeader =
-            '<span>未装船箱信息：</span>' +
-            "<span style='margin-left:100px;'>已放行：" +
-            me.unloadStatistcs.rnum +
-            '</span>' +
-            "<span style='margin-left:20px;'>未放行：" +
-            me.unloadStatistcs.hnum +
-            '</span>' +
-            "<span style='margin-left:20px;'>国际中转：" +
-            me.unloadStatistcs.znum +
-            '</span>' +
-            "<span style='margin-left:20px;'>内支中转：" +
-            me.unloadStatistcs.bnum +
-            '</span>';
+            swrap('未装船箱信息') + //
+            smwrap('已放行', me.unloadStatistcs.rnum) +
+            smwrap('未放行', me.unloadStatistcs.hnum) +
+            smwrap('国际中转', me.unloadStatistcs.znum) +
+            smwrap('内支中转', me.unloadStatistcs.bnum);
           me.unloadStatistcsStr =
-            "<span style='margin-left:20px;'>统计：</span>" +
-            "<span style='margin-left:20px;'>已放行：" +
-            me.unloadStatistcs.rnum +
-            '</span>' +
-            "<span style='margin-left:20px;'>未放行：" +
-            me.unloadStatistcs.hnum +
-            '</span>' +
-            "<span style='margin-left:20px;'>国际中转：" +
-            me.unloadStatistcs.znum +
-            '</span>' +
-            "<span style='margin-left:20px;'>内支中转：" +
-            me.unloadStatistcs.bnum +
-            '</span>';
+            swrap('统计') + //
+            smwrap('已放行', me.unloadStatistcs.rnum) +
+            smwrap('未放行', me.unloadStatistcs.hnum) +
+            smwrap('国际中转', me.unloadStatistcs.znum) +
+            smwrap('内支中转', me.unloadStatistcs.bnum);
           me.unloadCntrs = data.list1 == null ? [] : data.list1;
           me.unloadCntrs = me.unloadCntrs.map(function(item, index) {
             let c = {};
@@ -414,21 +403,13 @@ export default {
           //
           me.loadStatistcs = data.total2;
           me.loadStatistcsStr =
-            "<span style='margin-left:20px;'>统计：</span>" +
-            "<span style='margin-left:20px;'>国际中转：" +
-            me.loadStatistcs.znum +
-            '</span>' +
-            "<span style='margin-left:20px;'>内支中转：" +
-            me.loadStatistcs.bnum +
-            '</span>';
+            swrap('统计') + //
+            smwrap('国际中转', me.loadStatistcs.znum) +
+            smwrap('内支中转', me.loadStatistcs.bnum);
           me.loadHeader =
-            '<span>已装船箱信息：</span>' +
-            "<span style='margin-left:100px;'>国际中转：" +
-            me.loadStatistcs.znum +
-            '</span>' +
-            "<span style='margin-left:20px;'>内支中转：" +
-            me.loadStatistcs.bnum +
-            '</span>';
+            swrap('已装船箱信息') + //
+            smwrap('国际中转', me.loadStatistcs.znum) +
+            smwrap('内支中转', me.loadStatistcs.bnum);
           me.loadCntrs = data.list2 == null ? [] : data.list2;
           me.loadCntrs = me.loadCntrs.map(function(item, index) {
             let c = {};

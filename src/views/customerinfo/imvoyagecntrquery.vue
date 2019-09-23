@@ -233,6 +233,12 @@ export default {
       me.loading = true;
       let params = { vscd: voy.vscd, vsvy: voy.vsvy, vsdr: voy.vsdr, lncd: me.companyId, ordertype: me.filterOption };
       imcontainerlist(params).then(res => {
+        let swrap = title => {
+          return `<span>${title}：</span>`;
+        };
+        let smwrap = (title, num) => {
+          return `<span style='margin-left:20px;'>${title}：<b>${num}</b></span>`;
+        };
         let { flag, data, errMsg } = res;
         if (!flag) {
           me.loading = false;
@@ -241,13 +247,10 @@ export default {
           me.loading = false;
           me.statistcs = data.total;
           me.statistcsStr =
-            '统计：' +
-            '20箱量：' +
-            me.statistcs.ct20 +
-            '40箱量：' +
-            me.statistcs.ct40 +
-            '总箱量：' +
-            me.statistcs.teu +
+            swrap('统计') +
+            smwrap('20箱量', me.statistcs.ct20) +
+            smwrap('40箱量', me.statistcs.ct40) +
+            smwrap('总箱量', me.statistcs.teu) +
             'TEU';
           me.cntrs = data.list.map(function(item, index) {
             let c = {};
