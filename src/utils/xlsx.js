@@ -24,6 +24,8 @@ import XLSX from 'xlsx';
 
  * filename: 文件名
 
+ * merges: 合并项，'LAST'指将最后一行合并。 
+
  * exmaple: 
   const header = this.columns.map(item => {
         let tmp = "";
@@ -45,11 +47,25 @@ import XLSX from 'xlsx';
 
 */
 
-export default (cols, fields, filename = '测试数据') => {
+export default (cols, fields, filename = '测试数据',merges) => {
   let sheetName = filename; //excel的文件名称
   let wb = XLSX.utils.book_new(); //工作簿对象包含一SheetNames数组，以及一个表对象映射表名称到表对象。XLSX.utils.book_new实用函数创建一个新的工作簿对象。
   let ws = XLSX.utils.json_to_sheet(fields, { header: Object.values(cols) }); //将JS对象数组转换为工作表。
   wb.SheetNames.push(sheetName);
+  if (merges == 'LAST'){
+    let lines = fields.length;
+    let cols = Object.keys(fields[1]).length;
+    ws["!merges"] = [{//合并第一行数据[B1,C1,D1,E1]
+      s: {//s为开始
+        c: 0,//开始列
+        r: lines//开始取值范围
+      },
+      e: {//e结束
+        c: cols+1,//结束列
+        r: lines//结束范围
+      }
+    }];
+  }
   wb.Sheets[sheetName] = ws;
   const defaultCellStyle = {
     font: { name: 'Verdana', sz: 13, color: 'FF00FF88' },

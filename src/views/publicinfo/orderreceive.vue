@@ -2,9 +2,7 @@
   <div>
     <div>
       <h3>公告时间：{{curDt}}</h3>
-      <a-table bordered
-               :dataSource="ocs"
-               :columns="columns" />
+      <nbctCompactTable :columns="columns" :rows="ocs" :loading="loading" style="margin-top:10px;" />
     </div>
   </div>
 </template>
@@ -12,59 +10,63 @@
 <script>
 import { orderreceive } from '@/api/api';
 import U from '@/utils/utils.vue';
+import nbctCompactTable from '@/components/NBCTCompactTable.vue';
 
 export default {
-  data () {
+  data() {
     return {
       curDt: U.formatDate(new Date(), 'yyyy-MM-dd'),
       columns: [
         {
           title: '船名',
           dataIndex: 'cName',
-          width: "15%"
+          width: 60
         },
         {
           title: '英文船名',
           dataIndex: 'eName',
-          width: "10%"
+          width: 100
         },
         {
           title: '航次',
           dataIndex: 'voyage',
-          width: "10%"
+          width: 100
         },
         {
           title: '截单时间',
           dataIndex: 'closeDt',
-          width: "15%"
+          width: 120
         },
         {
           title: '计划加载截至时间',
           dataIndex: 'loadDt',
-          width: "15%"
+          width: 120
         },
         {
           title: '备注',
           dataIndex: 'mark',
-          width: "30%"
+          width: 200
         }
       ],
       ocs: [], //
+      loading: false
     };
   },
   methods: {
-    list () {
+    list() {
       let me = this;
       let dt = parseInt(U.formatDate(new Date(), 'yyyyMMdd'));
       let params = { dt };
+      me.loading = true;
       orderreceive(params).then(res => {
         let { flag, data, errMsg } = res;
         if (!flag) {
-          this.$message.error(errMsg);
+          me.loading = false;
+          me.$message.error(errMsg);
         } else {
-          console.info(data);
-          me.ocs = data.map(function (item, index) {
-            let oc = {}
+          me.loading = false;
+          me.ocs = data.map(function(item, index) {
+            let oc = {};
             oc.key = index;
             oc.cName = item.cnnmvr;
             oc.eName = item.vscdcs;
@@ -78,7 +80,10 @@ export default {
       });
     }
   },
-  mounted () {
+  components: {
+    nbctCompactTable
+  },
+  mounted() {
     this.list();
   }
 };
