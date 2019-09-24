@@ -45,7 +45,7 @@ export const menuMap = [
         permission: ['3000']
       },
       {
-        path: 'www.npedi.com/ediportal-web/ediweb/index.jsp',
+        path: 'http://www.npedi.com/ediportal-web/ediweb/index.jsp',
         title: '集卡停牌查询',
         permission: ['3000']
       },

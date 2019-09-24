@@ -18,3 +18,40 @@ export function getEmptyContainerInYardHis(parameter) {
     }
   });
 }
+
+/**
+ * getEfinreports func
+ * @param parameter
+ * @returns {*}
+ */
+export function getEfinreports(parameter) {
+  return axios({
+    url: '/getefinreports',
+    method: 'post',
+    data: parameter,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+}
+
+/**
+ * getEfinreportFile func
+ * parameters:{
+ *    cntrId:'',
+ * }
+ * @param parameter
+ * @returns {*}
+ */
+export function getEfinreportFile(parameter) {
+  return axios({
+    url: 'downloadefinreport', //?fnPyCocd=' + fnPyCocd + '&skey=' + skey,
+    //method: 'get',
+    method: 'post',
+    data: parameter,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    responseType: 'blob'
+  });
+}
