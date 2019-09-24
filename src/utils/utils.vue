@@ -1,6 +1,6 @@
 <script>
 function isEmpty(obj) {
-  if (typeof obj == "undefined" || obj == null || obj == "") {
+  if (typeof obj == 'undefined' || obj == null || obj == '') {
     return true;
   } else {
     return false;
@@ -8,10 +8,10 @@ function isEmpty(obj) {
 }
 
 function trim(val) {
-  if(!isEmpty(val)){
-    return val.replace(/(^\s*)|(\s*$)/g, "");
-  }else{
-    return ""
+  if (!isEmpty(val)) {
+    return val.replace(/(^\s*)|(\s*$)/g, '');
+  } else {
+    return '';
   }
 }
 
@@ -20,10 +20,27 @@ function pad(num, n) {
   num = String(num);
   var len = String(num).length;
   while (len < n) {
-    num = "0" + num;
+    num = '0' + num;
     len++;
   }
   return num;
+}
+
+//'20180101010101'->'2018/01/01 01:01:01'
+function compactDateToNormal(dt) {
+  return (
+    dt.substr(0, 4) +
+    '/' +
+    dt.substr(4, 2) +
+    '/' +
+    dt.substr(6, 2) +
+    '  ' +
+    dt.substr(8, 2) +
+    ':' +
+    dt.substr(10, 2) +
+    ':' +
+    dt.substr(12, 2)
+  );
 }
 
 function formatDate(date, fmt) {
@@ -46,13 +63,14 @@ function formatDate(date, fmt) {
 function convertNumToDate(dt, tm) {
   var pattern = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/;
   var str = dt + pad(tm);
-  return str.replace(pattern, "$1/$2/$3 $4:$5:$6");
+  return str.replace(pattern, '$1/$2/$3 $4:$5:$6');
 }
 
 export default {
   isEmpty,
   trim,
   formatDate, //格式化日期
-  convertNumToDate //将数字转为日期字符串
+  convertNumToDate, //将数字转为日期字符串
+  compactDateToNormal,
 };
 </script>

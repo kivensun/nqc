@@ -55,3 +55,19 @@ export function getEfinreportFile(parameter) {
     responseType: 'blob'
   });
 }
+/** emptyContainer func
+ * 有参数
+ * }
+ * @returns {*}
+ */
+
+export function emptyContainer(parameter) {
+  return axios({
+    url: '/emptycontainer',
+    method: 'post',
+    data: parameter,
+    headers: {
+      'Content-Type': 'application/json;charset-UTF-8'
+    }
+  });
+}

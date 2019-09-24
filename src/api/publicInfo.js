@@ -50,3 +50,4 @@ export const yardTruck = params => {
   return axios.post(`/yardtruck`, params).then(res => res);
 };
 
+
