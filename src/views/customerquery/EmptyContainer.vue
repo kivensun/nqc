@@ -36,14 +36,9 @@ export default {
           width: 120,
         },
         {
-          title: '船舶代码',
-          dataIndex: 'vscd',
-          width: 70,
-        },
-        {
           title: '航次',
           dataIndex: 'vsvy',
-          width: 70,
+          width: 150,
         },
         {
           title: '尺寸',
@@ -88,9 +83,7 @@ export default {
             let rows = {};
             rows.key = index+1;
             rows.cntrid = item.cntrid;
-            rows.vscd = item.vscdco;
-            rows.vsvy = item.vsvyco;
-            rows.vsdr = item.vsdrco;
+            rows.vsvy = item.vscdco +'-'+item.vsvyco.trim() +'/'+item.vsdrco;
             rows.ctsz = item.ctszco;
             rows.ctty = item.cttyco;
             rows.indm = item.indmco;
