@@ -98,19 +98,6 @@ export default {
   watch: {
     rows(val) {
       let me = this;
-      //固定宽度时设定表格宽度
-      if (me.fixedWidth) {
-        me.totalWidth = 0;
-        me.columns.forEach(col => {
-          if (col.width) {
-            me.totalWidth += col.width;
-          }
-        });
-        me.totalWidth = me.totalWidth + 'px';
-      } else {
-        me.totalWidth = '100%';
-      }
-      //分页时设定当前页内容
       if (!me.pagination) {
         me.curPageRows = val;
       } else {
