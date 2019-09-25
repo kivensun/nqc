@@ -14,7 +14,7 @@
           <a-select-option value="PORT">港口</a-select-option>
           <a-select-option value="CNTRID">箱号</a-select-option>
           <a-select-option value="VSVY">船名航次</a-select-option>
-          <a-select-option value="CTSZ">尺寸</a-select-option>
+          <a-select-option value="CTSZ">尺寸箱型</a-select-option>
           <a-select-option value="ISPASS">扣留/放行</a-select-option>
         </a-select>
         <a-button style="margin-left:20px;" @click="exportExcel">导出EXCEL</a-button>
@@ -76,7 +76,7 @@ const listColumns = [
   {
     title: '提单号',
     dataIndex: 'cabl',
-    width: 120
+    width: 140
   },
   {
     title: '尺寸',
@@ -192,7 +192,7 @@ export default {
             c.ptds = item.ptds;
             c.vscn = item.vscn;
             c.vsvy = item.vsvy;
-            c.cabl = item.cabl;
+            c.cabl = item.cabl.replace(/,/g, '<br/>');
             c.ctsz = item.ctsz;
             c.ctty = item.ctty;
             c.ctgw = item.ctgw;

@@ -35,7 +35,7 @@
                     <div>箱号:</div>
                   </a-col>
                   <a-col :span="5">
-                    <div class="wrap-content">{{ctnrInfo.cntrid}}</div>
+                    <div class="wrap-content">{{ctnrInfo.cntrId}}</div>
                   </a-col>
                   <a-col :span="3">
                     <div>船名/航次:</div>
@@ -71,7 +71,7 @@ export default {
       alertType: 'success',
       alertTitle: '成功',
       ctnrInfo: {
-        cntrid: '',
+        cntrId: '',
         vscn: '',
         vsvy: '',
         vsdr: '',
@@ -90,7 +90,7 @@ export default {
           description: '请输入箱号'
         });
         this.ctnrInfo = {
-          cntrid: '',
+          cntrId: '',
           vscn: '',
           vsvy: '',
           vsdr: '',
