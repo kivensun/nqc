@@ -51,7 +51,8 @@ td {
 </style>
 
 <script>
-import {exyardcontainerlistbycaag } from '@/api/containerInfo';
+import { exYardContainerListByCaag  } from '@/api/api';
+//import {exyardcontainerlistbycaag } from '@/api/containerInfo';
 import U from '@/utils/utils.vue';
 import { mapState } from 'vuex';
 import xlsx from '@/utils/xlsx';
@@ -173,7 +174,7 @@ export default {
         caag: me.companyId,
         ordertype: me.filterOption
       };
-      exyardcontainerlistbycaag(params).then(res => {
+      exYardContainerListByCaag(params).then(res => {
         let swrap = title => {
           return `<span>${title}：</span>`;
         };
