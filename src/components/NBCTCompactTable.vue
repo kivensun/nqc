@@ -5,7 +5,7 @@
         <a-spin size="large" style="margin-top:100px;" />
       </div>
       <div style="margin-top:10px;" v-show="!loading">
-        <div v-if="header" v-html="header" style="font: bold 15px/20px arial,sans-serif;"></div>
+        <div v-if="header" v-html="header" style="font: bold 15px/20px arial,sans-serif;text-align:left;"></div>
         <table border="1" style="width:100%;table-layout: fixed;">
           <thead style="background:#80b3ff;">
             <tr>
@@ -28,7 +28,7 @@
           </tbody>
           <tfoot v-if="footer">
             <tr>
-              <td :colspan="columns.length" style="font-size:16px;" v-html="footer"></td>
+              <td :colspan="columns.length" style="font-size:16px;text-align:left;" v-html="footer"></td>
             </tr>
           </tfoot>
         </table>
