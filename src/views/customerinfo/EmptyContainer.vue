@@ -22,7 +22,7 @@
       <nbctCompactTable
         :columns="columns"
         fixedWidth="true"
-        fontSize="15"
+        fontSize="8"
         textAlign="center"
         :rows="rows"
       />
@@ -34,6 +34,7 @@
 import { getEmptyContainer } from '@/api/api';
 import nbctCompactTable from '@/components/NBCTCompactTable.vue';
 import xlsx from '@/utils/xlsx';
+import { mapState } from 'vuex';
 
 export default {
   data() {
@@ -84,8 +85,16 @@ export default {
       rows: [] //
     };
   },
+  computed: {
+    ...mapState({
+      companyId: state => state.user.companyId
+    })
+  },
   components: {
     nbctCompactTable
+  },
+  mounted(){
+    this.lncd = this.companyId
   },
   methods: {
     getData() {
