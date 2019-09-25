@@ -65,7 +65,7 @@ export const menuMap = [
     title: '客户信息查询',
     children: [
       {
-        path: '/customerquery/exvoyagecntrquery',
+        path: '/customerquery/exvoyagelncdquery',
         title: '出口箱信息查询',
         permission: ['2001']
       },
@@ -90,7 +90,7 @@ export const menuMap = [
         permission: ['2002']
       },
       {
-        path: '/customerquery/2006',
+        path: '/customerquery/exvoyagecaagquery',
         title: '货代出口箱按航次查询',
         permission: ['2002']
       },

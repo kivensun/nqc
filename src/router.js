@@ -73,9 +73,9 @@ export default new Router({
           meta: { title: '延伸可提箱量查询', permission: ['3000'] }
         },
         {
-          path: '/customerquery/exvoyagecntrquery',
-          name: 'ExVoyageCntrQuery',
-          component: () => import('@/views/customerinfo/exvoyagecntrquery.vue'),
+          path: '/customerquery/exvoyagelncdquery',
+          name: 'ExVoyageLncdQuery',
+          component: () => import('@/views/customerinfo/exvoyagelncdquery.vue'),
           meta: { title: '出口箱信息查询', permission: ['2001'] }
         },
         {
@@ -103,9 +103,9 @@ export default new Router({
           meta: { title: '货代出口箱在场箱信息', permission: ['2002'] }
         },
         {
-          path: '/customerquery/2006',
-          name: '2006',
-          component: () => import('@/views/404.vue'),
+          path: '/customerquery/exvoyagecaagquery',
+          name: 'ExVoyageCaagQuery',
+          component: () => import('@/views/customerinfo/exvoyagecaagquery.vue'),
           meta: { title: '货代出口箱按航次查询', permission: ['2002'] }
         },
         {

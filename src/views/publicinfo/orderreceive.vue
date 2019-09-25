@@ -6,7 +6,7 @@
         :columns="columns"
         textAlign="left"
         fontSize="8"
-        fixedWidth="true"
+        fixedWidth:true
         :rows="ocs"
         :loading="loading"
         style="margin-top:10px;"
