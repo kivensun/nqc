@@ -28,6 +28,9 @@
           :rows="exCntrs"
           :footer="exStatistcsStr"
           :loading="loading"
+          :fixedWidth=true
+          fontSize="8"
+          textAlign="center"
         />
         <hr />
       </div>
@@ -51,8 +54,7 @@ td {
 </style>
 
 <script>
-import { exYardContainerListByCaag  } from '@/api/api';
-//import {exyardcontainerlistbycaag } from '@/api/containerInfo';
+import { exYardContainerListByCaag } from '@/api/containerInfo';
 import U from '@/utils/utils.vue';
 import { mapState } from 'vuex';
 import xlsx from '@/utils/xlsx';
@@ -66,7 +68,7 @@ const listColumns = [
   },
   {
     title: '箱号',
-    width: 100,
+    width: 60,
     dataIndex: 'cntrId'
   },
   {
@@ -121,7 +123,6 @@ const listColumns = [
   }
 ];
 
-
 export default {
   data() {
     return {
@@ -146,7 +147,7 @@ export default {
     })
   },
   methods: {
-     //导出EXCEL
+    //导出EXCEL
     exportExcel() {
       let me = this;
 
@@ -200,7 +201,7 @@ export default {
           me.exCntrs = me.exCntrs.map(function(item, index) {
             let c = {};
             c.key = index + 1;
-            c.cntrId = item.cntrid;
+            c.cntrId = item.cntrId;
             c.ptds = item.ptds;
             c.vscn = item.vscn;
             c.vsvy = item.vsvy;
@@ -210,7 +211,7 @@ export default {
             c.ctgw = item.ctgw;
             c.ctsn = item.ctsn;
             c.inTime = U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime);
-            c.holdPass=c.isportpass;
+            c.holdPass = item.isportpass;
             return c;
           });
         }
@@ -219,9 +220,9 @@ export default {
     selFilterOption() {
       let me = this;
       me.listCaagCntr();
-    },
+    }
   },
-    components: {
+  components: {
     nbctCompactTable
   },
   mounted() {
@@ -230,7 +231,7 @@ export default {
       return true;
     });
   }
-}
+};
 </script>
 
 <style scoped>
