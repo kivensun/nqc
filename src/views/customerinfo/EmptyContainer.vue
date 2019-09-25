@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="height:60px;padding:10px;border:1px solid black;">
+    <div>
       <span style="margin-top:15px;margin-left:50px;">输入箱主：</span>
       <a-input
         style="width:80px;margin-top:14px;margin-left:5px;"
@@ -18,14 +18,17 @@
       <a-button style="margin-left:20px;" @click="getData()" size="small">查找</a-button>
       <a-button style="margin-left:20px;" @click="getDownload()" size="small">下载</a-button>
     </div>
-    <div style="margin-top:20px;padding:5px;border:1px solid black;">
+    <div>
+      <hr />
       <nbctCompactTable
         :columns="columns"
         :fixedWidth="true"
-        fontSize="8"
+        fontSize="14"
         textAlign="center"
         :rows="rows"
+        style="margin-top:10px;font-size:16px;"
       />
+      <hr />
     </div>
   </div>
 </template>
@@ -35,6 +38,7 @@ import { getEmptyContainer } from '@/api/api';
 import nbctCompactTable from '@/components/NBCTCompactTable.vue';
 import xlsx from '@/utils/xlsx';
 import { mapState } from 'vuex';
+import U from '@/utils/utils.vue';
 
 export default {
   data() {
@@ -50,7 +54,7 @@ export default {
         {
           title: '箱号',
           dataIndex: 'cntrid',
-          width: 120
+          width: 140
         },
         {
           title: '航次',
@@ -68,18 +72,29 @@ export default {
           width: 50
         },
         {
+          title: '堆场位置',
+          dataIndex: 'ydst',
+          width: 120
+        },
+        {
           title: '残损',
           dataIndex: 'indm',
           width: 50
         },
         {
-          title: '箱主',
-          dataIndex: 'lncd',
-          width: 70
+          title: '禁提',
+          dataIndex: 'injt',
+          width: 50
         },
         {
-          title: ' ',
-          dataIndex: 'blank'
+          title: '毛重',
+          dataIndex: 'ctgw',
+          width: 50
+        },
+        {
+          title: '进场日期',
+          dataIndex: 'intime',
+          width: 160
         }
       ],
       rows: [] //
@@ -94,7 +109,8 @@ export default {
     nbctCompactTable
   },
   mounted(){
-    this.lncd = this.companyId
+    this.lncd = this.companyId,
+    this.getData()
   },
   methods: {
     getData() {
@@ -108,11 +124,15 @@ export default {
             let rows = {};
             rows.key = index + 1;
             rows.cntrid = item.cntrid;
-            rows.vsvy = item.vscdco + '-' + item.vsvyco.trim() + '/' + item.vsdrco;
+            rows.vsvy =U.isEmpty(item.vscdco.trim())?'': item.vscdco + '-' + item.vsvyco.trim() + '/' + item.vsdrco;
             rows.ctsz = item.ctszco;
             rows.ctty = item.cttyco;
             rows.indm = item.indmco;
             rows.lncd = item.lncdco;
+            rows.ydst = item.ydstco + '-' +item.ydlnco + '-' +item.ydrwco + '-' +item.ydelco;
+            rows.injt = item.injt;
+            rows.intime = U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime);
+            rows.ctgw = item.ctgwco;
             return rows;
           });
         } else {
