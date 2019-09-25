@@ -91,9 +91,9 @@ export default new Router({
           meta: { title: '历史空箱在场查询', permission: ['2001'] }
         },
         {
-          path: '/customerquery/EmptyContainer',
+          path: '/customerinfo/EmptyContainer',
           name: 'EmptyContainer',
-          component: () => import('@/views/customerquery/EmptyContainer.vue'),
+          component: () => import('@/views/customerinfo/EmptyContainer.vue'),
           meta: { title: '在场空箱实时查询', permission: ['2001', '2003'] }
         },
         {
