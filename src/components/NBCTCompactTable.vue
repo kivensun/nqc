@@ -69,7 +69,20 @@ export default {
     };
   },
   methods: {
-    initPage() {},
+    adjuestWidth() {
+      let me = this;
+      if (me.fixedWidth) {
+        me.totalWidth = 0;
+        me.columns.forEach(col => {
+          if (col.width) {
+            me.totalWidth += col.width;
+          }
+        });
+        me.totalWidth = me.totalWidth + 'px';
+      } else {
+        me.totalWidth = '100%';
+      }
+    },
     adjuestPage() {
       let me = this;
       me.curPageRows = me.rows.filter((item, index) => {
@@ -79,6 +92,9 @@ export default {
       });
     }
   },
+  created() {
+    this.adjuestWidth()
+  },
   watch: {
     rows(val) {
       let me = this;
@@ -86,7 +102,9 @@ export default {
       if (me.fixedWidth) {
         me.totalWidth = 0;
         me.columns.forEach(col => {
-          me.totalWidth += col.width;
+          if (col.width) {
+            me.totalWidth += col.width;
+          }
         });
         me.totalWidth = me.totalWidth + 'px';
       } else {
