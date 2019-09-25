@@ -80,7 +80,7 @@ export const menuMap = [
         permission: ['2001']
       },
       {
-        path: '/customerquery/EmptyContainer',
+        path: '/customerinfo/EmptyContainer',
         title: '在场空箱实时查询',
         permission: ['2001', '2003']
       },
