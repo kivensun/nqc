@@ -2,7 +2,15 @@
   <div>
     <div>
       <h3>公告时间：{{curDt}}</h3>
-      <nbctCompactTable :columns="columns" :rows="ocs" :loading="loading" style="margin-top:10px;" />
+      <nbctCompactTable
+        :columns="columns"
+        textAlign="left"
+        fontSize="8"
+        fixedWidth="true"
+        :rows="ocs"
+        :loading="loading"
+        style="margin-top:10px;"
+      />
     </div>
   </div>
 </template>
@@ -20,7 +28,7 @@ export default {
         {
           title: '船名',
           dataIndex: 'cName',
-          width: 60
+          width: 120
         },
         {
           title: '英文船名',
@@ -45,7 +53,7 @@ export default {
         {
           title: '备注',
           dataIndex: 'mark',
-          width: 200
+          width: 120
         }
       ],
       ocs: [], //
