@@ -473,7 +473,7 @@ export default {
     },
     companyVoyList() {
       let me = this;
-      let params = { vsvy: '', vsdr: 'E', lncd: '' };
+      let params = { vsvy: '', vsdr: 'E', lncd: me.companyId };
       let fn = function(value) {
         me.companyVoys = value;
       };
@@ -481,7 +481,7 @@ export default {
     },
     weekVoyList() {
       let me = this;
-      let params = { vsvy: '', vsdr: 'E', lncd: me.companyId };
+      let params = { vsvy: '', vsdr: 'E', lncd: '' };
       let fn = function(value) {
         me.weekVoys = value;
       };

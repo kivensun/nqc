@@ -35,19 +35,6 @@
           >{{voy.title}}</a-tag>
         </div>
       </div>
-      <div style="min-height:100px;padding:10px;border:1px solid black;margin-top:10px;">
-        <div style="text-align:left;margin-left:20px;margin-top:10px;">
-          <span class="title">一个月内{{companyId}}航次</span>
-        </div>
-        <div style="overflow:hidden;">
-          <a-tag
-            v-for="voy in companyVoys"
-            :key="voy.key"
-            @click="showVoyCntrs(voy)"
-            class="tag"
-          >{{voy.title}}</a-tag>
-        </div>
-      </div>
     </div>
     <!-- 箱信息列表 -->
     <div v-show="!voyVisable">
@@ -473,7 +460,7 @@ export default {
     },
     companyVoyList() {
       let me = this;
-      let params = { vsvy: '', vsdr: 'E', lncd: '' };
+      let params = { vsvy: '', vsdr: 'E', lncd: me.companyId };
       let fn = function(value) {
         me.companyVoys = value;
       };
@@ -481,7 +468,7 @@ export default {
     },
     weekVoyList() {
       let me = this;
-      let params = { vsvy: '', vsdr: 'E', lncd: me.companyId };
+      let params = { vsvy: '', vsdr: 'E', lncd: '' };
       let fn = function(value) {
         me.weekVoys = value;
       };
