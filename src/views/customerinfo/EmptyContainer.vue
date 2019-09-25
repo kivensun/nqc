@@ -158,6 +158,7 @@ export default {
       console.log(header);
       const exportData = this.rows.map(item => {
         delete item.blank;
+        delete item.lncd;
         let tmpStr = JSON.stringify(item);
         this.columns.forEach(item => {
           tmpStr = tmpStr.replace(item.dataIndex, item.title);
