@@ -21,7 +21,7 @@
     <div style="margin-top:20px;padding:5px;border:1px solid black;">
       <nbctCompactTable
         :columns="columns"
-        fixedWidth="true"
+        :fixedWidth="true"
         fontSize="8"
         textAlign="center"
         :rows="rows"

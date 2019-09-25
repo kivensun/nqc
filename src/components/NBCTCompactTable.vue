@@ -40,7 +40,7 @@
             :total="rows.length"
             :showTotal="total => `总数： ${total} 条记录`"
             v-model="currentPage"
-            style="font-size:16px;"
+            style="font-size:13px;"
           />
         </div>
       </div>
