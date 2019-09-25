@@ -67,12 +67,6 @@ export default new Router({
           meta: { title: '在场集卡列表', permission: ['3000'] }
         },
         {
-          path: '/publicinfo/ysktxl',
-          name: 'ysktxl',
-          component: () => import('@/views/404.vue'),
-          meta: { title: '延伸可提箱量查询', permission: ['3000'] }
-        },
-        {
           path: '/customerquery/exvoyagelncdquery',
           name: 'ExVoyageLncdQuery',
           component: () => import('@/views/customerinfo/exvoyagelncdquery.vue'),
@@ -113,12 +107,6 @@ export default new Router({
           name: 'EfinReportDownload',
           component: () => import('@/views/customerinfo/EfinReportDownload.vue'),
           meta: { title: '货代对帐单下载', permission: ['2002'] }
-        },
-        {
-          path: '/customerquery/2008',
-          name: '2008',
-          component: () => import('@/views/404.vue'),
-          meta: { title: '堆场驳箱查询', permission: ['2003'] }
         },
         {
           path: '/customerquery/2009',

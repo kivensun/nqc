@@ -53,11 +53,6 @@ export const menuMap = [
         path: '/publicinfo/yardtruck',
         title: '在场集卡列表',
         permission: ['3000']
-      },
-      {
-        path: '/publicinfo/ysktxl',
-        title: '延伸可提箱量查询',
-        permission: ['3000']
       }
     ]
   },
@@ -98,11 +93,6 @@ export const menuMap = [
         path: '/customerquery/efinreportdownload',
         title: '货代对帐单下载',
         permission: ['2002']
-      },
-      {
-        path: '/customerquery/2008',
-        title: '堆场驳箱查询',
-        permission: ['2003']
       },
       {
         path: '/customerquery/2007',
