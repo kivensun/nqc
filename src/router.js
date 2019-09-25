@@ -109,9 +109,9 @@ export default new Router({
           meta: { title: '货代出口箱按航次查询', permission: ['2002'] }
         },
         {
-          path: '/customerquery/2007',
-          name: '2007',
-          component: () => import('@/views/404.vue'),
+          path: '/customerquery/efinreportdownload',
+          name: 'EfinReportDownload',
+          component: () => import('@/views/customerinfo/EfinReportDownload.vue'),
           meta: { title: '货代对帐单下载', permission: ['2002'] }
         },
         {

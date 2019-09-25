@@ -134,9 +134,14 @@ export default {
     showDrawer (param) {
       console.log("router");
       const { path, data } = param;
-      this.aDrawerTitle = data;
-      this.$router.push({ path: path }, () => { });
-      this.visible = true;
+      if (path.includes('http://')) {
+
+        window.open(path, '_blank');
+      } else {
+        this.aDrawerTitle = data;
+        this.$router.push({ path: path }, () => { });
+        this.visible = true;
+      }
     },
     onDrawerClose () {
       this.visible = false
