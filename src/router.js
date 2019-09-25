@@ -97,10 +97,10 @@ export default new Router({
           meta: { title: '在场空箱实时查询', permission: ['2001', '2003'] }
         },
         {
-          path: '/customerquery/2005',
-          name: '2005',
-          component: () => import('@/views/404.vue'),
-          meta: { title: '货代出口箱在场箱信息', permission: ['2002'] }
+          path: '/customerquery/exyardcontainerlistbycaag',
+          name: 'exYardContainerListByCaag',
+          component: () => import('@/views/customerinfo/exYardContainerListByCaag.vue'),
+          meta: { title: '货代在场出口箱信息', permission: ['2002'] }
         },
         {
           path: '/customerquery/exvoyagecaagquery',

@@ -85,8 +85,8 @@ export const menuMap = [
         permission: ['2001', '2003']
       },
       {
-        path: '/customerquery/2005',
-        title: '货代出口箱在场箱信息',
+        path: '/customerquery/exyardcontainerlistbycaag',
+        title: '货代在场出口箱信息',
         permission: ['2002']
       },
       {
