@@ -179,6 +179,8 @@ const columns = [
   }
 ];
 
+const filterColumns = columns.slice(1);
+
 export default {
   data() {
     return {
@@ -201,90 +203,7 @@ export default {
       //excel export
       headers: [],
       contents: [],
-
-      filterColumns: [
-        {
-          title: '箱号',
-          width: 90,
-          dataIndex: 'cntrId',
-          fixed: 'left'
-        },
-        {
-          title: '尺寸类型',
-          dataIndex: 'szty',
-          width: 40
-        },
-        {
-          title: '重量',
-          dataIndex: 'weight',
-          width: 40
-        },
-        {
-          title: '空/重',
-          dataIndex: 'infe',
-          width: 20
-        },
-        {
-          title: '提单号',
-          dataIndex: 'cabl',
-          width: 100
-        },
-        {
-          title: '铅封号',
-          dataIndex: 'ctsn',
-          width: 100
-        },
-        {
-          title: '卸船时间',
-          dataIndex: 'inTime',
-          width: 120
-        },
-        {
-          title: '出场时间',
-          dataIndex: 'outTime',
-          width: 120
-        },
-        {
-          title: '超限',
-          dataIndex: 'inog',
-          width: 20
-        },
-        {
-          title: '箱主',
-          dataIndex: 'lncd',
-          width: 30
-        },
-        {
-          title: '冷藏',
-          dataIndex: 'inth',
-          width: 20
-        },
-        {
-          title: '危品',
-          dataIndex: 'inhz',
-          width: 20
-        },
-        {
-          title: '危品等级',
-          dataIndex: 'hzcl',
-          width: 30
-        },
-        {
-          title: '内外贸',
-          dataIndex: 'intd',
-          width: 20
-        },
-        {
-          title: '中转',
-          dataIndex: 'ints',
-          width: 20
-        },
-        {
-          title: '内转外',
-          dataIndex: 'nzw',
-          width: 20
-        }
-      ]
+      filterColumns
     };
   },
   computed: {

@@ -249,6 +249,8 @@ const loadColumns = [
   }
 ];
 
+const filterColumns = loadColumns.slice(1);
+
 export default {
   data() {
     return {
@@ -278,134 +280,7 @@ export default {
       //excel export
       headers: [],
       contents: [],
-
-      filterColumns: [
-        {
-          title: '箱号',
-          width: 90,
-          dataIndex: 'cntrId'
-        },
-        {
-          title: '港口',
-          width: 50,
-          dataIndex: 'ptds'
-        },
-        {
-          title: '尺寸类型',
-          dataIndex: 'szty',
-          width: 40
-        },
-        {
-          title: '重量',
-          dataIndex: 'ctgw',
-          width: 40
-        },
-        {
-          title: '过磅重量(仅供参考)',
-          dataIndex: 'trwt',
-          width: 40
-        },
-        {
-          title: '船舱位',
-          dataIndex: 'vsLoc',
-          width: 60
-        },
-        {
-          title: '扣留/放行',
-          dataIndex: 'holdPass',
-          width: 20
-        },
-        {
-          title: '放行时间',
-          dataIndex: 'passTime',
-          width: 120
-        },
-        {
-          title: '空/重',
-          dataIndex: 'infe',
-          width: 20
-        },
-        {
-          title: '提单号',
-          dataIndex: 'cabl',
-          width: 100
-        },
-        {
-          title: '铅封号',
-          dataIndex: 'ctsn',
-          width: 100
-        },
-        {
-          title: '进场时间',
-          dataIndex: 'inTime',
-          width: 120
-        },
-        {
-          title: '装船时间',
-          dataIndex: 'outTime',
-          width: 120
-        },
-        {
-          title: '超限',
-          dataIndex: 'inog',
-          width: 20
-        },
-        {
-          title: '箱主',
-          dataIndex: 'lncd',
-          width: 30
-        },
-        {
-          title: '冷藏',
-          dataIndex: 'inth',
-          width: 20
-        },
-        {
-          title: '危品',
-          dataIndex: 'inhz',
-          width: 20
-        },
-        {
-          title: '危品等级',
-          dataIndex: 'hzcl',
-          width: 30
-        },
-        {
-          title: '中转',
-          dataIndex: 'ints',
-          width: 20
-        },
-        {
-          title: '查验箱',
-          dataIndex: 'isck',
-          width: 20
-        },
-        {
-          title: '海铁箱',
-          dataIndex: 'issrt',
-          width: 20
-        },
-        {
-          title: 'VGM重量',
-          dataIndex: 'vgmw',
-          width: 40
-        },
-        {
-          title: 'VGM称重方式',
-          dataIndex: 'vgmm',
-          width: 20
-        },
-        {
-          title: 'VGM签名',
-          dataIndex: 'vgms',
-          width: 60
-        },
-        {
-          title: '内转外',
-          dataIndex: 'nzw',
-          width: 20
-        }
-      ]
+      filterColumns,
     };
   },
   computed: {

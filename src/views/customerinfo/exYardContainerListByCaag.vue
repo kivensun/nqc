@@ -39,8 +39,6 @@
   </div>
 </template>
 
-
-
 <script>
 import { exYardContainerListByCaag } from '@/api/containerInfo';
 import U from '@/utils/utils.vue';
@@ -48,13 +46,78 @@ import { mapState } from 'vuex';
 import xlsx from '@/utils/xlsx';
 import nbctCompactTable from '@/components/NBCTCompactTable.vue';
 
+const exColumns = [
+  ////表格标题
+  {
+    title: '序号',
+    width: 40,
+    dataIndex: 'key'
+  },
+  {
+    title: '箱号',
+    width: 120,
+    dataIndex: 'cntrId'
+  },
+  {
+    title: '港口',
+    width: 70,
+    dataIndex: 'ptds'
+  },
+  {
+    title: '船名',
+    dataIndex: 'vscn',
+    width: 120
+  },
+  {
+    title: '航次',
+    dataIndex: 'vsvy',
+    width: 60
+  },
+  {
+    title: '提单号',
+    dataIndex: 'cabl',
+    width: 140
+  },
+  {
+    title: '尺寸',
+    dataIndex: 'ctsz',
+    width: 40
+  },
+  {
+    title: '类型',
+    dataIndex: 'ctty',
+    width: 40
+  },
+  {
+    title: '重量',
+    dataIndex: 'ctgw',
+    width: 60
+  },
+  {
+    title: '铅封号',
+    dataIndex: 'ctsn',
+    width: 90
+  },
+  {
+    title: '进场时间',
+    dataIndex: 'inTime',
+    width: 140
+  },
+  {
+    title: '扣留/放行',
+    dataIndex: 'holdPass',
+    width: 70
+  }
+];
+
+const filterColumns = exColumns.slice(1);
+
 export default {
   data() {
     return {
       caag: '', //货代
       filterOption: 'PORT', //过滤条件
       loading: false,
-
       exHeader: '',
       exCntrs: [], //箱信息列表
       exStatistcs: '', //统计信息
@@ -62,128 +125,8 @@ export default {
       //excel export
       headers: [],
       contents: [],
-
-      exColumns: [
-        ////表格标题
-        {
-          title: '序号',
-          width: 40,
-          dataIndex: 'key'
-        },
-        {
-          title: '箱号',
-          width: 120,
-          dataIndex: 'cntrId'
-        },
-        {
-          title: '港口',
-          width: 70,
-          dataIndex: 'ptds'
-        },
-        {
-          title: '船名',
-          dataIndex: 'vscn',
-          width: 120
-        },
-        {
-          title: '航次',
-          dataIndex: 'vsvy',
-          width: 60
-        },
-        {
-          title: '提单号',
-          dataIndex: 'cabl',
-          width: 140
-        },
-        {
-          title: '尺寸',
-          dataIndex: 'ctsz',
-          width: 40
-        },
-        {
-          title: '类型',
-          dataIndex: 'ctty',
-          width: 40
-        },
-        {
-          title: '重量',
-          dataIndex: 'ctgw',
-          width: 60
-        },
-        {
-          title: '铅封号',
-          dataIndex: 'ctsn',
-          width: 90
-        },
-        {
-          title: '进场时间',
-          dataIndex: 'inTime',
-          width: 140
-        },
-        {
-          title: '扣留/放行',
-          dataIndex: 'holdPass',
-          width: 70
-        }
-      ],
-
-      filterColumns: [
-        {
-          title: '箱号',
-          width: 120,
-          dataIndex: 'cntrId'
-        },
-        {
-          title: '港口',
-          width: 70,
-          dataIndex: 'ptds'
-        },
-        {
-          title: '船名',
-          dataIndex: 'vscn',
-          width: 120
-        },
-        {
-          title: '航次',
-          dataIndex: 'vsvy',
-          width: 60
-        },
-        {
-          title: '提单号',
-          dataIndex: 'cabl',
-          width: 140
-        },
-        {
-          title: '尺寸',
-          dataIndex: 'ctsz',
-          width: 40
-        },
-        {
-          title: '类型',
-          dataIndex: 'ctty',
-          width: 40
-        },
-        {
-          title: '重量',
-          dataIndex: 'ctgw',
-          width: 60
-        },
-        {
-          title: '铅封号',
-          dataIndex: 'ctsn',
-          width: 90
-        },
-        {
-          title: '进场时间',
-          dataIndex: 'inTime',
-          width: 140
-        },
-        {
-          title: '扣留/放行',
-          dataIndex: 'holdPass',
-          width: 70
-        }
-      ]
+      exColumns,
+      filterColumns
     };
   },
   computed: {
