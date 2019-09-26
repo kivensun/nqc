@@ -9,6 +9,8 @@
         fixedWidth:true
         :rows="ocs"
         :loading="loading"
+        :filterColumns="filterColumns"
+        header="aaa"
         style="margin-top:10px;"
       />
     </div>
@@ -54,6 +56,18 @@ export default {
           title: '备注',
           dataIndex: 'mark',
           width: 120
+        }
+      ],
+      filterColumns: [
+        {
+          title: '船名',
+          dataIndex: 'cName',
+          width: 120
+        },
+        {
+          title: '英文船名',
+          dataIndex: 'eName',
+          width: 100
         }
       ],
       ocs: [], //
