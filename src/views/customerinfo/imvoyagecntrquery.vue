@@ -75,6 +75,7 @@
         :rows="cntrs"
         :footer="statistcsStr"
         :loading="loading"
+        :filterColumns="filterColumns"
         style="margin-top:10px;"
       />
     </div>
@@ -178,6 +179,8 @@ const columns = [
   }
 ];
 
+const filterColumns = columns.slice(1);
+
 export default {
   data() {
     return {
@@ -199,7 +202,8 @@ export default {
       columns, //表格标题
       //excel export
       headers: [],
-      contents: []
+      contents: [],
+      filterColumns
     };
   },
   computed: {
@@ -305,7 +309,7 @@ export default {
     },
     companyVoyList() {
       let me = this;
-      let params = { vsvy: '', vsdr: 'I', lncd: '' };
+      let params = { vsvy: '', vsdr: 'I', lncd: me.companyId };
       let fn = function(value) {
         me.companyVoys = value;
       };
@@ -313,7 +317,7 @@ export default {
     },
     weekVoyList() {
       let me = this;
-      let params = { vsvy: '', vsdr: 'I', lncd: me.companyId };
+      let params = { vsvy: '', vsdr: 'I', lncd: '' };
       let fn = function(value) {
         me.weekVoys = value;
       };

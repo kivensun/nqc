@@ -78,6 +78,7 @@
           :rows="unloadCntrs"
           :footer="unloadStatistcsStr"
           :loading="loading"
+          :filterColumns="filterColumns"
         />
         <hr />
         <nbctCompactTable
@@ -86,6 +87,7 @@
           :rows="loadCntrs"
           :footer="loadStatistcsStr"
           :loading="loading"
+          :filterColumns="filterColumns"
         />
       </div>
     </div>
@@ -247,6 +249,8 @@ const loadColumns = [
   }
 ];
 
+const filterColumns = loadColumns.slice(1);
+
 export default {
   data() {
     return {
@@ -275,7 +279,8 @@ export default {
       unloadStatistcsStr: '',
       //excel export
       headers: [],
-      contents: []
+      contents: [],
+      filterColumns,
     };
   },
   computed: {
@@ -473,7 +478,7 @@ export default {
     },
     companyVoyList() {
       let me = this;
-      let params = { vsvy: '', vsdr: 'E', lncd: '' };
+      let params = { vsvy: '', vsdr: 'E', lncd: me.companyId };
       let fn = function(value) {
         me.companyVoys = value;
       };
@@ -481,7 +486,7 @@ export default {
     },
     weekVoyList() {
       let me = this;
-      let params = { vsvy: '', vsdr: 'E', lncd: me.companyId };
+      let params = { vsvy: '', vsdr: 'E', lncd: '' };
       let fn = function(value) {
         me.weekVoys = value;
       };

@@ -149,3 +149,18 @@ export function getContainerHisCabl(parameter) {
     }
   });
 }
+/* getExYardContainerListByCaag func
+ * parameters:{"caag": "CNC", "ordertype": "PORT"}
+ * @param parameter
+ * @returns {*}
+ */
+export function exYardContainerListByCaag(parameter) {
+  return axios({
+    url: '/exyardcontainerlist',
+    method: 'post',
+    data: parameter,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+}

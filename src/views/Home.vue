@@ -99,7 +99,7 @@
                     @close="onDrawerClose"
                     width="95%"
                     height="95%"
-                    :title="aDrawerTitle">
+                    :title="aDrawerTitle" style="margin-bottom: 30px">
           <route-view @closeDrawer="onDrawerClose" />
         </sun-drawer>
 

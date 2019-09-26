@@ -48,11 +48,6 @@ export const menuMap = [
         path: '/publicinfo/yardtruck',
         title: '在场集卡列表',
         permission: ['3000']
-      },
-      {
-        path: '/publicinfo/ysktxl',
-        title: '延伸可提箱量查询',
-        permission: ['3000']
       }
     ]
   },
@@ -60,7 +55,7 @@ export const menuMap = [
     title: '客户信息查询',
     children: [
       {
-        path: '/customerquery/exvoyagecntrquery',
+        path: '/customerquery/exvoyagelncdquery',
         title: '出口箱信息查询',
         permission: ['2001']
       },
@@ -75,17 +70,17 @@ export const menuMap = [
         permission: ['2001']
       },
       {
-        path: '/customerquery/EmptyContainer',
+        path: '/customerinfo/EmptyContainer',
         title: '在场空箱实时查询',
         permission: ['2001', '2003']
       },
       {
-        path: '/customerquery/2005',
-        title: '货代出口箱在场箱信息',
+        path: '/customerquery/exyardcontainerlistbycaag',
+        title: '货代在场出口箱信息',
         permission: ['2002']
       },
       {
-        path: '/customerquery/2006',
+        path: '/customerquery/exvoyagecaagquery',
         title: '货代出口箱按航次查询',
         permission: ['2002']
       },
@@ -93,11 +88,6 @@ export const menuMap = [
         path: '/customerquery/efinreportdownload',
         title: '货代对帐单下载',
         permission: ['2002']
-      },
-      {
-        path: '/customerquery/2008',
-        title: '堆场驳箱查询',
-        permission: ['2003']
       },
       {
         path: '/customerquery/containerinfohis',
