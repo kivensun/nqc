@@ -12,7 +12,7 @@
                :md="17"
                :lg="17"
                :xl="17"
-               style="height:100vh">
+               style="height:103vh">
           <div class="drawer-container"
                :style="[{width: width },{height: height }]"
                @click.self="handleWrapperClick">
@@ -50,7 +50,7 @@
               </a-row>
 
             </div>
-            <a-divider style="margin-top:0px;margin-bottom:0px" />
+            <a-divider style="margin-top:0px;padding-bottom:0px" />
             <div class="drawer-body">
               <section>
                 <slot></slot>
@@ -146,7 +146,7 @@ export default {
   border-bottom: 2px solid #1d2c6a;
 }
 .drawer-body {
-  padding: 30px;
+  padding: 10px;
 }
 
 .sun-drawer-fade-enter-active,

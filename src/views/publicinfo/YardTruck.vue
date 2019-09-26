@@ -7,6 +7,7 @@
         :rows="tableData"
         :loading="loading"
         :fixedWidth="true"
+        :filterColumns="filterColumns"
         fontSize="14"
         textAlign="center"
         style="margin-top:10px;font-size:16px;"
@@ -46,9 +47,32 @@ export default {
           width: 200
         }
       ],
+      filterColumns: [
+        {
+          title: '车牌号',
+          dataIndex: 'trnr',
+          width: 100
+        },
+        {
+          title: '港区编号',
+          dataIndex: 'trcd',
+          width: 100
+        },
+        {
+          title: '集卡在港滞留时间(分钟)',
+          dataIndex: 'delayminutes',
+          width: 200
+        },
+        {
+          title: '集卡进场时间',
+          dataIndex: 'intime',
+          width: 200
+        }
+      ],
       tableData: []
     };
   },
+
   methods: {
     list() {
       //let me=this;//test
