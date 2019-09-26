@@ -1,6 +1,6 @@
 export const menuMap = [
   {
-    title: '集装箱信息查询',
+    title: '公共信息查询',
     children: [
       {
         path: '/cntrinfo/cntrainerinfo',
@@ -22,12 +22,7 @@ export const menuMap = [
         path: '/cntrinfo/checkmovecntrinfo',
         title: '查验箱移箱/归位情况查询',
         permission: ['1000']
-      }
-    ]
-  },
-  {
-    title: '公共信息查询',
-    children: [
+      },
       {
         path: '/publicinfo/sailingdatenotice',
         title: '集装箱船舶船期信息',
@@ -105,9 +100,24 @@ export const menuMap = [
         permission: ['2003']
       },
       {
-        path: '/customerquery/2007',
+        path: '/customerquery/containerinfohis',
         title: '集装箱历史信息查询',
         permission: ['2004']
+      }
+    ]
+  },
+  {
+    title: '系统管理',
+    children: [
+      {
+        path: '/usermanage',
+        title: '用户管理',
+        permission: ['5000']
+      },
+      {
+        path: '/noticemanage',
+        title: '公告管理',
+        permission: ['5000']
       }
     ]
   }

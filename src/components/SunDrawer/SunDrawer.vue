@@ -9,8 +9,8 @@
              align="middle">
         <a-col :xs="24"
                :sm="24"
-               :md="17"
-               :lg="17"
+               :md="23"
+               :lg="20"
                :xl="17"
                style="height:100vh">
           <div class="drawer-container"
@@ -18,34 +18,37 @@
                @click.self="handleWrapperClick">
             <div class="drawer-header">
               <a-row type="flex"
-                     justify="space-around"
-                     align="middle"
-                     style="height:100%">
-                <a-col :span="24">
-                  <a-row type="flex"
-                         justify="space-between">
-                    <a-col :span="7"
-                           style="margin-left:30px;">
-                      <a-breadcrumb>
-                        <a-breadcrumb-item href="">
-                          <a-icon type="home" />
-                        </a-breadcrumb-item>
-                        <a-breadcrumb-item href="">
-                          <span>{{title.parent}}</span>
-                        </a-breadcrumb-item>
-                        <a-breadcrumb-item>
-                          {{title.children}}
-                        </a-breadcrumb-item>
-                      </a-breadcrumb>
-                    </a-col>
-                    <a-col :span="7"
-                           style="text-align:right;margin-right:15px;">
-                      <a-button type="primary"
-                                @click="closeDrawer">
-                        关闭当前页
-                      </a-button>
-                    </a-col>
-                  </a-row>
+                     style="">
+                <a-col :xs="{span: 16, offset: 1}"
+                       :sm="{span: 14, offset: 1}"
+                       :md="{span: 14, offset: 1}"
+                       :lg="{span: 14, offset: 1}"
+                       :xl="{span: 10, offset: 1}"
+                       :xxl="{span: 9, offset: 1}">
+                  <a-breadcrumb>
+                    <a-breadcrumb-item href="">
+                      <a-icon type="home" />
+                    </a-breadcrumb-item>
+                    <a-breadcrumb-item href="">
+                      <span>{{title.parent}}</span>
+                    </a-breadcrumb-item>
+                    <a-breadcrumb-item>
+                      {{title.children}}
+                    </a-breadcrumb-item>
+                  </a-breadcrumb>
+                </a-col>
+                <a-col :xs="{span: 3, offset: 2}"
+                       :sm="{span: 3, offset: 4}"
+                       :md="{span: 3, offset: 4}"
+                       :lg="{span: 3, offset: 6}"
+                       :xl="{span: 3, offset: 10}"
+                       :xxl="{span: 3, offset: 11}">
+                  <a-button type="primary"
+                            @click="closeDrawer"
+                            size="small">
+                    关闭当前页
+                  </a-button>
+
                 </a-col>
               </a-row>
 
@@ -141,7 +144,8 @@ export default {
   margin: auto;
 }
 .drawer-header {
-  height: 60px;
+  height: 50px;
+  padding-top: 10px;
   background: #ff9933;
   border-bottom: 2px solid #1d2c6a;
 }

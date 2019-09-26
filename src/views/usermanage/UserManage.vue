@@ -7,7 +7,9 @@
 
     </div>
     <a-table :dataSource="tableData"
-             :columns="columns">
+             :columns="columns"
+             :pagination="pagination"
+             size="small">
       <div slot="filterDropdown"
            slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }"
            class="custom-filter-dropdown">
@@ -72,6 +74,8 @@
 <script>
 //import UserOpt from '@/components/UserOpt';
 import { getUsers, deleteUser, resetPwUser } from '@/api/user'
+import { mapState } from 'vuex'
+
 function getUserType (userType) {
   switch (userType) {
     case 'A':
@@ -95,10 +99,14 @@ export default {
       userInfoModifyVisible: false,
       toChangeUserId: '',
       isAddForm: true,
+      pagination: {
+        pageSize: 40,
+      },
       columns: [{
         title: '用户名',
         dataIndex: 'userId',
         key: 'userId',
+        width: 80,
         scopedSlots: {
           filterDropdown: 'filterDropdown',
           filterIcon: 'filterIcon',
@@ -116,6 +124,7 @@ export default {
         title: '用户姓名',
         dataIndex: 'userName',
         key: 'userName',
+        width: 80,
         scopedSlots: {
           filterDropdown: 'filterDropdown',
           filterIcon: 'filterIcon',
@@ -133,6 +142,7 @@ export default {
         title: '单位名称',
         dataIndex: 'company',
         key: 'company',
+        width: 200,
         scopedSlots: {
           filterDropdown: 'filterDropdown',
           filterIcon: 'filterIcon',
@@ -150,6 +160,7 @@ export default {
         title: '单位代码',
         dataIndex: 'companyId',
         key: 'companyId',
+        width: 80,
         scopedSlots: {
           filterDropdown: 'filterDropdown',
           filterIcon: 'filterIcon',
@@ -172,6 +183,7 @@ export default {
           filterIcon: 'filterIcon',
           customRender: 'customRender',
         },
+        width: 80,
         onFilter: (value, record) => record.userType.toLowerCase().includes(value.toLowerCase()),
         onFilterDropdownVisibleChange: (visible) => {
           if (visible) {
@@ -180,22 +192,27 @@ export default {
             }, 0)
           }
         },
-      }, {
+      },
+      {
         title: '功能',
         dataIndex: 'action',
         key: 'action',
+        width: 100,
         scopedSlots: {
           customRender: 'action',
         },
       }
-
-      ],
-
-
+      ]
     }
   },
   components: {
     'UserOpt': () => import('@/components/UserOpt')
+  },
+  computed: {
+    ...mapState({
+      // 动态主路由    
+      userId: state => state.user.userId,
+    }),
   },
   mounted () {
     this.refreshUsers();
@@ -214,6 +231,7 @@ export default {
       let params = {};
       if (key) {
         params.userId = key;
+        params.opUser = this.userId;
         deleteUser(params).then((response) => {
           let { flag, errMsg } = response;
           if (flag) {
@@ -236,6 +254,7 @@ export default {
       let params = {};
       if (key) {
         params.userId = key;
+        params.opUser = this.userId;
         resetPwUser(params).then(response => {
           let { flag, errMsg } = response;
           if (flag) {

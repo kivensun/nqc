@@ -146,3 +146,19 @@ export function getUsercompanyHadCodes(parameter) {
     }
   });
 }
+
+/**
+ * changePasswordUser func
+ * @param
+ * @returns {*}
+ */
+export function changePasswordUser(parameter) {
+  return axios({
+    url: '/changepwuser',
+    method: 'post',
+    data: parameter,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+}

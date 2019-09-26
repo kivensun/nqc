@@ -1,16 +1,32 @@
 <template>
   <div>
     <a-row type="flex"
-           justify="center"
-           align="middle">
-      <a-col :span="3">查询开始日期：</a-col>
-      <a-col :span="8">
+           align="bottom">
+      <a-col :xs="{span: 7, offset: 9}"
+             :sm="{span: 7, offset: 9}"
+             :md="{span: 5, offset: 2}"
+             :lg="{span: 5, offset: 5}"
+             :xl="{span: 5, offset: 6}"
+             :xxl="{span: 3, offset: 6}">
+        查询开始日期：</a-col>
+      <a-col :xs="{span: 22 , offset: 1}"
+             :sm="{span: 22 }"
+             :md="{span: 6 }"
+             :lg="{span: 6 }"
+             :xl="{span: 6 }"
+             :xxl="{span: 6}">
         <a-date-picker style="width:100%"
                        v-model="selDate" />
       </a-col>
-      <a-col :span="2">
+      <a-col :xs="{span: 22, offset: 1}"
+             :sm="{span: 22}"
+             :md="{span: 2}"
+             :lg="{span: 2 }"
+             :xl="{span: 2, offset: 1}"
+             :xxl="{span: 2}">
         <a-button type="primary"
-                  @click="loadData">查 找</a-button>
+                  @click="loadData"
+                  style="margin-top:6px">查 找</a-button>
       </a-col>
     </a-row>
 
@@ -27,7 +43,7 @@
                     size="small"
                     :pagination="pagination"
                     :dataSource="listDzdIData"
-                    :grid="{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }">
+                    :grid="{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl: 3 }">
               <a-list-item slot="renderItem"
                            slot-scope="item"
                            key="item.skey">
@@ -49,7 +65,7 @@
                     size="small"
                     :pagination="pagination"
                     :dataSource="listDzdEData"
-                    :grid="{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }">
+                    :grid="{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl: 3 }">
               <a-list-item slot="renderItem"
                            slot-scope="item"
                            key="item.title">
@@ -67,7 +83,7 @@
                     size="small"
                     :pagination="pagination"
                     :dataSource="listYszkData"
-                    :grid="{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }">
+                    :grid="{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl: 3 }">
               <a-list-item slot="renderItem"
                            slot-scope="item"
                            key="item.title">
