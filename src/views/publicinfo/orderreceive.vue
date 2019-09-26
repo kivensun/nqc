@@ -10,7 +10,6 @@
         :rows="ocs"
         :loading="loading"
         :filterColumns="filterColumns"
-        header="aaa"
         style="margin-top:10px;"
       />
     </div>
@@ -61,13 +60,15 @@ export default {
       filterColumns: [
         {
           title: '船名',
-          dataIndex: 'cName',
-          width: 120
+          dataIndex: 'cName'
         },
         {
           title: '英文船名',
-          dataIndex: 'eName',
-          width: 100
+          dataIndex: 'eName'
+        },
+        {
+          title: '航次',
+          dataIndex: 'voyage'
         }
       ],
       ocs: [], //

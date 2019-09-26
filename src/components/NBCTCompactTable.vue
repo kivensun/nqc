@@ -61,11 +61,15 @@
             showSizeChanger
             :pageSize.sync="pageSize"
             :defaultCurrent="1"
-            :total="rows.length"
+            :total="filterRows.length"
             :showTotal="total => `总数： ${total} 条记录`"
             v-model="currentPage"
             style="font-size:13px;"
-          />
+          >
+            <template slot="buildOptionText" slot-scope="props">
+              <span>{{props.value}}条/页</span>
+            </template>
+          </a-pagination>
         </div>
       </div>
     </div>

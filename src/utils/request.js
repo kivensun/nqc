@@ -20,10 +20,10 @@ const err = error => {
         description: data.message
       });
     }
-    if (error.response.status === 401) {
+    if (error.response.status === 401 || error.response.status === 500) {
       notification.error({
-        message: 'Unauthorized',
-        description: 'Authorized verification failed'
+        message: '安全认证',
+        description: error.response.data.message
       });
       if (token) {
         store.dispath('Logout').then(() => {

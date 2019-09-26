@@ -5,3 +5,7 @@ export const voyagelist = params => { return axios.post(`/voyagelist`, params); 
 export const imcontainerlist = params => { return axios.post(`/imcontainerlist`, params); };
 export const excontainerlist = params => { return axios.post(`/excontainerlist`, params); };
 export const getEmptyContainer = params => { return axios.post(`/emptycontainer`, params); };
+
+//测试
+export const tokentest = params => { return axios.post(`/tokentest`, params); };
+
