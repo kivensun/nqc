@@ -26,6 +26,7 @@
         fontSize="14"
         textAlign="center"
         :rows="rows"
+        :filterColumns="filterColumns"
         style="margin-top:10px;font-size:16px;"
       />
       <hr />
@@ -51,6 +52,53 @@ export default {
           dataIndex: 'key',
           width: 50
         },
+        {
+          title: '箱号',
+          dataIndex: 'cntrid',
+          width: 140
+        },
+        {
+          title: '航次',
+          dataIndex: 'vsvy',
+          width: 150
+        },
+        {
+          title: '尺寸',
+          dataIndex: 'ctsz',
+          width: 50
+        },
+        {
+          title: '箱型',
+          dataIndex: 'ctty',
+          width: 50
+        },
+        {
+          title: '堆场位置',
+          dataIndex: 'ydst',
+          width: 120
+        },
+        {
+          title: '残损',
+          dataIndex: 'indm',
+          width: 50
+        },
+        {
+          title: '禁提',
+          dataIndex: 'injt',
+          width: 50
+        },
+        {
+          title: '毛重',
+          dataIndex: 'ctgw',
+          width: 50
+        },
+        {
+          title: '进场日期',
+          dataIndex: 'intime',
+          width: 160
+        }
+      ],
+      filterColumns: [
         {
           title: '箱号',
           dataIndex: 'cntrid',
