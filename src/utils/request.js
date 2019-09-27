@@ -39,8 +39,10 @@ const err = error => {
 
 service.interceptors.request.use(config => {
   const token = store.getters.token;
+  const userId = store.getters.userId;
   if (token) {
     config.headers['token'] = token; // 让每个请求携带自定义tokens
+    config.headers['userId'] = userId;
   }
   return config;
 }, err);

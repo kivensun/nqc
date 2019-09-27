@@ -2,14 +2,14 @@
   <div>
     <!-- 航次列表 -->
     <div v-show="voyVisable">
-      <div style="min-height:50px;padding:10px;border:1px solid black;">
-        <div style="overflow:hidden;">
-          <span style="float:left;margin-top:15px;margin-left:20px;" class="title">输入进口航次查询：</span>
+      <div class="block" style="min-height:50px;">
+        <div style="text-align:left;">
+          <span style="margin-left:20px;" class="title">输入进口航次查询：</span>
           <a-input-search
             @search="onSearch"
             @change="onChange"
             enterButton
-            style="width: 500px;float:left;margin-top:10px;margin-left:20px;margin-top:10px;"
+            style="width: 400px;margin-left:20px;"
             v-model="imvsvy"
           />
         </div>
@@ -22,7 +22,7 @@
           >{{voy.title}}</a-tag>
         </div>
       </div>
-      <div style="min-height:100px;padding:10px;border:1px solid black;margin-top:10px;">
+      <div class="block" style="min-height:100px;">
         <div style="text-align:left;margin-left:20px;margin-top:10px;">
           <span class="title">7天内所有航次</span>
         </div>
@@ -35,7 +35,7 @@
           >{{voy.title}}</a-tag>
         </div>
       </div>
-      <div style="min-height:100px;padding:10px;border:1px solid black;margin-top:10px;">
+      <div class="block" style="min-height:100px;">
         <div style="text-align:left;margin-left:20px;margin-top:10px;">
           <span class="title">一个月内{{companyId}}航次</span>
         </div>
@@ -355,6 +355,12 @@ export default {
   float: left;
   margin-top: 10px;
   text-align: left;
+}
+.block{
+  margin-top:10px;
+  padding:10px;
+  border:1px solid #c0c4cc;
+  border-radius: 10px;
 }
 </style>
 
