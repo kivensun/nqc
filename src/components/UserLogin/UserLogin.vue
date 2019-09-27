@@ -235,7 +235,7 @@ export default {
     },
     handleLoginout () {
       const { Logout } = this;
-      Logout().then(() => {
+      Logout({userId:this.userId}).then(() => {
         this.isLogin = false;
         this.isAdmin = false;
         this.$emit('changeMenu');

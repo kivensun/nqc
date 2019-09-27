@@ -115,6 +115,7 @@ export default {
       }
       //调整页面内容
       me.adjuestPage();
+      me.currentPage = 1;
     },
     adjuestWidth() {
       let me = this;
