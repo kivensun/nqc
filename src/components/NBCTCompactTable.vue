@@ -37,7 +37,11 @@
                 v-for="col in columns"
                 :key="col.dataIndex"
                 :style="{width:col.width+'px'}"
-              >{{col.title}}</th>
+                @click="sortCol(col)"
+              >
+                {{col.title}}
+                <span style="color:yellow;">{{col.sort}}</span>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -77,7 +81,36 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import U from '@/utils/utils.vue';
+
+const compareUp = function(prop) {
+  return function(obj1, obj2) {
+    var val1 = obj1[prop];
+    var val2 = obj2[prop];
+    if (val1 < val2) {
+      return -1;
+    } else if (val1 > val2) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+};
+
+const compareDown = function(prop) {
+  return function(obj1, obj2) {
+    var val1 = obj1[prop];
+    var val2 = obj2[prop];
+    if (val1 > val2) {
+      return -1;
+    } else if (val1 < val2) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+};
 
 export default {
   data() {
@@ -103,6 +136,34 @@ export default {
     };
   },
   methods: {
+    handlerOrder(col) {
+      let me = this;
+      if (col.sort == '↑') {
+        me.filterRows.sort(compareUp(col.dataIndex));
+      } else {
+        me.filterRows.sort(compareDown(col.dataIndex));
+      }
+    },
+    sortCol(col) {
+      let me = this;
+      let index = me.columns.indexOf(col);
+      //1.先清理掉其它排序标记
+      this.columns.forEach(item => {
+        if (item != col) {
+          item.sort = null;
+        }
+      });
+      //2.设置本列排序标记
+      if (!col.sort) {
+        col.sort = '↑';
+      } else if (col.sort == '↑') {
+        col.sort = '↓';
+      } else {
+        col.sort = '↑';
+      }
+      Vue.set(me.columns, index, col);
+      me.handlerOrder(col);
+    },
     handleFilter() {
       let me = this;
       //过滤内容
