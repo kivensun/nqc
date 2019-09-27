@@ -109,9 +109,9 @@ export default new Router({
           meta: { title: '货代对帐单下载', permission: ['2002'] }
         },
         {
-          path: '/customerquery/2009',
-          name: '2009',
-          component: () => import('@/views/404.vue'),
+          path: '/customerquery/containerinfohis',
+          name: 'ContainerInfoHis',
+          component: () => import('@/views/customerinfo/ContainerInfoHis.vue'),
           meta: { title: '集装箱历史信息查询', permission: ['2004'] }
         },
         {
@@ -119,6 +119,12 @@ export default new Router({
           name: 'UserManage',
           component: () => import('@/views/usermanage/UserManage.vue'),
           meta: { title: '用户管理', permission: ['5000'] }
+        },
+        {
+          path: '/noticemanage',
+          name: 'NoticeManage',
+          component: () => import('@/views/404.vue'),
+          meta: { title: '公告管理', permission: ['5000'] }
         }
       ]
     },

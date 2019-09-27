@@ -92,6 +92,7 @@
 <script>
 
 import { addUser, editUser, getUser } from '@/api/user';
+import { mapState } from 'vuex'
 
 export default {
   data () {
@@ -147,6 +148,12 @@ export default {
       default: false
     }
   },
+  computed: {
+    ...mapState({
+      // 动态主路由    
+      opUser: state => state.user.userId,
+    }),
+  },
   watch: {
     visible (val) {
       if (val) {
@@ -201,7 +208,7 @@ export default {
           params.address = values.address ? values.address : '';
           params.company = values.company ? values.company : '';
           params.companyId = values.companyId.toUpperCase();
-          params.opUser = this.userId;
+          params.opUser = this.opUser;
           console.log(params);
           if (this.isAdd) {
             addUser(params).then(response => {

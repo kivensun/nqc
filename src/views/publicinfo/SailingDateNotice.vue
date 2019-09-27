@@ -1,19 +1,35 @@
 
 <template>
   <div>
-    <a-row type="flex"
-           justify="center"
-           align="middle">
-      <a-col :span="2">查询时间：</a-col>
-      <a-col :span="8">
+    <a-row>
+      <a-col :xs="{span: 24}"
+             :sm="{span: 24}"
+             :md="{span: 4, offset:1}"
+             :lg="{span: 4}"
+             :xl="{span: 3, offset:2}"
+             :xxl="{span: 3, offset: 2}">
+        <div style="margin-top:20px;">查询时间：</div>
+      </a-col>
+      <a-col :xs="{span: 19}"
+             :sm="{span: 20}"
+             :md="{span: 13}"
+             :lg="{span: 13}"
+             :xl="{span: 13}"
+             :xxl="{span: 13}">
         <a-range-picker format="YYYYMMDD"
+                        style="margin-top:10px;"
                         :placeholder="['开始日期', '结束日期']"
                         v-model="selDates" />
       </a-col>
-      <a-col :span="2"
-             :offset="1">
+      <a-col :xs="{span: 3,offset:1}"
+             :sm="{span: 3}"
+             :md="{span: 3,offset:1}"
+             :lg="{span: 3, offset: 1}"
+             :xl="{span: 3, offset: 1}"
+             :xxl="{span: 3, offset: 1}">
         <a-button type="primary"
-                  @click="getData">查 找</a-button>
+                  @click="getData"
+                  style="margin-top:10px; ">查 找</a-button>
       </a-col>
     </a-row>
     <a-divider />
