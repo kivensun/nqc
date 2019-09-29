@@ -213,6 +213,9 @@ export default {
   created() {
     this.adjuestWidth();
     this.filter();
+    this.columns.forEach(item => {
+      item.sort = null;
+    });
   },
   watch: {
     rows(val) {
