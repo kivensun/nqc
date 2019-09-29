@@ -163,6 +163,8 @@ export default {
       }
       Vue.set(me.columns, index, col);
       me.handlerOrder(col);
+      //3.调整页面内容
+      me.adjuestPage();
     },
     handleFilter() {
       let me = this;
