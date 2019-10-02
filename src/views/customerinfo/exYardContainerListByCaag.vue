@@ -27,7 +27,7 @@
           :columns="exColumns"
           :rows="exCntrs"
           :footer="exStatistcsStr"
-          :loading="loading"
+          :loading="true"
           :fixedWidth="false"
           :filterColumns="filterColumns"
           fontSize="14"

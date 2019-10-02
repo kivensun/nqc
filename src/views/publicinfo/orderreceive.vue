@@ -8,7 +8,7 @@
         fontSize="8"
         fixedWidth:true
         :rows="ocs"
-        :loading="loading"
+        :loading="true"
         :filterColumns="filterColumns"
         style="margin-top:10px;"
       />

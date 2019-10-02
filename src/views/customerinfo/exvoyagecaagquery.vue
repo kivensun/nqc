@@ -64,7 +64,7 @@
           :columns="unloadColumns"
           :rows="unloadCntrs"
           :footer="unloadStatistcsStr"
-          :loading="loading"
+          :loading="true"
           :filterColumns="filterColumns"
         />
         <hr />
@@ -73,7 +73,7 @@
           :columns="loadColumns"
           :rows="loadCntrs"
           :footer="loadStatistcsStr"
-          :loading="loading"
+          :loading="true"
           :filterColumns="filterColumns"
         />
       </div>
