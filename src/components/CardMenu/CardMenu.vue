@@ -14,7 +14,11 @@
              overflow: 'hidden',
              backgroundSize:'cover' }">
 
-          <a-row style="top: 30%;z-index: 10;text-align: left;">
+          <a-row type="flex"
+                 justify="space-between"
+                 align="middle"
+                 style="z-index: 10;text-align: left;height:100%">
+
             <a-col :xs="{span: 22, offset: 1}"
                    :sm="{span: 22, offset: 1}"
                    :md="{span: 22, offset: 1}"
@@ -34,7 +38,7 @@
                   </a>
                 </a-list-item>
                 <div slot="header"
-                     style="font-size:3em;color: #fff;">
+                     style="font-size:3.5em;color: #fff;">
                   {{menu.title}}
                 </div>
               </a-list>
@@ -49,7 +53,10 @@
              backgroundRepeat: 'no-repeat',
              overflow: 'hidden',
              backgroundSize:'cover'  }">
-          <a-row style="top: 30%;z-index: 10">
+          <a-row type="flex"
+                 justify="space-between"
+                 align="middle"
+                 style="z-index: 99;height:100%">
             <a-col :xs="{span: 22, offset: 1}"
                    :sm="{span: 22, offset: 1}"
                    :md="{span: 22, offset: 1}"
@@ -192,6 +199,7 @@ export default {
   padding: 10px 20px !important;
   background: rgba(255, 255, 255, 0.1) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
   filter: Alpha(opacity=90);
+  overflow: auto;
   background: #fff; /*实现IE背景透明
 
 width: 100%;
@@ -208,11 +216,14 @@ position:fixed;/* 随着鼠标滚动*/
 .menu-list .ant-list-item {
   margin-top: 10px;
   height: 64px;
-  background: rgba(255, 255, 255, 0.2) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
+  background: rgba(255, 255, 255, 0.4) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
   filter: Alpha(opacity=90);
   background: #fff;
   padding-left: 10px;
   line-height: 30px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
   box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1); /*投影*/
   -webkit-box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -225,9 +236,9 @@ position:fixed;/* 随着鼠标滚动*/
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: 400;
+  font-weight: 500;
   text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
-  font-size: 1.35em;
+  font-size: 1.6em;
   -webkit-transition: color 0.3s;
   -moz-transition: color 0.3s;
   transition: color 0.3s;

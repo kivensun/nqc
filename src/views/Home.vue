@@ -5,6 +5,13 @@
         <a-layout>
           <a-layout-header class="global-header">
             <a-row>
+              <a-col :span="24"
+                     style="text-align: center;background-color: #55aaff;height:20px;line-height:20px">
+                <a href="http://www.nbct.com.cn/query/index.html"
+                   style="color:#fff;margin-top:5px;">回到旧版查询>>>>></a>
+              </a-col>
+            </a-row>
+            <a-row>
               <a-col :xs="{span: 7, offset:1}"
                      :sm="{span: 5, offset:1}"
                      :md="{span: 5, offset: 1}"
@@ -61,16 +68,18 @@
                             <a-icon type="poweroff" />注销
                           </span>
                         </template>
-                        <a-card-meta title="Card title"
-                                     description="This is the description">
+                        <a-card-meta :title="'公司: '+ companyId"
+                                     :description="'用户类别: ' + userType">
 
                         </a-card-meta>
                       </a-card>
                     </template>
-                    <a-avatar :size="60"
-                              shape="square"
-                              style="color: #000000; backgroundColor: #f6ad3c;float: right;margin-top: 8px;">
-                      {{userId}}
+                    <a-avatar :size="55"
+                              style="color: #000000; backgroundColor: #36a678;#float: right;margin-top: -1px;">
+                      <p>
+                        <a-icon type="user"
+                                style="font-size:1.2em; " />
+                        {{userId}}</p>
                     </a-avatar>
 
                   </a-popover>
@@ -259,6 +268,8 @@ export default {
       groups: state => state.user.groups,
       userId: state => state.user.userId,
       cardMenus: state => state.permission.allowedMenuMap,
+      companyId: state => state.user.companyId,
+      userType: state => state.user.userType,
     }),
   },
   beforeCreate () {
@@ -458,7 +469,7 @@ export default {
 }
 
 .global-header {
-  height: 80px;
+  height: 85px;
   padding: 0;
   position: fixed;
   width: 100%;
@@ -488,7 +499,7 @@ position:fixed;/* 随着鼠标滚动*/
   text-align: right;
 }
 .header-meun .ant-menu-item {
-  margin-top: 22px;
+  margin-top: 7px;
   padding-left: 10px;
   padding-right: 10px;
   font-size: 1.35em;
