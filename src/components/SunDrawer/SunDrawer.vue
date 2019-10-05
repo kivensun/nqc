@@ -126,7 +126,7 @@ export default {
 .drawer-dialog {
   height: 100vh;
   width: 100vw;
-  background: #cecece;
+
   position: fixed;
   top: 0;
   right: 0;
@@ -134,6 +134,14 @@ export default {
   bottom: 0;
   margin: auto;
   z-index: 99;
+  background: rgba(255, 255, 255, 0.6) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
+  filter: Alpha(opacity=90);
+  background: #fff; /*实现IE背景透明*/
+
+  box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1); /*投影*/
+  -webkit-box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 .drawer-container {
   background: #fff;

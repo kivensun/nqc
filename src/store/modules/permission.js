@@ -35,7 +35,11 @@ const permission = {
             }
           });
           if (filterdMenuChildren.length !== 0) {
-            filterdMenuMap.push({ title: menu.title, children: filterdMenuChildren });
+            filterdMenuMap.push({
+              title: menu.title,
+              backgroundImage: menu.backgroundImage,
+              children: filterdMenuChildren
+            });
           }
         });
 
@@ -63,7 +67,11 @@ const permission = {
             }
           });
           if (filterdMenuChildren.length !== 0) {
-            filterdMenuMap.push({ title: menu.title, children: filterdMenuChildren });
+            filterdMenuMap.push({
+              title: menu.title,
+              backgroundImage: menu.backgroundImage,
+              children: filterdMenuChildren
+            });
           }
         });
 
