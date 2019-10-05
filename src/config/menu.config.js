@@ -1,6 +1,7 @@
 export const menuMap = [
   {
     title: '公共信息查询',
+    backgroundImage: require('@/assets/home1.jpg'),
     children: [
       {
         path: '/cntrinfo/cntrainerinfo',
@@ -53,6 +54,7 @@ export const menuMap = [
   },
   {
     title: '客户信息查询',
+    backgroundImage: require('@/assets/home2.jpg'),
     children: [
       {
         path: '/customerquery/exvoyagelncdquery',
@@ -98,6 +100,7 @@ export const menuMap = [
   },
   {
     title: '系统管理',
+    backgroundImage: require('@/assets/home3.jpg'),
     children: [
       {
         path: '/usermanage',

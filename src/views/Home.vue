@@ -2,35 +2,78 @@
   <div class="outer-container">
     <div class="inner-container">
       <div class="content">
-        <a-layout style="min-height: 100vh;">
+        <a-layout>
           <a-layout-header class="global-header">
             <a-row>
-              <a-col :xs="{span: 10, offset:1}"
+              <a-col :xs="{span: 7, offset:1}"
                      :sm="{span: 5, offset:1}"
-                     :md="{span: 5, offset: 2}"
-                     :lg="{span: 5, offset: 3}"
+                     :md="{span: 5, offset: 1}"
+                     :lg="{span: 5, offset: 2}"
                      :xl="{span: 3, offset: 4}"
                      :xxl="{span: 3, offset: 4}">
                 <img src="@/assets/logo.png" />
               </a-col>
-              <a-col :xs="{span: 11, offset:1}"
-                     :sm="{span: 11, offset: 6}"
-                     :md="{span: 10, offset: 5}"
-                     :lg="{span: 10, offset: 3}"
-                     :xl="{span: 10, offset: 3}"
-                     :xxl="{span: 4, offset: 9}">
+
+              <a-col :xs="{span: 12}"
+                     :sm="{span: 14,offset:1}"
+                     :md="{span: 13, offset: 1}"
+                     :lg="{span: 11, offset: 1}"
+                     :xl="{span: 8, offset: 2}"
+                     :xxl="{span:6, offset:4}">
+                <a-menu mode="horizontal"
+                        :selectedKeys="[selectedPage]"
+                        class="header-meun">
+                  <a-menu-item v-for="(item,index) in cardMenus"
+                               :key="index">
+                    <div style="color: #0f317d"
+                         @click="changeHeaderMenu(index)">{{item.title}}</div>
+                  </a-menu-item>
+                  <a-menu-item v-if="!userId"
+                               key="99">
+                    <div style="color: #0f317d"
+                         @click="changeHeaderMenu(1)">客户查询</div>
+                  </a-menu-item>
+                </a-menu>
+              </a-col>
+              <a-col :xs="{span: 1, offset: 1}"
+                     :sm="{span: 1}"
+                     :md="{span: 2}"
+                     :lg="{span: 2}"
+                     :xl="{span: 2}"
+                     :xxl="{span: 2}">
+
                 <div v-if="userId">
-                  <a-button style="float: right;margin-top: 32px;margin-left: 16px; "
-                            size="small"
-                            @click="handleLoginout">注销</a-button>
-                  <a-button size="small"
-                            style="float: right;margin-top: 32px;margin-left: 16px;"
-                            @click="handleChangePwModel">修改密码</a-button>
-                  <a-avatar :size="55"
-                            shape="square"
-                            style="color: #000000; backgroundColor: #f6ad3c;float: right;margin-top: 8px;margin-left: 16px;">
-                    {{userId}}
-                  </a-avatar>
+                  <a-popover>
+                    <template slot="content">
+                      <a-card hoverable
+                              style="width: 230px">
+
+                        <template class="ant-card-actions"
+                                  slot="actions">
+                          <span @click="handleChangePwModel">
+                            <a-icon type="lock" />修改密码
+                          </span>
+
+                          <span>
+                            <a-icon type="tool" />修改信息
+                          </span>
+                          <span @click="handleLoginout">
+                            <a-icon type="poweroff" />注销
+                          </span>
+                        </template>
+                        <a-card-meta title="Card title"
+                                     description="This is the description">
+
+                        </a-card-meta>
+                      </a-card>
+                    </template>
+                    <a-avatar :size="60"
+                              shape="square"
+                              style="color: #000000; backgroundColor: #f6ad3c;float: right;margin-top: 8px;">
+                      {{userId}}
+                    </a-avatar>
+
+                  </a-popover>
 
                 </div>
               </a-col>
@@ -38,68 +81,24 @@
             </a-row>
 
           </a-layout-header>
-          <a-layout-content style="margin-top:80px; background-image:url('../assets/homebar1.jpg')">
-            <a-row>
-              <a-col :xs="{span: 22, offset: 1}"
-                     :sm="{span: 22, offset: 1}"
-                     :md="{span: 20, offset: 2}"
-                     :lg="{span: 18, offset: 3}"
-                     :xl="{span: 16, offset: 4}"
-                     :xxl="{span: 16, offset: 4}">
+          <a-layout-content class="global-content">
 
-                <a-carousel autoplay>
-                  <div>
-                    <img alt="example"
-                         src="../assets/homebar1.jpg"
-                         slot="cover"
-                         style="display: block;margin: auto;" />
-                  </div>
-                  <div>
-                    <img alt="example"
-                         src="../assets/homebar2.jpg"
-                         slot="cover" />
-                  </div>
-                  <div>
-                    <img alt="example"
-                         src="../assets/homebar3.jpg"
-                         slot="cover" />
-                  </div>
-                  <div>
-                    <img alt="example"
-                         src="../assets/homebar4.jpg"
-                         slot="cover"
-                         style="display: block;margin: auto;" />
-                  </div>
-                  <div v-if="hadNotice">
-                    <p> notice </p>
-                  </div>
-                </a-carousel>
-
-                <card-menu :menus=cardMenu
-                           @showDrawer="showDrawer" />
-                <div v-if="!userId">
-                  <a-card title="客户服务"
-                          :headStyle="cardNoLoginTileStyle"
-                          :bodyStyle="cardNoLoginBodyStyle">
-                    <p style="width:100%">
-                      <a-button type="link"
-                                @click="showLogin">点击登录查看详情</a-button>
-                    </p>
-                  </a-card>
-                </div>
-
-              </a-col>
-            </a-row>
+            <card-menu :menus=cardMenus
+                       :userId=userId
+                       :selectedPage=selectedPage
+                       @showDrawer="showDrawer"
+                       @showLogin="showLogin"
+                       @changeCardMenu="changeHeaderMenu" />
 
           </a-layout-content>
-          <a-layout-footer class="global-footer">NBCTCustomerQuery ©2018 Created by Ant </a-layout-footer>
+
         </a-layout>
 
         <sun-drawer :visible="visible"
                     @close="onDrawerClose"
                     width="95%"
                     height="95%"
-                    :title="aDrawerTitle" style="margin-bottom: 30px">
+                    :title="aDrawerTitle">
           <route-view @closeDrawer="onDrawerClose" />
         </sun-drawer>
 
@@ -234,6 +233,8 @@ export default {
       visible: false,
       placement: 'left',
       aDrawerTitle: {},
+      titleMenus: [],
+      selectedPage: 0,
       hadNotice: true,
       cardNoLoginTileStyle: {
         background: '#ff9933',
@@ -257,7 +258,7 @@ export default {
       // 动态主路由
       groups: state => state.user.groups,
       userId: state => state.user.userId,
-      cardMenu: state => state.permission.allowedMenuMap
+      cardMenus: state => state.permission.allowedMenuMap,
     }),
   },
   beforeCreate () {
@@ -267,6 +268,13 @@ export default {
   created () {
     this.reGetDateOnRefresh();
     this.InitMenu(this.groups);
+    this.titleMenus = this.cardMenus.map((item, index) => {
+      let tmp = {};
+      tmp.key = index;
+      tmp.title = item.title;
+      console.log(tmp);
+      return tmp;
+    })
 
   },
   // mounted () {
@@ -330,6 +338,13 @@ export default {
         this.loignVisible = false;
         this.loginConfirmLoading = false;
       }, 1000);
+      this.titleMenus = this.cardMenus.map((item, index) => {
+        let tmp = {};
+        tmp.key = index;
+        tmp.title = item.title;
+        console.log(tmp);
+        return tmp;
+      })
     },
     loginFailed (err) {
       console.log(err);
@@ -420,6 +435,11 @@ export default {
       }
       callback();
     },
+    changeHeaderMenu (key) {
+      console.log('changeHeaderMenu: ' + key);
+      this.selectedPage = key;
+      console.log('selectedPage: ' + this.selectedPage);
+    }
   }
 }
 </script>
@@ -438,13 +458,13 @@ export default {
 }
 
 .global-header {
-  height: 65px;
+  height: 80px;
   padding: 0;
   position: fixed;
   width: 100%;
   z-index: 10;
   max-width: 100%;
-  background: rgba(255, 255, 255, 0.1) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
+  background: rgba(255, 255, 255, 0.2) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
   filter: Alpha(opacity=90);
   background: #fff; /*实现IE背景透明
 
@@ -456,6 +476,25 @@ position:fixed;/* 随着鼠标滚动*/
   -moz-box-shadow: 0px 1px 1px 1px 1gba (0, 0, 0, 0.1);
   -o-box-shadow: 0px 1px 1px 1px 1gba (0, 0, 0, 0.1);
 }
+.global-content {
+  height: 100%;
+}
+.header-meun {
+  background: rgba(255, 255, 255, 0) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
+  filter: Alpha(opacity=90);
+  background: #fff;
+  line-height: 55px;
+  border-bottom: 0px !important;
+  text-align: right;
+}
+.header-meun .ant-menu-item {
+  margin-top: 22px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1.35em;
+  font-weight: 800;
+}
+
 .global-footer {
   background: #002f7b;
   color: #fff;
@@ -464,26 +503,6 @@ position:fixed;/* 随着鼠标滚动*/
   text-align: center;
 }
 
-.homebar1 {
-  background: url('../assets/homebar1.jpg') center bottom no-repeat;
-  z-index: 1;
-  display: block;
-}
-.homebar2 {
-  background: url('../assets/homebar2.jpg') center bottom no-repeat;
-  z-index: 1;
-  display: block;
-}
-.homebar3 {
-  background: url('../assets/homebar3.jpg') center bottom no-repeat;
-  z-index: 1;
-  display: block;
-}
-.homebar4 {
-  background: url('../assets/homebar4.jpg') center bottom no-repeat;
-  z-index: 1;
-  display: block;
-}
 .content,
 .outer-container {
   width: 100vw;

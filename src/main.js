@@ -1,3 +1,6 @@
+// 引入@babel/polyfill处理兼容
+import '@babel/polyfill';
+
 import Vue from 'vue';
 import Antd from 'ant-design-vue';
 import App from './App.vue';
