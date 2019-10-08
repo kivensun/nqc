@@ -234,7 +234,13 @@ export default {
       let me = this;
       me.curVoy = voy;
       me.loading = true;
-      let params = { vscd: voy.vscd, vsvy: voy.vsvy, vsdr: voy.vsdr, lncd: me.companyId, ordertype: me.filterOption };
+      let params = {
+        vscd: voy.vscd, //
+        vsvy: voy.vsvy, //
+        vsdr: voy.vsdr, //
+        lncd: me.companyId, //
+        ordertype: me.filterOption
+      };
       imcontainerlist(params).then(res => {
         let swrap = title => {
           return `<span>${title}：</span>`;
@@ -256,25 +262,16 @@ export default {
             smwrap('总箱量', me.statistcs.teu) +
             'TEU';
           me.cntrs = data.list.map(function(item, index) {
-            let c = {};
-            c.key = index + 1;
-            c.cntrId = item.cntrid;
-            c.szty = item.ctsz + item.ctty;
-            c.weight = item.ctgw;
-            c.infe = item.infe;
-            c.cabl = item.cabl;
-            c.ctsn = item.ctsn;
-            c.inTime = U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime);
-            c.outTime = U.isEmpty(item.outtime) ? '' : U.compactDateToNormal(item.outtime);
-            c.inog = item.inog;
-            c.lncd = item.lncd;
-            c.inth = item.inth;
-            c.inhz = item.inhz;
-            c.hzcl = item.hzcl;
-            c.intd = item.intd == 'W' ? '外' : '内';
-            c.ints = item.ints;
-            c.nzw = item.nzw;
-            return c;
+            return {
+              ...item,
+              key: index + 1,
+              cntrId: item.cntrid,
+              szty: item.ctsz + item.ctty,
+              weight: item.ctgw,
+              inTime: U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime),
+              outTime: U.isEmpty(item.outtime) ? '' : U.compactDateToNormal(item.outtime),
+              intd: item.intd == 'W' ? '外' : '内'
+            };
           });
         }
       });
@@ -293,14 +290,14 @@ export default {
           this.$message.error(errMsg);
         } else {
           let r = data.map(function(item, index) {
-            let voy = {};
-            voy.key = index;
-            voy.vscd = U.trim(item.vscdvy);
-            voy.vsvy = U.trim(item.vsvyvy);
-            voy.vsdr = U.trim(item.vsdrvy);
-            voy.lncd = item.lncdvr;
-            voy.title = U.trim(item.egnmvr) + '/' + U.trim(item.cnnmvr) + ' ' + U.trim(item.vsvyvy);
-            return voy;
+            return {
+              key: index, //
+              vscd: U.trim(item.vscdvy), //
+              vsvy: U.trim(item.vsvyvy), //
+              vsdr: U.trim(item.vsdrvy), //
+              lncd: item.lncdvr, //
+              title: U.trim(item.egnmvr) + '/' + U.trim(item.cnnmvr) + ' ' + U.trim(item.vsvyvy)
+            };
           });
           fn(r);
         }
@@ -355,10 +352,10 @@ export default {
   margin-top: 10px;
   text-align: left;
 }
-.block{
-  margin-top:10px;
-  padding:10px;
-  border:1px solid #c0c4cc;
+.block {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #c0c4cc;
   border-radius: 10px;
 }
 </style>
