@@ -74,7 +74,6 @@
         :columns="columns"
         :rows="cntrs"
         :footer="statistcsStr"
-        :loading="true"
         :filterColumns="filterColumns"
         style="margin-top:10px;"
       />

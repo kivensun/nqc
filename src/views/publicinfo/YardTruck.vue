@@ -5,7 +5,6 @@
       <nbctCompactTable
         :columns="columns"
         :rows="tableData"
-        :loading="true"
         :fixedWidth="true"
         :filterColumns="filterColumns"
         fontSize="14"
