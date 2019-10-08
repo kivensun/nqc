@@ -376,32 +376,18 @@ export default {
             smwrap('内支中转', me.unloadStatistcs.bnum);
           me.unloadCntrs = data.list1 == null ? [] : data.list1;
           me.unloadCntrs = me.unloadCntrs.map(function(item, index) {
-            let c = {};
-            c.key = index + 1;
-            c.cntrId = item.cntrid;
-            c.ptds = item.ptds;
-            c.szty = item.ctsz + item.ctty;
-            c.ctgw = item.ctgw;
-            c.trwt = item.trwt;
-            c.holdPass = item.isportpass;
-            c.passTime = U.isEmpty(item.passtime) ? '' : U.compactDateToNormal(item.passtime);
-            c.infe = item.infe;
-            c.cabl = item.cabl.replace(/,/g, '<br/>');
-            c.ctsn = item.ctsn;
-            c.inTime = U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime);
-            c.inog = item.inog;
-            c.lncd = item.lncd;
-            c.inth = item.inth;
-            c.inhz = item.inhz;
-            c.hzcl = item.hzcl;
-            c.ints = item.ints;
-            c.isck = item.isck;
-            c.issrt = item.issrt;
-            c.vgmw = item.vgmw;
-            c.vgmm = item.vgmm;
-            c.vgms = item.vgms;
-            c.nzw = item.isnzwct;
-            return c;
+            return {
+              ...item,
+              key: index + 1, //
+              cntrId: item.cntrid, //
+              szty: item.ctsz + item.ctty, //
+              holdPass: item.isportpass, //
+              passTime: U.isEmpty(item.passtime) ? '' : U.compactDateToNormal(item.passtime), //
+              cabl: item.cabl.replace(/,/g, '<br/>'), //
+              ctsn: item.ctsn, //
+              inTime: U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime), //
+              nzw: item.isnzwct
+            };
           });
           //
           me.loadStatistcs = data.total2;
@@ -415,34 +401,19 @@ export default {
             smwrap('内支中转', me.loadStatistcs.bnum);
           me.loadCntrs = data.list2 == null ? [] : data.list2;
           me.loadCntrs = me.loadCntrs.map(function(item, index) {
-            let c = {};
-            c.key = index + 1;
-            c.cntrId = item.cntrid;
-            c.ptds = item.ptds;
-            c.szty = item.ctsz + item.ctty;
-            c.ctgw = item.ctgw;
-            c.trwt = item.trwt;
-            c.vsLoc = item.vsba.padStart(2, '0') + '/' + item.vscl.padStart(2, '0') + '/' + item.vsel.padStart(2, '0');
-            c.holdPass = item.isportpass;
-            c.passTime = U.isEmpty(item.passtime) ? '' : U.compactDateToNormal(item.passtime);
-            c.infe = item.infe;
-            c.cabl = item.cabl.replace(/,/g, '<br/>');
-            c.ctsn = item.ctsn;
-            c.inTime = U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime);
-            c.outTime = U.isEmpty(item.outtime) ? '' : U.compactDateToNormal(item.outtime);
-            c.inog = item.inog;
-            c.lncd = item.lncd;
-            c.inth = item.inth;
-            c.inhz = item.inhz;
-            c.hzcl = item.hzcl;
-            c.ints = item.ints;
-            c.isck = item.isck;
-            c.issrt = item.issrt;
-            c.vgmw = item.vgmw;
-            c.vgmm = item.vgmm;
-            c.vgms = item.vgms;
-            c.nzw = item.isnzwct;
-            return c;
+            return {
+              ...item,
+              key: index + 1,
+              cntrId: item.cntrid,
+              szty: item.ctsz + item.ctty,
+              vsLoc: item.vsba.padStart(2, '0') + '/' + item.vscl.padStart(2, '0') + '/' + item.vsel.padStart(2, '0'),
+              holdPass: item.isportpass,
+              passTime: U.isEmpty(item.passtime) ? '' : U.compactDateToNormal(item.passtime),
+              cabl: item.cabl.replace(/,/g, '<br/>'),
+              inTime: U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime),
+              outTime: U.isEmpty(item.outtime) ? '' : U.compactDateToNormal(item.outtime),
+              nzw: item.isnzwct
+            };
           });
         }
       });
@@ -461,14 +432,14 @@ export default {
           this.$message.error(errMsg);
         } else {
           let r = data.map(function(item, index) {
-            let voy = {};
-            voy.key = index;
-            voy.vscd = U.trim(item.vscdvy);
-            voy.vsvy = U.trim(item.vsvyvy);
-            voy.vsdr = U.trim(item.vsdrvy);
-            voy.lncd = item.lncdvr;
-            voy.title = U.trim(item.egnmvr) + '/' + U.trim(item.cnnmvr) + ' ' + U.trim(item.vsvyvy);
-            return voy;
+            return {
+              key: index,
+              vscd: U.trim(item.vscdvy),
+              vsvy: U.trim(item.vsvyvy),
+              vsdr: U.trim(item.vsdrvy),
+              lncd: item.lncdvr,
+              title: U.trim(item.egnmvr) + '/' + U.trim(item.cnnmvr) + ' ' + U.trim(item.vsvyvy)
+            };
           });
           fn(r);
         }

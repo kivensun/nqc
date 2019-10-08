@@ -126,19 +126,18 @@ export default {
         let { flag, data } = res;
         if (flag) {
           this.rows = data.map((item, index) => {
-            let rows = {};
-            rows.key = index + 1;
-            rows.cntrid = item.cntrid;
-            rows.vsvy = U.isEmpty(item.vscdco.trim()) ? '' : item.vscdco + '-' + item.vsvyco.trim() + '/' + item.vsdrco;
-            rows.ctsz = item.ctszco;
-            rows.ctty = item.cttyco;
-            rows.indm = item.indmco;
-            rows.lncd = item.lncdco;
-            rows.ydst = item.ydstco + '-' + item.ydlnco + '-' + item.ydrwco + '-' + item.ydelco;
-            rows.injt = item.injt;
-            rows.intime = U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime);
-            rows.ctgw = item.ctgwco;
-            return rows;
+            return {
+              ...item,
+              key: index + 1,
+              vsvy: U.isEmpty(item.vscdco.trim()) ? '' : item.vscdco + '-' + item.vsvyco.trim() + '/' + item.vsdrco,
+              ctsz: item.ctszco,
+              ctty: item.cttyco,
+              indm: item.indmco,
+              lncd: item.lncdco,
+              ydst: item.ydstco + '-' + item.ydlnco + '-' + item.ydrwco + '-' + item.ydelco,
+              intime: U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime),
+              ctgw: item.ctgwco
+            };
           });
         } else {
           this.$notification.error({
