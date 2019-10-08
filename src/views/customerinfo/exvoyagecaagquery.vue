@@ -65,6 +65,7 @@
           :rows="unloadCntrs"
           :footer="unloadStatistcsStr"
           :filterColumns="filterColumns"
+          :loading="loading"
         />
         <hr />
         <nbctCompactTable
@@ -73,6 +74,7 @@
           :rows="loadCntrs"
           :footer="loadStatistcsStr"
           :filterColumns="filterColumns"
+          :loading="loading"
         />
       </div>
     </div>

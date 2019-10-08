@@ -9,6 +9,7 @@
         fixedWidth:true
         :rows="ocs"
         :filterColumns="filterColumns"
+        :loading="loading"
         style="margin-top:10px;"
       />
     </div>
@@ -81,12 +82,11 @@ export default {
       let params = { dt };
       me.loading = true;
       orderreceive(params).then(res => {
+        me.loading = false;
         let { flag, data, errMsg } = res;
         if (!flag) {
-          me.loading = false;
           me.$message.error(errMsg);
         } else {
-          me.loading = false;
           me.ocs = data.map(function(item, index) {
             let oc = {};
             oc.key = index;

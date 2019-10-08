@@ -7,6 +7,7 @@
         :rows="tableData"
         :fixedWidth="true"
         :filterColumns="filterColumns"
+        :loading="loading"
         fontSize="14"
         textAlign="center"
         style="margin-top:10px;font-size:16px;"
@@ -74,8 +75,9 @@ export default {
 
   methods: {
     list() {
-      //let me=this;//test
+      this.loading = true;
       yardTruck().then(res => {
+        this.loading = false;
         let { flag, data, errMsg } = res;
         if (!flag) {
           this.$message.error(errMsg);

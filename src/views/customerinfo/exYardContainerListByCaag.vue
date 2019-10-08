@@ -29,6 +29,7 @@
           :footer="exStatistcsStr"
           :fixedWidth="false"
           :filterColumns="filterColumns"
+          :loading="loading"
           fontSize="14"
           textAlign="center"
         />

@@ -27,6 +27,7 @@
         textAlign="center"
         :rows="rows"
         :filterColumns="filterColumns"
+        :loading="loading"
         style="margin-top:10px;font-size:16px;"
       />
       <hr />
@@ -103,7 +104,8 @@ export default {
       ctty: '', //
       columns,
       filterColumns,
-      rows: [] //
+      rows: [], //
+      loading: false
     };
   },
   computed: {
@@ -119,10 +121,12 @@ export default {
   },
   methods: {
     getData() {
+      this.loading = true;
       getEmptyContainer({
         lncd: this.lncd,
         ctty: this.ctty
       }).then(res => {
+        this.loading = false;
         let { flag, data } = res;
         if (flag) {
           this.rows = data.map((item, index) => {
