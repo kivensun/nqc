@@ -11,7 +11,8 @@
                         style="width: 300px" />
       </a-col>
     </a-row>
-    <a-row style="margin-top:30px">
+    <a-row v-if="container.cntrId"
+           style="margin-top:30px">
       <a-col :span="22"
              :offset="1"
              justify="center">

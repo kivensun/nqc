@@ -144,6 +144,9 @@ export default {
     }
 
   },
+  mounted () {
+    this.getData();
+  },
   methods: {
     getData () {
       this.loading = true;

@@ -87,6 +87,9 @@ export default {
     }
 
   },
+  mounted () {
+    this.getCntrInCloseDate();
+  },
   methods: {
     getCntrInCloseDate () {
       this.loading = true;

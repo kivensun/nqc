@@ -28,17 +28,14 @@
                      :xl="{span: 8, offset: 2}"
                      :xxl="{span:6, offset:4}">
                 <a-menu mode="horizontal"
-                        :selectedKeys="[selectedPage]"
                         class="header-meun">
                   <a-menu-item v-for="(item,index) in cardMenus"
                                :key="index">
-                    <div style="color: #0f317d"
-                         @click="changeHeaderMenu(index)">{{item.title}}</div>
+                    <div style="color: #0f317d">{{item.title}}</div>
                   </a-menu-item>
                   <a-menu-item v-if="!userId"
                                key="99">
-                    <div style="color: #0f317d"
-                         @click="changeHeaderMenu(1)">客户查询</div>
+                    <div style="color: #0f317d">客户查询</div>
                   </a-menu-item>
                 </a-menu>
               </a-col>
@@ -91,14 +88,13 @@
 
           </a-layout-header>
           <a-layout-content class="global-content">
+            <div class="content-menus">
 
-            <card-menu :menus=cardMenus
-                       :userId=userId
-                       :selectedPage=selectedPage
-                       @showDrawer="showDrawer"
-                       @showLogin="showLogin"
-                       @changeCardMenu="changeHeaderMenu" />
-
+              <card-menu :menus=cardMenus
+                         :userId=userId
+                         @showDrawer="showDrawer"
+                         @showLogin="showLogin" />
+            </div>
           </a-layout-content>
 
         </a-layout>
@@ -243,7 +239,6 @@ export default {
       placement: 'left',
       aDrawerTitle: {},
       titleMenus: [],
-      selectedPage: 0,
       hadNotice: true,
       cardNoLoginTileStyle: {
         background: '#ff9933',
@@ -445,11 +440,6 @@ export default {
         form.validateFields(['confirm'], { force: true });
       }
       callback();
-    },
-    changeHeaderMenu (key) {
-      console.log('changeHeaderMenu: ' + key);
-      this.selectedPage = key;
-      console.log('selectedPage: ' + this.selectedPage);
     }
   }
 }
@@ -488,7 +478,10 @@ position:fixed;/* 随着鼠标滚动*/
   -o-box-shadow: 0px 1px 1px 1px 1gba (0, 0, 0, 0.1);
 }
 .global-content {
-  height: 100%;
+  height: 100vh;
+}
+.content-menus {
+  margin-top: 120px;
 }
 .header-meun {
   background: rgba(255, 255, 255, 0) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
