@@ -195,7 +195,7 @@ export default {
               params.groups = '1000,2004,3000,4000';
               break;
             case 'D':
-              params.groups = '1000,2003,3000,4000,';
+              params.groups = '1000,2003,3000,4000';
               break;
             case 'H':
               params.groups = '1000,2002,3000,4000';

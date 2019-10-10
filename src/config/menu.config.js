@@ -11,17 +11,17 @@ export const menuMap = [
       // 外部链接
       {
         path: '/cntrinfo/imcustompassinfo',
-        title: '进口箱海关放行信息查询',
+        title: '进口箱海关放行查询',
         permission: ['1000']
       },
       {
         path: '/cntrinfo/exportpassinfo',
-        title: '出口箱码头放行信息查询',
+        title: '出口箱码头放行查询',
         permission: ['1000']
       },
       {
         path: '/cntrinfo/checkmovecntrinfo',
-        title: '查验箱移箱/归位情况查询',
+        title: '查验箱移箱/归位查询',
         permission: ['1000']
       },
       {
@@ -32,7 +32,7 @@ export const menuMap = [
       // 外部链接
       {
         path: '/publicinfo/cntrinclosedate',
-        title: '集装箱进箱/截箱时间公告',
+        title: '进箱/截箱时间公告',
         permission: ['3000']
       },
       {
@@ -78,7 +78,7 @@ export const menuMap = [
       },
       {
         path: '/customerquery/exyardcontainerlistbycaag',
-        title: '货代在场出口箱信息',
+        title: '货代在场出口箱',
         permission: ['2002']
       },
       {
@@ -93,7 +93,7 @@ export const menuMap = [
       },
       {
         path: '/customerquery/containerinfohis',
-        title: '集装箱历史信息查询',
+        title: '集装箱历史查询',
         permission: ['2004']
       }
     ]

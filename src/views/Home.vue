@@ -35,7 +35,8 @@
                   </a-menu-item>
                   <a-menu-item v-if="!userId"
                                key="99">
-                    <div style="color: #0f317d">客户查询</div>
+                    <div style="color: #0f317d"
+                         @click="showLogin">客户查询</div>
                   </a-menu-item>
                 </a-menu>
               </a-col>
@@ -218,7 +219,10 @@
             </a-form-item>
           </a-form>
         </a-modal>
-
+        <public-notice :visible="hadNotice"
+                       :content="noticeCotent"
+                       :noticeId="noticeId"
+                       @hideNotice="hideNotice" />
       </div>
     </div>
   </div>
@@ -227,9 +231,11 @@
 import CardMenu from '@/components/CardMenu';
 import SunDrawer from '@/components/SunDrawer';
 import RouteView from '@/views/RouteView'
+import PublicNotice from '@/components/PublicNotice';
 import * as utility from 'utility';
 import { mapState, mapActions } from 'vuex'
 import { changePasswordUser } from '@/api/user';
+import { getNotices } from '@/api/notice';
 
 export default {
   name: 'home',
@@ -239,7 +245,9 @@ export default {
       placement: 'left',
       aDrawerTitle: {},
       titleMenus: [],
-      hadNotice: true,
+      hadNotice: false,
+      noticeCotent: '',
+      noticeId: '',
       cardNoLoginTileStyle: {
         background: '#ff9933',
         color: '#000000'
@@ -255,7 +263,8 @@ export default {
   components: {
     CardMenu,
     SunDrawer,
-    RouteView
+    RouteView,
+    PublicNotice
   },
   computed: {
     ...mapState({
@@ -283,9 +292,9 @@ export default {
     })
 
   },
-  // mounted () {
-  //   this.reGetDateOnRefresh();
-  // },
+  mounted () {
+    this.checkNotice();
+  },
   methods: {
     ...mapActions(['RenewMenu', 'Login', 'InitMenu', 'refreshUser', 'Logout']),
     changeMenu () {
@@ -440,6 +449,39 @@ export default {
         form.validateFields(['confirm'], { force: true });
       }
       callback();
+    },
+    hideNotice () {
+      this.hadNotice = false;
+    },
+    checkNotice () {
+      //this.hadNotice = true;
+      let noticeLs = this.$ls.get('NOTICESID')
+      getNotices().then(res => {
+        let { flag, data, errMsg } = res;
+        if (flag) {
+          if (data) {
+            let notices = data.notices;
+            if (notices) {
+              let notice = notices[0];
+              if ((noticeLs) && (noticeLs === notice.dttr)) {
+                this.hadNotice = false;
+              } else {
+                this.noticeCotent = notice.content;
+                this.noticeId = notice.dttr;
+                this.hadNotice = true;
+              }
+            }
+          }
+        } else {
+          setTimeout(() => {
+            this.$notification.error({
+              message: '失败',
+              description: errMsg
+            });
+
+          }, 1000);
+        }
+      })
     }
   }
 }
@@ -480,9 +522,7 @@ position:fixed;/* 随着鼠标滚动*/
 .global-content {
   height: 100vh;
 }
-.content-menus {
-  margin-top: 120px;
-}
+
 .header-meun {
   background: rgba(255, 255, 255, 0) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
   filter: Alpha(opacity=90);
@@ -506,7 +546,10 @@ position:fixed;/* 随着鼠标滚动*/
   padding-top: 16px;
   text-align: center;
 }
-
+.content-menus {
+  margin-top: 120px;
+  background-color: #f0f2f5;
+}
 .content,
 .outer-container {
   width: 100vw;

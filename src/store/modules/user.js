@@ -45,11 +45,11 @@ const user = {
               commit('SET_GROUPS', groups);
               commit('SET_COMPANYID', user.companyId === null ? '' : user.companyId);
               commit('SET_USERTYPE', user.userType === null ? '' : user.userType);
-              Vue.ls.set('TOKEN', data.token);
-              Vue.ls.set('USERID', userInfo.userId);
-              Vue.ls.set('GROUPS', groups);
-              Vue.ls.set('COMPANYID', user.companyId === null ? '' : user.companyId);
-              Vue.ls.set('USERTYPE', user.userType === null ? '' : user.userType);
+              Vue.ss.set('TOKEN', data.token);
+              Vue.ss.set('USERID', userInfo.userId);
+              Vue.ss.set('GROUPS', groups);
+              Vue.ss.set('COMPANYID', user.companyId === null ? '' : user.companyId);
+              Vue.ss.set('USERTYPE', user.userType === null ? '' : user.userType);
               if (user.companyId) {
                 let params = {};
                 params.companyId = user.companyId;
@@ -59,7 +59,7 @@ const user = {
                   if (flag) {
                     let codes = data === null ? [] : data.sort();
                     commit('SET_COMPANYHADCODES', codes);
-                    Vue.ls.set('COMPANYHADCODES', codes);
+                    Vue.ss.set('COMPANYHADCODES', codes);
                   }
                 });
               }
@@ -82,12 +82,12 @@ const user = {
         commit('SET_COMPANYID', '');
         commit('SET_USERTYPE', '');
         commit('SET_COMPANYHADCODES', []);
-        Vue.ls.set('TOKEN', '');
-        Vue.ls.set('USERID', '');
-        Vue.ls.set('GROUPS', ['1000', '3000', '4000']);
-        Vue.ls.set('COMPANYID', '');
-        Vue.ls.set('USERTYPE', '');
-        Vue.ls.set('COMPANYHADCODES', []);
+        Vue.ss.set('TOKEN', '');
+        Vue.ss.set('USERID', '');
+        Vue.ss.set('GROUPS', ['1000', '3000', '4000']);
+        Vue.ss.set('COMPANYID', '');
+        Vue.ss.set('USERTYPE', '');
+        Vue.ss.set('COMPANYHADCODES', []);
         logout(state.token)
           .then(() => {
             resolve();
@@ -102,7 +102,7 @@ const user = {
       return new Promise(resolve => {
         console.log('RenewToken:' + token);
         commit('SET_TOKEN', token);
-        Vue.ls.set('TOKEN', token);
+        Vue.ss.set('TOKEN', token);
         resolve();
       });
     },
@@ -110,12 +110,12 @@ const user = {
     refreshUser({ commit }) {
       return new Promise(resolve => {
         console.log('刷新重新初始化Vuex');
-        const userId = Vue.ls.get('USERID') ? Vue.ls.get('USERID') : '';
-        const token = Vue.ls.get('TOKEN') ? Vue.ls.get('TOKEN') : '';
-        const groups = Vue.ls.get('GROUPS') ? Vue.ls.get('GROUPS') : ['1000', '3000', '4000'];
-        const companyId = Vue.ls.get('COMPANYID') ? Vue.ls.get('COMPANYID') : '';
-        const userType = Vue.ls.get('USERTYPE') ? Vue.ls.get('USERTYPE') : '';
-        const companyHadCodes = Vue.ls.get('COMPANYHADCODES');
+        const userId = Vue.ss.get('USERID') ? Vue.ss.get('USERID') : '';
+        const token = Vue.ss.get('TOKEN') ? Vue.ss.get('TOKEN') : '';
+        const groups = Vue.ss.get('GROUPS') ? Vue.ss.get('GROUPS') : ['1000', '3000', '4000'];
+        const companyId = Vue.ss.get('COMPANYID') ? Vue.ss.get('COMPANYID') : '';
+        const userType = Vue.ss.get('USERTYPE') ? Vue.ss.get('USERTYPE') : '';
+        const companyHadCodes = Vue.ss.get('COMPANYHADCODES');
         commit('SET_USERID', userId);
         commit('SET_TOKEN', token);
         commit('SET_GROUPS', groups);

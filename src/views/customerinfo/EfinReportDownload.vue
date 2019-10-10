@@ -35,7 +35,7 @@
            style="margin-top:6px">
       <a-col :span="22">
 
-        <a-collapse accordion
+        <a-collapse v-model="activeKey"
                     defaultActiveKey="1">
           <a-collapse-panel header="对账单(I)"
                             key="1">
@@ -114,6 +114,7 @@ export default {
       listDzdIData: [],
       listDzdEData: [],
       listYszkData: [],
+      activeKey: ['1', '2', '3'],
       pagination: {
         pageSize: 100,
       },
