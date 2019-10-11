@@ -35,18 +35,19 @@
     <a-divider />
     <a-skeleton :loading="loading">
       <a-card :title="cardTitle"
-              :bordered="false">
+              :bordered="false"
+              class="viewcard-had-table">
         <a-table :columns="columns"
                  :dataSource="tableData"
                  size="small"
                  :rowClassName="setRowColor">
           <template slot="footer">
             <a-row>
-              <a-col :span="3"
+              <a-col :span="5"
                      style="background:#FF99FF">粉红:计划未定</a-col>
-              <a-col :span="3"
+              <a-col :span="5"
                      style="background:#ffffff">白色:计划已定</a-col>
-              <a-col :span="3"
+              <a-col :span="5"
                      style="background:#99FFFF">浅绿:已经离泊</a-col>
             </a-row>
 
@@ -69,13 +70,13 @@ export default {
         {
           title: "船公司",
           dataIndex: "lncd",
-          width: 80,
+          width: 100,
           key: 1
         },
         {
           title: "中文船名",
           dataIndex: "cnvsname",
-          width: 150,
+          width: 180,
           key: 2
         },
         {
@@ -93,13 +94,13 @@ export default {
         {
           title: "泊位号",
           dataIndex: "btno",
-          width: 150,
+          width: 100,
           key: 5
         },
         {
           title: "计划靠泊时间",
           dataIndex: "estberthdate",
-          width: 250,
+          width: 150,
           key: 6
         },
         {
@@ -123,19 +124,19 @@ export default {
         {
           title: "进箱时间",
           dataIndex: "cntrindate",
-          width: 150,
+          width: 120,
           key: 10
         },
         {
           title: "截箱时间",
           dataIndex: "cntroutdate",
-          width: 250,
+          width: 120,
           key: 11
         },
         {
           title: "发布时间",
           dataIndex: "pubdate",
-          width: 250,
+          width: 150,
           key: 12
         }
       ],

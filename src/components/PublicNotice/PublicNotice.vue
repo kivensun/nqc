@@ -5,11 +5,13 @@
              :visible="visible"
              :footer="null"
              :closable="false">
-      <pre>{{content}}</pre>
+      <pre style="white-space: pre-wrap;word-wrap: break-word;">{{content}}</pre>
       <p style="text-align:center">
 
         <a-checkbox :defaultChecked="false"
-                    @change="onNoSeeChange">下次不再显示</a-checkbox>
+                    @change="onNoSeeChange">我已知晓 下次不再显示</a-checkbox>
+      </p>
+      <p style="text-align:center">
         <a-button type="primary"
                   style="width:100px;"
                   @click="handleOk">好的</a-button>

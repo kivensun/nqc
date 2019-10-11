@@ -466,9 +466,14 @@ export default {
               if ((noticeLs) && (noticeLs === notice.dttr)) {
                 this.hadNotice = false;
               } else {
-                this.noticeCotent = notice.content;
-                this.noticeId = notice.dttr;
-                this.hadNotice = true;
+                if (notice.content === null || notice.content === '') {
+                  this.hadNotice = false;
+                } else {
+                  this.noticeCotent = notice.content;
+                  this.noticeId = notice.dttr;
+                  this.hadNotice = true;
+                }
+
               }
             }
           }
@@ -507,12 +512,9 @@ export default {
   width: 100%;
   z-index: 10;
   max-width: 100%;
-  background: rgba(255, 255, 255, 0.2) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
-  filter: Alpha(opacity=90);
-  background: #fff; /*实现IE背景透明
+  background: #f0f2f5;
 
-width: 100%;
-position:fixed;/* 随着鼠标滚动*/
+  position: fixed; /* 随着鼠标滚动*/
 
   box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1); /*投影*/
   -webkit-box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);

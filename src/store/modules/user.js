@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { login, logout, getUsercompanyHadCodes } from '@/api/user';
+import { login, getUsercompanyHadCodes } from '@/api/user';
 const user = {
   state: {
     token: '',
@@ -74,7 +74,7 @@ const user = {
       });
     },
     //注销
-    Logout({ commit, state }) {
+    Logout({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '');
         commit('SET_GROUPS', ['1000', '3000', '4000']);
@@ -88,13 +88,15 @@ const user = {
         Vue.ss.set('COMPANYID', '');
         Vue.ss.set('USERTYPE', '');
         Vue.ss.set('COMPANYHADCODES', []);
-        logout(state.token)
+        resolve();
+        /*logout(state.token)
           .then(() => {
             resolve();
           })
           .catch(() => {
             resolve();
           });
+          */
       });
     },
     // 更新token

@@ -123,7 +123,7 @@ export default new Router({
         {
           path: '/noticemanage',
           name: 'NoticeManage',
-          component: () => import('@/views/404.vue'),
+          component: () => import('@/views/usermanage/NoticeManage.vue'),
           meta: { title: '公告管理', permission: ['5000'] }
         }
       ]
