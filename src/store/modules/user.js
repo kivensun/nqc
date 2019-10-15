@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { login, getUsercompanyHadCodes } from '@/api/user';
+import { login, getUsercompanyHadCodes, logout } from '@/api/user';
 const user = {
   state: {
     token: '',
@@ -88,15 +88,14 @@ const user = {
         Vue.ss.set('COMPANYID', '');
         Vue.ss.set('USERTYPE', '');
         Vue.ss.set('COMPANYHADCODES', []);
-        resolve();
-        /*logout(state.token)
+        //resolve();
+        logout()
           .then(() => {
             resolve();
           })
           .catch(() => {
             resolve();
           });
-          */
       });
     },
     // 更新token

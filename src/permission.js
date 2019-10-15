@@ -16,7 +16,7 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta.title;
   }
   if (to.meta.permission) {
-    let hadPermission = store.getters.groups.filter(item => to.meta.permission[0].includes(item));
+    let hadPermission = store.getters.groups.filter(item => to.meta.permission.includes(item));
     if (hadPermission.length === 0) {
       console.log('没有权限');
       notification.error({
@@ -25,6 +25,7 @@ router.beforeEach((to, from, next) => {
       });
 
       setTimeout(() => {
+        next(from.fullPath);
         window.location.reload();
       }, 1500);
       NProgress.done;

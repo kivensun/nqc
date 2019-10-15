@@ -28,7 +28,7 @@ const err = error => {
       if (token) {
         store.dispatch('Logout').then(() => {
           setTimeout(() => {
-            window.location.reload();
+            window.location.href = '/';
           }, 1500);
         });
       }
