@@ -137,6 +137,11 @@ export default new Router({
       path: '/test',
       name: 'test',
       component: () => import('@/views/test.vue')
+    },
+    {
+      path: '*',
+      redirect: '/404',
+      hidden: true
     }
   ]
 });
