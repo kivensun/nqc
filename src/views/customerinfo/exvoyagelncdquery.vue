@@ -256,7 +256,7 @@ export default {
     return {
       voyVisable: true,
       //voyage list
-      exvsvy: '035E', //进口航次
+      exvsvy: '', //进口航次
       lncd: '', //船公司
       determineVoys: [], //指定航次列表
       companyVoys: [], //本公司一个月内进口航次
@@ -408,7 +408,8 @@ export default {
               key: index + 1,
               cntrId: item.cntrid,
               szty: item.ctsz + item.ctty,
-              vsLoc: item.vsba.padStart(2, '0') + '/' + item.vscl.padStart(2, '0') + '/' + item.vsel.padStart(2, '0'),
+              //vsLoc: item.vsba.padStart(2, '0') + '/' + item.vscl.padStart(2, '0') + '/' + item.vsel.padStart(2, '0'),
+              vsLoc: item.vsba.padStart(2, '0') + item.vscl.padStart(2, '0') + item.vsel.padStart(2, '0'),
               holdPass: item.isportpass,
               passTime: U.isEmpty(item.passtime) ? '' : U.compactDateToNormal(item.passtime),
               cabl: item.cabl.replace(/,/g, '<br/>'),

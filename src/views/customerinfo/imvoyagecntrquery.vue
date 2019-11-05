@@ -186,7 +186,7 @@ export default {
     return {
       voyVisable: true,
       //voyage list
-      imvsvy: 'JK044N', //进口航次
+      imvsvy: '', //进口航次
       lncd: '', //船公司
       determineVoys: [], //指定航次列表
       companyVoys: [], //本公司一个月内进口航次
