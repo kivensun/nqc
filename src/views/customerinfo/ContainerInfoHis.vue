@@ -41,7 +41,7 @@
            v-if="(yardContainerInfor.cntrId !== '')&&(yardContainerInfor.cntrId !== undefined)">
       <a-col :span="22">
         <a-card title="集装箱在场信息"
-                style="text-align: left;">
+                class="cntrinyardinfo-card">
           <a-row>
             <a-col :xs="{span: 19}"
                    :sm="{span: 11}"
@@ -92,7 +92,7 @@
                    :lg="{span: 12}"
                    :xl="{span: 8}"
                    :xxl="{span: 5}">
-              <p>总重：{{yardContainerInfor.ctgw}}</p>
+              <span>总重：{{yardContainerInfor.ctgw}}</span>
             </a-col>
             <a-col :xs="{span: 19}"
                    :sm="{span: 13}"
@@ -100,7 +100,7 @@
                    :lg="{span: 12}"
                    :xl="{span: 8}"
                    :xxl="{span: 4}">
-              <p>铅封号：{{yardContainerInfor.ctsn}}</p>
+              <span>铅封号：{{yardContainerInfor.ctsn}}</span>
             </a-col>
             <a-col :xs="{span: 19}"
                    :sm="{span: 11}"
@@ -108,7 +108,7 @@
                    :lg="{span: 12}"
                    :xl="{span: 8}"
                    :xxl="{span: 4}">
-              <p>装/卸港：{{yardContainerInfor.ptldds}}</p>
+              <span>装/卸港：{{yardContainerInfor.ptldds}}</span>
             </a-col>
             <a-col :xs="{span: 19}"
                    :sm="{span: 13}"
@@ -116,7 +116,7 @@
                    :lg="{span: 12}"
                    :xl="{span: 8}"
                    :xxl="{span: 6}">
-              <p>目的地：{{yardContainerInfor.fdcd}}</p>
+              <span>目的地：{{yardContainerInfor.fdcd}}</span>
             </a-col>
 
           </a-row>
@@ -128,7 +128,7 @@
                    :lg="{span: 12}"
                    :xl="{span: 8}"
                    :xxl="{span: 5}">
-              <p>坏箱：{{yardContainerInfor.indm}}</p>
+              <span>坏箱：{{yardContainerInfor.indm}}</span>
             </a-col>
             <a-col :xs="{span: 19}"
                    :sm="{span: 11}"
@@ -136,7 +136,7 @@
                    :lg="{span: 12}"
                    :xl="{span: 8}"
                    :xxl="{span: 4}">
-              <p>危险品：{{yardContainerInfor.inhz}}</p>
+              <span>危险品：{{yardContainerInfor.inhz}}</span>
             </a-col>
             <a-col :xs="{span: 19}"
                    :sm="{span: 13}"
@@ -144,7 +144,7 @@
                    :lg="{span: 12}"
                    :xl="{span: 8}"
                    :xxl="{span: 6}">
-              <p>温控箱：{{yardContainerInfor.inth}}</p>
+              <span>温控箱：{{yardContainerInfor.inth}}</span>
             </a-col>
             <a-col :xs="{span: 19}"
                    :sm="{span: 12}"
@@ -152,7 +152,7 @@
                    :lg="{span: 12}"
                    :xl="{span: 8}"
                    :xxl="{span: 4}">
-              <p>超限箱：{{yardContainerInfor.inog}}</p>
+              <span>超限箱：{{yardContainerInfor.inog}}</span>
             </a-col>
           </a-row>
           <a-divider />
@@ -163,7 +163,7 @@
                    :lg="{span: 12}"
                    :xl="{span: 8}"
                    :xxl="{span: 5}">
-              <p>堆场位置：{{yardContainerInfor.pos}} </p>
+              <span>堆场位置：{{yardContainerInfor.pos}} </span>
             </a-col>
             <a-col :xs="{span: 19}"
                    :sm="{span: 11}"
@@ -171,7 +171,7 @@
                    :lg="{span: 12}"
                    :xl="{span: 8}"
                    :xxl="{span: 4}">
-              <p>货代公司：{{yardContainerInfor.caag}}</p>
+              <span>货代公司：{{yardContainerInfor.caag}}</span>
             </a-col>
             <a-col :xs="{span: 19}"
                    :sm="{span: 13}"
@@ -179,13 +179,13 @@
                    :lg="{span: 12}"
                    :xl="{span: 8}"
                    :xxl="{span: 6}">
-              <p>内外贸标志：{{yardContainerInfor.intd}}</p>
+              <span>内外贸标志：{{yardContainerInfor.intd}}</span>
             </a-col>
           </a-row>
           <a-divider />
           <a-row>
             <a-col span="24">
-              <p>备注：</p>
+              <span>备注：</span>
             </a-col>
           </a-row>
         </a-card>
@@ -198,7 +198,8 @@
         <a-card title="集装箱历史信息"
                 style="text-align:left;">
           <a-list :dataSource="listCntrHis"
-                  itemLayout="vertical">
+                  itemLayout="vertical"
+                  class="cntrhisdetail-list">
             <a-list-item slot="renderItem"
                          slot-scope="item"
                          key="item.title">
@@ -872,4 +873,19 @@ export default {
 </script>
 
 <style>
+.cntrinyardinfo-card {
+  text-align: left;
+}
+.cntrinyardinfo-card .ant-divider {
+  margin: 12px 0;
+}
+.cntrhisdetail-list {
+  text-align: left;
+}
+.cntrhisdetail-list .ant-list-item-meta {
+  margin-bottom: 5px;
+}
+.cntrhisdetail-list p {
+  margin-bottom: 5px !important;
+}
 </style>

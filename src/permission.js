@@ -1,5 +1,6 @@
 import router from './router';
 import store from './store/';
+import notification from 'ant-design-vue/es/notification';
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
 
@@ -15,10 +16,18 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta.title;
   }
   if (to.meta.permission) {
-    if (!store.getters.groups.includes(to.meta.permission[0])) {
+    let hadPermission = store.getters.groups.filter(item => to.meta.permission.includes(item));
+    if (hadPermission.length === 0) {
       console.log('没有权限');
+      notification.error({
+        message: '安全认证',
+        description: '没有权限'
+      });
 
-      next(from.fullPath);
+      setTimeout(() => {
+        next(from.fullPath);
+        window.location.reload();
+      }, 1500);
       NProgress.done;
     } else {
       next();

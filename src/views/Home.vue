@@ -28,17 +28,15 @@
                      :xl="{span: 8, offset: 2}"
                      :xxl="{span:6, offset:4}">
                 <a-menu mode="horizontal"
-                        :selectedKeys="[selectedPage]"
                         class="header-meun">
                   <a-menu-item v-for="(item,index) in cardMenus"
                                :key="index">
-                    <div style="color: #0f317d"
-                         @click="changeHeaderMenu(index)">{{item.title}}</div>
+                    <div style="color: #0f317d">{{item.title}}</div>
                   </a-menu-item>
                   <a-menu-item v-if="!userId"
                                key="99">
                     <div style="color: #0f317d"
-                         @click="changeHeaderMenu(1)">客户查询</div>
+                         @click="showLogin">客户查询</div>
                   </a-menu-item>
                 </a-menu>
               </a-col>
@@ -91,14 +89,13 @@
 
           </a-layout-header>
           <a-layout-content class="global-content">
+            <div class="content-menus">
 
-            <card-menu :menus=cardMenus
-                       :userId=userId
-                       :selectedPage=selectedPage
-                       @showDrawer="showDrawer"
-                       @showLogin="showLogin"
-                       @changeCardMenu="changeHeaderMenu" />
-
+              <card-menu :menus=cardMenus
+                         :userId=userId
+                         @showDrawer="showDrawer"
+                         @showLogin="showLogin" />
+            </div>
           </a-layout-content>
 
         </a-layout>
@@ -222,7 +219,10 @@
             </a-form-item>
           </a-form>
         </a-modal>
-
+        <public-notice :visible="hadNotice"
+                       :content="noticeCotent"
+                       :noticeId="noticeId"
+                       @hideNotice="hideNotice" />
       </div>
     </div>
   </div>
@@ -231,9 +231,11 @@
 import CardMenu from '@/components/CardMenu';
 import SunDrawer from '@/components/SunDrawer';
 import RouteView from '@/views/RouteView'
+import PublicNotice from '@/components/PublicNotice';
 import * as utility from 'utility';
 import { mapState, mapActions } from 'vuex'
 import { changePasswordUser } from '@/api/user';
+import { getNotices } from '@/api/notice';
 
 export default {
   name: 'home',
@@ -243,8 +245,9 @@ export default {
       placement: 'left',
       aDrawerTitle: {},
       titleMenus: [],
-      selectedPage: 0,
-      hadNotice: true,
+      hadNotice: false,
+      noticeCotent: '',
+      noticeId: '',
       cardNoLoginTileStyle: {
         background: '#ff9933',
         color: '#000000'
@@ -260,7 +263,8 @@ export default {
   components: {
     CardMenu,
     SunDrawer,
-    RouteView
+    RouteView,
+    PublicNotice
   },
   computed: {
     ...mapState({
@@ -288,9 +292,9 @@ export default {
     })
 
   },
-  // mounted () {
-  //   this.reGetDateOnRefresh();
-  // },
+  mounted () {
+    this.checkNotice();
+  },
   methods: {
     ...mapActions(['RenewMenu', 'Login', 'InitMenu', 'refreshUser', 'Logout']),
     changeMenu () {
@@ -446,10 +450,43 @@ export default {
       }
       callback();
     },
-    changeHeaderMenu (key) {
-      console.log('changeHeaderMenu: ' + key);
-      this.selectedPage = key;
-      console.log('selectedPage: ' + this.selectedPage);
+    hideNotice () {
+      this.hadNotice = false;
+    },
+    checkNotice () {
+      //this.hadNotice = true;
+      let noticeLs = this.$ls.get('NOTICESID')
+      getNotices().then(res => {
+        let { flag, data, errMsg } = res;
+        if (flag) {
+          if (data) {
+            let notices = data.notices;
+            if (notices) {
+              let notice = notices[0];
+              if ((noticeLs) && (noticeLs === notice.dttr)) {
+                this.hadNotice = false;
+              } else {
+                if (notice.content === null || notice.content === '') {
+                  this.hadNotice = false;
+                } else {
+                  this.noticeCotent = notice.content;
+                  this.noticeId = notice.dttr;
+                  this.hadNotice = true;
+                }
+
+              }
+            }
+          }
+        } else {
+          setTimeout(() => {
+            this.$notification.error({
+              message: '失败',
+              description: errMsg
+            });
+
+          }, 1000);
+        }
+      })
     }
   }
 }
@@ -475,12 +512,9 @@ export default {
   width: 100%;
   z-index: 10;
   max-width: 100%;
-  background: rgba(255, 255, 255, 0.2) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
-  filter: Alpha(opacity=90);
-  background: #fff; /*实现IE背景透明
+  background: #f0f2f5;
 
-width: 100%;
-position:fixed;/* 随着鼠标滚动*/
+  position: fixed; /* 随着鼠标滚动*/
 
   box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1); /*投影*/
   -webkit-box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -488,8 +522,9 @@ position:fixed;/* 随着鼠标滚动*/
   -o-box-shadow: 0px 1px 1px 1px 1gba (0, 0, 0, 0.1);
 }
 .global-content {
-  height: 100%;
+  height: 100vh;
 }
+
 .header-meun {
   background: rgba(255, 255, 255, 0) none repeat scroll 0 0 !important; /*实现FF背景透明，文字不透明*/
   filter: Alpha(opacity=90);
@@ -513,7 +548,10 @@ position:fixed;/* 随着鼠标滚动*/
   padding-top: 16px;
   text-align: center;
 }
-
+.content-menus {
+  margin-top: 120px;
+  background-color: #f0f2f5;
+}
 .content,
 .outer-container {
   width: 100vw;

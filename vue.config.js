@@ -1,17 +1,45 @@
 const path = require('path');
 const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            warnings: false,
+            drop_console: true,
+            drop_debugger: true,
+            pure_funcs: ['console.log']
+          }
+        }
+      })
+    ]
+  }
+};
 
 //vue.config.js
 const vueConfig = {
-  configureWebpack: {
-    plugins: [
-      // Ignore all locale files of moment.js
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-    ]
+  // configureWebpack: {
+  //   plugins: [
+  //     // Ignore all locale files of moment.js
+  //     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  //   ]
+  // },
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      config.optimization.minimizer[0].options.terserOptions.compress.warnings = false;
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true;
+      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log'];
+    }
+    const plugins = [];
+    plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
+    config.plugins = [...config.plugins, ...plugins];
   },
 
   chainWebpack: config => {

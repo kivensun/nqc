@@ -7,6 +7,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store/';
 import VueStorage from 'vue-ls';
+import _ from 'lodash';
 import 'ant-design-vue/dist/antd.css';
 
 import { VueAxios } from './utils/request';
@@ -18,15 +19,22 @@ import './permission'; // permission control
 
 Vue.config.productionTip = false;
 
-const storageOptions = {
-  namespace: 'pro__', // key prefix
-  name: 'ls', // name variable Vue.[ls] or this.[$ls],
+const sessionStorageOptions = {
+  namespace: 'pross__', // key prefix
+  name: 'ss', // name variable Vue.[ss] or this.[$ss],
   storage: 'session' // storage name session, local, memory
+};
+
+const localStorageOptions = {
+  namespace: 'prolocal__', // key prefix__', // key prefix
+  name: 'ls', // name variable Vue.[ls] or this.[$ls],
+  storage: 'local' // storage name session, local, memory
 };
 
 Vue.use(Antd);
 Vue.use(VueAxios);
-Vue.use(VueStorage, storageOptions);
+Vue.use(_.clone(VueStorage), sessionStorageOptions);
+Vue.use(_.clone(VueStorage), localStorageOptions);
 
 new Vue({
   router,

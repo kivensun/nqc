@@ -10,8 +10,8 @@
         <a-col :xs="24"
                :sm="24"
                :md="23"
-               :lg="20"
-               :xl="17"
+               :lg="22"
+               :xl="19"
                style="height:103vh">
           <div class="drawer-container"
                :style="[{width: width },{height: height }]"
@@ -122,7 +122,7 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less" >
 .drawer-dialog {
   height: 100vh;
   width: 100vw;
@@ -167,5 +167,25 @@ export default {
 }
 .sun-drawer-fade-enter, .sun-drawer-fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.viewcard-had-table {
+  text-align: center;
+}
+.viewcard-had-table .ant-table-content {
+  width: 100%;
+  // white-space: nowrap;
+  overflow: auto;
+  overflow-x: scroll; /* 1 */
+}
+.viewcard-had-table .ant-table-content th {
+  padding: 5px 5px !important;
+}
+.viewcard-had-table .ant-table-content td {
+  padding: 5px 5px !important;
+}
+@media screen and (max-width: 1600px) {
+  .viewcard-had-table .ant-table-body {
+    white-space: nowrap;
+  }
 }
 </style>

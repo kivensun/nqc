@@ -34,7 +34,8 @@
     <a-divider />
     <a-skeleton :loading="loading">
       <a-card :title="cardTitle"
-              :bordered="false">
+              :bordered="false"
+              class="viewcard-had-table">
         <a-table :columns="columns"
                  :dataSource="tableData"
                  size="small"></a-table>
@@ -86,6 +87,9 @@ export default {
       cardTitle: ""
     }
 
+  },
+  mounted () {
+    this.getCntrInCloseDate();
   },
   methods: {
     getCntrInCloseDate () {

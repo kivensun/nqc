@@ -17,18 +17,18 @@ const err = error => {
     if (error.response.status === 403) {
       notification.err({
         message: 'Forbidden',
-        description: data.message
+        description: data.errMsg
       });
     }
     if (error.response.status === 401 || error.response.status === 500) {
       notification.error({
         message: '安全认证',
-        description: error.response.data.message
+        description: error.response.data.errMsg
       });
       if (token) {
-        store.dispath('Logout').then(() => {
+        store.dispatch('Logout').then(() => {
           setTimeout(() => {
-            window.location.reload();
+            window.location.href = '/';
           }, 1500);
         });
       }
@@ -50,6 +50,8 @@ service.interceptors.request.use(config => {
 // response interceptor
 service.interceptors.response.use(response => {
   const token = response.headers.token;
+  // console.log(response.headers);
+  //console.log(response);
   if (token) {
     store.dispatch('renewToken', token);
   }
