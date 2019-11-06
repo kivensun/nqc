@@ -91,6 +91,11 @@
         />
       </div>
     </div>
+    <div style="text-align:left;">
+      <br>
+      <span >*说明 中转 Z:国际中转/B:内支中转/Y:内贸中转/N:非中转</span>
+      <br> 
+    </div>
   </div>
 </template>
 
