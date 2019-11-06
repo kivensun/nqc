@@ -41,6 +41,40 @@
                  :dataSource="tableData"
                  size="small"
                  :rowClassName="setRowColor">
+          <div slot="filterDropdown"
+               slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }"
+               style="padding: 8px">
+            <a-input v-ant-ref="c => searchInput = c"
+                     :placeholder="`查找 ${column.title}`"
+                     :value="selectedKeys[0]"
+                     @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
+                     @pressEnter="() => handleSearch(selectedKeys, confirm)"
+                     style="width: 188px; margin-bottom: 8px; display: block;" />
+            <a-button type="primary"
+                      @click="() => handleSearch(selectedKeys, confirm)"
+                      icon="search"
+                      size="small"
+                      style="width: 90px; margin-right: 8px">查找</a-button>
+            <a-button @click="() => handleReset(clearFilters)"
+                      size="small"
+                      style="width: 90px">重置</a-button>
+          </div>
+          <a-icon slot="filterIcon"
+                  slot-scope="filtered"
+                  type="search"
+                  :style="{ color: filtered ? '#108ee9' : undefined }" />
+          <template slot="customRender"
+                    slot-scope="text">
+            <span v-if="searchText">
+              <template v-for="(fragment, i) in text.toString().split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i'))">
+                <mark v-if="fragment.toLowerCase() === searchText.toLowerCase()"
+                      :key="i"
+                      class="sdn-highlight">{{fragment}}</mark>
+                <template v-else>{{fragment}}</template>
+              </template>
+            </span>
+            <template v-else>{{text}}</template>
+          </template>
           <template slot="footer">
             <a-row>
               <a-col :span="5"
@@ -65,31 +99,85 @@ export default {
   data () {
     return {
       loading: false,
+      searchText: '',
+      searchInput: null,
       selDates: [moment(), moment()],
       columns: [
         {
           title: "船公司",
           dataIndex: "lncd",
           width: 100,
-          key: 1
+          key: 'lncd',
+          scopedSlots: {
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+            customRender: 'customRender',
+          },
+          onFilter: (value, record) => record.lncd.toString().toLowerCase().includes(value.toLowerCase()),
+          onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+              setTimeout(() => {
+                this.searchInput.focus();
+              }, 0);
+            }
+          },
         },
         {
           title: "中文船名",
           dataIndex: "cnvsname",
           width: 180,
-          key: 2
+          key: 'cnvsname',
+          scopedSlots: {
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+            customRender: 'customRender',
+          },
+          onFilter: (value, record) => record.cnvsname.toString().toLowerCase().includes(value.toLowerCase()),
+          onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+              setTimeout(() => {
+                this.searchInput.focus();
+              }, 0);
+            }
+          },
         },
         {
           title: "英文船名",
           dataIndex: "engvsname",
           width: 150,
-          key: 3
+          key: 'engvsname',
+          scopedSlots: {
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+            customRender: 'customRender',
+          },
+          onFilter: (value, record) => record.engvsname.toString().toLowerCase().includes(value.toLowerCase()),
+          onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+              setTimeout(() => {
+                this.searchInput.focus();
+              }, 0);
+            }
+          },
         },
         {
           title: "航次",
           dataIndex: "vsvy",
           width: 150,
-          key: 4
+          key: 'vsvy',
+          scopedSlots: {
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+            customRender: 'customRender',
+          },
+          onFilter: (value, record) => record.vsvy.toString().toLowerCase().includes(value.toLowerCase()),
+          onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+              setTimeout(() => {
+                this.searchInput.focus();
+              }, 0);
+            }
+          },
         },
         {
           title: "泊位号",
@@ -207,7 +295,15 @@ export default {
       if (record.realunberthdate)
         return 'sdn-had-leave'
       return '';
-    }
+    },
+    handleSearch (selectedKeys, confirm) {
+      confirm();
+      this.searchText = selectedKeys[0];
+    },
+    handleReset (clearFilters) {
+      clearFilters();
+      this.searchText = '';
+    },
   }
 }
 </script>
@@ -220,5 +316,9 @@ export default {
 }
 .sdn-had-leave {
   background: #99ffff;
+}
+.sdn-highlight {
+  background-color: rgb(255, 192, 105);
+  padding: 0px;
 }
 </style>
