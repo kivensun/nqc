@@ -119,9 +119,7 @@ export default {
         this.loading = false;
         return false;
       }
-      const params = {};
-      params.cntrId = value;
-      imCustomPassInfo(params).then(response => {
+      imCustomPassInfo({ "cntrId": value }).then(response => {
         console.log(response);
         const { flag, data, errMsg, outMsg } = response;
         if (flag) {

@@ -99,9 +99,8 @@ export default {
         this.loading = false;
         return false;
       }
-      const params = {};
-      params.cntrId = value;
-      exportPassiInfo(params).then(response => {
+
+      exportPassiInfo({ "cntrId": value }).then(response => {
         console.log(response);
         const { flag, data, errMsg, outMsg } = response;
         if (flag) {
