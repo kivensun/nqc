@@ -63,6 +63,7 @@
         <div v-show="pagination" style="margin-top:10px;">
           <a-pagination
             showSizeChanger
+            :pageSizeOptions="pageSizeOptions"
             :pageSize.sync="pageSize"
             :defaultCurrent="1"
             :total="filterRows.length"
@@ -71,7 +72,8 @@
             style="font-size:13px;"
           >
             <template slot="buildOptionText" slot-scope="props">
-              <span>{{props.value}}条/页</span>
+              <span v-if="props.value!=='999999'">{{props.value}}条/页</span>
+              <span v-if="props.value==='999999'">全部</span>
             </template>
           </a-pagination>
         </div>
@@ -115,6 +117,7 @@ const compareDown = function(prop) {
 export default {
   data() {
     return {
+      pageSizeOptions: ['10', '20', '30', '40', '999999'],
       currentPage: 1,
       pageSize: 20,
       curPageRows: [],
