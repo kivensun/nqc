@@ -65,7 +65,8 @@
           <a-select-option value="CTSZ">尺寸</a-select-option>
           <a-select-option value="ISPASS">扣留/放行</a-select-option>
         </a-select>
-        <a-button style="margin-left:20px;" @click="exportExcel">导出EXCEL</a-button>
+        <a-button style="margin-left:20px;" @click="exportNotLoadExcel">导出未装船</a-button>
+        <a-button style="margin-left:20px;" @click="exportLoadedExcel">导出已装船</a-button>
         <a-button style="float:right" @click="voyVisable = true">
           <a-icon type="left" />航次列表
         </a-button>
@@ -92,9 +93,9 @@
       </div>
     </div>
     <div style="text-align:left;">
-      <br>
-      <span >*说明 中转 Z:国际中转/B:内支中转/Y:内贸中转/N:非中转</span>
-      <br> 
+      <br />
+      <span>*说明 中转 Z:国际中转/B:内支中转/Y:内贸中转/N:非中转</span>
+      <br />
     </div>
   </div>
 </template>
@@ -295,9 +296,8 @@ export default {
     })
   },
   methods: {
-    exportExcel() {
+    exportNotLoadExcel() {
       let me = this;
-      //1.未装船
       if (me.unloadCntrs.length > 0) {
         me.headers = me.unloadColumns.map(item => {
           return item.title;
@@ -322,7 +322,9 @@ export default {
         me.contents.push({ 序号: foot });
         xlsx(me.headers, me.contents, me.curVoy.vscd + '-' + me.curVoy.vsvy + '未装船箱信息', 'LAST');
       }
-      //2.已装船
+    },
+    exportLoadedExcel() {
+      let me = this;
       if (me.loadCntrs.length > 0) {
         me.headers = me.loadColumns.map(item => {
           return item.title;
@@ -390,7 +392,7 @@ export default {
               szty: item.ctsz + item.ctty, //
               holdPass: item.isportpass, //
               passTime: U.isEmpty(item.passtime) ? '' : U.compactDateToNormal(item.passtime), //
-              cabl: item.cabl?item.cabl.replace(/,/g, '<br/>'):'', //
+              cabl: item.cabl ? item.cabl.replace(/,/g, '<br/>') : '', //
               ctsn: item.ctsn, //
               inTime: U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime), //
               nzw: item.isnzwct
@@ -417,7 +419,7 @@ export default {
               vsLoc: item.vsba.padStart(2, '0') + item.vscl.padStart(2, '0') + item.vsel.padStart(2, '0'),
               holdPass: item.isportpass,
               passTime: U.isEmpty(item.passtime) ? '' : U.compactDateToNormal(item.passtime),
-              cabl: item.cabl?item.cabl.replace(/,/g, '<br/>'):'', //,
+              cabl: item.cabl ? item.cabl.replace(/,/g, '<br/>') : '', //,
               inTime: U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime),
               outTime: U.isEmpty(item.outtime) ? '' : U.compactDateToNormal(item.outtime),
               nzw: item.isnzwct
