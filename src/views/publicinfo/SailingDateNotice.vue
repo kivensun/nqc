@@ -10,16 +10,27 @@
              :xxl="{span: 3, offset: 2}">
         <div style="margin-top:20px;">查询时间：</div>
       </a-col>
-      <a-col :xs="{span: 19}"
-             :sm="{span: 20}"
-             :md="{span: 13}"
-             :lg="{span: 13}"
-             :xl="{span: 13}"
-             :xxl="{span: 13}">
-        <a-range-picker format="YYYYMMDD"
-                        style="margin-top:10px;"
-                        :placeholder="['开始日期', '结束日期']"
-                        v-model="selDates" />
+      <a-col :xs="{span: 9}"
+             :sm="{span: 10}"
+             :md="{span: 6}"
+             :lg="{span: 6}"
+             :xl="{span: 6}"
+             :xxl="{span: 6}"
+             style="text-align: right;">
+        <a-date-picker format="YYYYMMDD"
+                       style="margin-top:10px;"
+                       v-model="startDate" />
+      </a-col>
+      <a-col :xs="{span: 9,offset: 1}"
+             :sm="{span: 9,offset: 1}"
+             :md="{span: 6,offset: 1}"
+             :lg="{span: 6,offset: 1}"
+             :xl="{span: 6,offset: 1}"
+             :xxl="{span: 6,offset: 1}"
+             style="text-align: left;">
+        <a-date-picker format="YYYYMMDD"
+                       style="margin-top:10px;"
+                       v-model="endDate" />
       </a-col>
       <a-col :xs="{span: 3,offset:1}"
              :sm="{span: 3}"
@@ -41,6 +52,29 @@
                  :dataSource="tableData"
                  size="small"
                  :rowClassName="setRowColor">
+          <div slot="filterDropdown"
+               slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }"
+               style="padding: 8px">
+            <a-input v-ant-ref="c => searchInput = c"
+                     :placeholder="`查找 ${column.title}`"
+                     :value="selectedKeys[0]"
+                     @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
+                     @pressEnter="() => handleSearch(selectedKeys, confirm)"
+                     style="width: 188px; margin-bottom: 8px; display: block;" />
+            <a-button type="primary"
+                      @click="() => handleSearch(selectedKeys, confirm)"
+                      icon="search"
+                      size="small"
+                      style="width: 90px; margin-right: 8px">查找</a-button>
+            <a-button @click="() => handleReset(clearFilters)"
+                      size="small"
+                      style="width: 90px">重置</a-button>
+          </div>
+          <a-icon slot="filterIcon"
+                  slot-scope="filtered"
+                  type="search"
+                  :style="{ color: filtered ? '#108ee9' : undefined }" />
+
           <template slot="footer">
             <a-row>
               <a-col :span="5"
@@ -65,79 +99,143 @@ export default {
   data () {
     return {
       loading: false,
-      selDates: [moment(), moment()],
+      searchText: '',
+      searchInput: null,
+      startDate: moment(),
+      endDate: moment(),
       columns: [
         {
           title: "船公司",
           dataIndex: "lncd",
           width: 100,
-          key: 1
+          key: 'lncd',
+          scopedSlots: {
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+            customRender: 'customRender',
+          },
+          onFilter: (value, record) => record.lncd.toString().toLowerCase().includes(value.toLowerCase()),
+          onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+              setTimeout(() => {
+                this.searchInput.focus();
+              }, 0);
+            }
+          },
         },
         {
           title: "中文船名",
           dataIndex: "cnvsname",
           width: 180,
-          key: 2
+          key: 'cnvsname',
+          scopedSlots: {
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+            customRender: 'customRender',
+          },
+          onFilter: (value, record) => record.cnvsname.toString().toLowerCase().includes(value.toLowerCase()),
+          onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+              setTimeout(() => {
+                this.searchInput.focus();
+              }, 0);
+            }
+          },
         },
         {
           title: "英文船名",
           dataIndex: "engvsname",
           width: 150,
-          key: 3
+          key: 'engvsname',
+          scopedSlots: {
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+            customRender: 'customRender',
+          },
+          onFilter: (value, record) => record.engvsname.toString().toLowerCase().includes(value.toLowerCase()),
+          onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+              setTimeout(() => {
+                this.searchInput.focus();
+              }, 0);
+            }
+          },
         },
         {
           title: "航次",
           dataIndex: "vsvy",
           width: 150,
-          key: 4
+          key: 'vsvy',
+          scopedSlots: {
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+            customRender: 'customRender',
+          },
+          onFilter: (value, record) => record.vsvy.toString().toLowerCase().includes(value.toLowerCase()),
+          onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+              setTimeout(() => {
+                this.searchInput.focus();
+              }, 0);
+            }
+          },
         },
         {
           title: "泊位号",
           dataIndex: "btno",
           width: 100,
-          key: 5
+          key: "btno",
+
         },
         {
           title: "计划靠泊时间",
           dataIndex: "estberthdate",
           width: 150,
-          key: 6
+          key: "estberthdate",
+
         },
         {
           title: "计划离泊时间",
           dataIndex: "estunberthdate",
           width: 150,
-          key: 7
+          key: "estunberthdate",
+
         },
         {
           title: "实际靠泊时间",
           dataIndex: "realberthdate",
           width: 150,
-          key: 8
+          key: "realberthdate",
+
         },
         {
           title: "实际离泊时间",
           dataIndex: "realunberthdate",
           width: 150,
-          key: 9
+          key: "realunberthdate",
+
+
         },
         {
           title: "进箱时间",
           dataIndex: "cntrindate",
           width: 120,
-          key: 10
+          key: "cntrindate",
+
         },
         {
           title: "截箱时间",
           dataIndex: "cntroutdate",
           width: 120,
-          key: 11
+          key: "cntroutdate",
+
         },
         {
           title: "发布时间",
           dataIndex: "pubdate",
           width: 150,
-          key: 12
+          key: "pubdate",
+
         }
       ],
       tableData: [],
@@ -152,52 +250,46 @@ export default {
     getData () {
       this.loading = true;
       const params = {}
-      if (this.selDates.length > 0) {
-        params.startdate = this.selDates[0].format('YYYYMMDD');
-        params.enddate = this.selDates[1].format('YYYYMMDD');
-        this.cardTitle = '报表时间: ' +
-          this.selDates[0].format('YYYY-MM-DD') +
-          ' ---- ' +
-          this.selDates[1].format('YYYY-MM-DD')
 
-        console.log(params);
-        sailingDateNotice(params).then((response) => {
-          console.log(response);
-          const { flag, data, errMsg } = response;
-          if (flag) {
-            console.log(data);
+      params.startdate = this.startDate.format('YYYYMMDD');
+      params.enddate = this.endDate.format('YYYYMMDD');
+      this.cardTitle = '报表时间: ' +
+        this.startDate.format('YYYY-MM-DD') +
+        ' ---- ' +
+        this.endDate.format('YYYY-MM-DD')
 
-            this.tableData = data.map((item, index) => {
-              let tmp = {};
-              tmp.key = index;
-              tmp.lncd = item.lncd;
-              tmp.cnvsname = item.cnvsname;
-              tmp.engvsname = item.engvsname;
-              tmp.vsvy = item.imvsvy + '/' + item.exvsvy;
-              tmp.realberthdate = item.realberthdate;
-              tmp.realunberthdate = item.realunberthdate;
-              tmp.cntrindate = item.cntrindate;
-              tmp.cntroutdate = item.cntroutdate;
-              tmp.estberthdate = item.estberthdate;
-              tmp.estunberthdate = item.estunberthdate;
-              tmp.pubdate = item.pubdate;
-              tmp.btno = item.btno;
-              return tmp;
-            });
-          } else {
-            this.$notification.error({
-              message: '出错',
-              description: '发生错误' + errMsg
-            });
+      console.log(params);
+      sailingDateNotice(params).then((response) => {
+        console.log(response);
+        const { flag, data, errMsg } = response;
+        if (flag) {
+          console.log(data);
 
-          }
-        });
-      } else {
-        this.$notification.error({
-          message: '出错',
-          description: '请选择日期'
-        })
-      }
+          this.tableData = data.map((item, index) => {
+            let tmp = {};
+            tmp.key = index;
+            tmp.lncd = item.lncd;
+            tmp.cnvsname = item.cnvsname;
+            tmp.engvsname = item.engvsname;
+            tmp.vsvy = item.imvsvy + '/' + item.exvsvy;
+            tmp.realberthdate = item.realberthdate;
+            tmp.realunberthdate = item.realunberthdate;
+            tmp.cntrindate = item.cntrindate;
+            tmp.cntroutdate = item.cntroutdate;
+            tmp.estberthdate = item.estberthdate;
+            tmp.estunberthdate = item.estunberthdate;
+            tmp.pubdate = item.pubdate;
+            tmp.btno = item.btno;
+            return tmp;
+          });
+        } else {
+          this.$notification.error({
+            message: '出错',
+            description: '发生错误' + errMsg
+          });
+
+        }
+      });
 
       this.loading = false;
     },
@@ -207,7 +299,15 @@ export default {
       if (record.realunberthdate)
         return 'sdn-had-leave'
       return '';
-    }
+    },
+    handleSearch (selectedKeys, confirm) {
+      confirm();
+      this.searchText = selectedKeys[0];
+    },
+    handleReset (clearFilters) {
+      clearFilters();
+      this.searchText = '';
+    },
   }
 }
 </script>
@@ -220,5 +320,9 @@ export default {
 }
 .sdn-had-leave {
   background: #99ffff;
+}
+.sdn-highlight {
+  background-color: rgb(255, 192, 105);
+  padding: 0px;
 }
 </style>

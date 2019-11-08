@@ -238,9 +238,8 @@ export default {
         this.loading = false;
         return false;
       }
-      const params = {};
-      params.cntrId = value;
-      containerInfo(params).then(response => {
+
+      containerInfo({ "cntrId": value }).then(response => {
         console.log(response);
         const { flag, data, errMsg } = response;
         if (flag) {

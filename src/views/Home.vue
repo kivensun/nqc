@@ -294,9 +294,18 @@ export default {
   },
   mounted () {
     this.checkNotice();
+    if (window.history && window.history.pushState) {
+      history.pushState(null, null, document.URL);
+      window.addEventListener('popstate', this.onDrawerClose, false);
+    }
+
+  },
+  destroyed () {
+    window.removeEventListener('popstate', this.onDrawerClose, false);
   },
   methods: {
     ...mapActions(['RenewMenu', 'Login', 'InitMenu', 'refreshUser', 'Logout']),
+
     changeMenu () {
       this.RenewMenu(this.groups);
       console.log('changeMenu');
