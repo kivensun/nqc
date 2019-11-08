@@ -194,7 +194,7 @@ export default {
             c.ptds = item.ptds;
             c.vscn = item.vscn;
             c.vsvy = item.vsvy;
-            c.cabl = item.cabl.replace(/,/g, '<br/>');
+            c.cabl = item.cabl?item.cabl.replace(/,/g, '<br/>'):''; //
             c.ctsz = item.ctsz;
             c.ctty = item.ctty;
             c.ctgw = item.ctgw;
