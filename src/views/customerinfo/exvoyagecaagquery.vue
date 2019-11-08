@@ -364,7 +364,7 @@ export default {
               szty: item.ctsz + item.ctty,
               holdPass: item.isportpass,
               passTime: U.isEmpty(item.passtime) ? '' : U.compactDateToNormal(item.passtime),
-              cabl: item.cabl.replace(/,/g, '<br/>'),
+              cabl: item.cabl?item.cabl.replace(/,/g, '<br/>'):'', //
               inTime: U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime),
               nzw: item.isnzwct
             };
@@ -390,7 +390,7 @@ export default {
               vsLoc: item.vsba.padStart(2, '0') + item.vscl.padStart(2, '0') + item.vsel.padStart(2, '0'),
               holdPass: item.isportpass,
               passTime: U.isEmpty(item.passtime) ? '' : U.compactDateToNormal(item.passtime),
-              cabl: item.cabl.replace(/,/g, '<br/>'),
+              cabl: item.cabl?item.cabl.replace(/,/g, '<br/>'):'', //
               inTime: U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime),
               outTime: U.isEmpty(item.outtime) ? '' : U.compactDateToNormal(item.outtime),
               nzw: item.isnzwct
