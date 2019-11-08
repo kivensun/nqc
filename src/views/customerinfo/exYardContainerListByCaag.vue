@@ -139,7 +139,6 @@ export default {
     //导出EXCEL
     exportExcel() {
       let me = this;
-
       if (me.exCntrs.length > 0) {
         me.headers = me.exColumns.map(item => {
           return item.title;
