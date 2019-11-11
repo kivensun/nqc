@@ -4,19 +4,22 @@
     <div v-show="voyVisable">
       <div style="min-height:50px;padding:10px;border:1px solid black;">
         <div style="overflow:hidden;">
-          <span style="float:left;margin-top:15px;margin-left:20px;"
-                class="title">输入出口航次查询：</span>
-          <a-input-search @search="onSearch"
-                          @change="onChange"
-                          enterButton
-                          style="width: 500px;float:left;margin-top:10px;margin-left:20px;margin-top:10px;"
-                          v-model="exvsvy" />
+          <span style="float:left;margin-top:15px;margin-left:20px;" class="title">输入出口航次查询：</span>
+          <a-input-search
+            @search="onSearch"
+            @change="onChange"
+            enterButton
+            style="width: 500px;float:left;margin-top:10px;margin-left:20px;margin-top:10px;"
+            v-model="exvsvy"
+          />
         </div>
         <div style="overflow:hidden;margin-top:10px;">
-          <a-tag v-for="voy in determineVoys"
-                 :key="voy.key"
-                 @click="showVoyCntrs(voy)"
-                 class="tag">{{voy.title}}</a-tag>
+          <a-tag
+            v-for="voy in determineVoys"
+            :key="voy.key"
+            @click="showVoyCntrs(voy)"
+            class="tag"
+          >{{voy.title}}</a-tag>
         </div>
       </div>
       <div style="min-height:100px;padding:10px;border:1px solid black;margin-top:10px;">
@@ -24,10 +27,12 @@
           <span class="title">7天内所有航次</span>
         </div>
         <div style="overflow:hidden;">
-          <a-tag v-for="voy in weekVoys"
-                 :key="voy.key"
-                 @click="showVoyCntrs(voy)"
-                 class="tag">{{voy.title}}</a-tag>
+          <a-tag
+            v-for="voy in weekVoys"
+            :key="voy.key"
+            @click="showVoyCntrs(voy)"
+            class="tag"
+          >{{voy.title}}</a-tag>
         </div>
       </div>
     </div>
@@ -35,39 +40,43 @@
     <div v-show="!voyVisable">
       <div style="text-align: left;margin-left: 20px;overflow:hidden;">
         <span class="title">船名/航次： {{curVoy.vscd}} / {{curVoy.vsvy}}</span>
-        <span class="title"
-              style="margin-left:50px;">排序方式：</span>
-        <a-select defaultValue="PORT"
-                  style="width: 120px"
-                  v-model="filterOption"
-                  @change="selFilterOption">
+        <span class="title" style="margin-left:50px;">排序方式：</span>
+        <a-select
+          defaultValue="PORT"
+          style="width: 120px"
+          v-model="filterOption"
+          @change="selFilterOption"
+        >
           <a-select-option value="PORT">港口</a-select-option>
           <a-select-option value="LNCD">箱主</a-select-option>
           <a-select-option value="CTSZ">尺寸</a-select-option>
           <a-select-option value="ISPASS">扣留/放行</a-select-option>
         </a-select>
-        <a-button style="margin-left:20px;"
-                  @click="exportExcel">导出EXCEL</a-button>
-        <a-button style="float:right"
-                  @click="voyVisable = true">
+        <a-button style="margin-left:20px;" @click="exportNotLoadExcel">未装船导出</a-button>
+        <a-button style="margin-left:20px;" @click="exportLoadedExcel">已装船导出</a-button>
+        <a-button style="float:right" @click="voyVisable = true">
           <a-icon type="left" />航次列表
         </a-button>
       </div>
       <div style="margin-top:10px;text-align:left;">
         <hr />
-        <nbctCompactTable :header="unloadHeader"
-                          :columns="unloadColumns"
-                          :rows="unloadCntrs"
-                          :footer="unloadStatistcsStr"
-                          :filterColumns="filterColumns"
-                          :loading="loading" />
+        <nbctCompactTable
+          :header="unloadHeader"
+          :columns="unloadColumns"
+          :rows="unloadCntrs"
+          :footer="unloadStatistcsStr"
+          :filterColumns="filterColumns"
+          :loading="loading"
+        />
         <hr />
-        <nbctCompactTable :header="loadHeader"
-                          :columns="loadColumns"
-                          :rows="loadCntrs"
-                          :footer="loadStatistcsStr"
-                          :filterColumns="filterColumns"
-                          :loading="loading" />
+        <nbctCompactTable
+          :header="loadHeader"
+          :columns="loadColumns"
+          :rows="loadCntrs"
+          :footer="loadStatistcsStr"
+          :filterColumns="filterColumns"
+          :loading="loading"
+        />
       </div>
     </div>
   </div>
@@ -231,7 +240,7 @@ const loadColumns = [
 const filterColumns = loadColumns.slice(1);
 
 export default {
-  data () {
+  data() {
     return {
       voyVisable: true,
       //voyage list
@@ -269,9 +278,8 @@ export default {
     })
   },
   methods: {
-    exportExcel () {
+    exportNotLoadExcel() {
       let me = this;
-      //1.未装船
       if (me.unloadCntrs.length > 0) {
         me.headers = me.unloadColumns.map(item => {
           return item.title;
@@ -296,7 +304,9 @@ export default {
         me.contents.push({ 序号: foot });
         xlsx(me.headers, me.contents, me.curVoy.vscd + '-' + me.curVoy.vsvy + '未装船箱信息', 'LAST');
       }
-      //2.已装船
+    },
+    exportLoadedExcel() {
+      let me = this;
       if (me.loadCntrs.length > 0) {
         me.headers = me.loadColumns.map(item => {
           return item.title;
@@ -313,11 +323,11 @@ export default {
         xlsx(me.headers, me.contents, me.curVoy.vscd + '-' + me.curVoy.vsvy + '已装船箱信息', 'LAST');
       }
     },
-    selFilterOption () {
+    selFilterOption() {
       let me = this;
       me.showVoyCntrs(me.curVoy);
     },
-    showVoyCntrs (voy) {
+    showVoyCntrs(voy) {
       let me = this;
       me.curVoy = voy;
       me.loading = true;
@@ -356,7 +366,7 @@ export default {
             smwrap('国际中转', me.unloadStatistcs.znum) +
             smwrap('内支中转', me.unloadStatistcs.bnum);
           me.unloadCntrs = data.list1 == null ? [] : data.list1;
-          me.unloadCntrs = me.unloadCntrs.map(function (item, index) {
+          me.unloadCntrs = me.unloadCntrs.map(function(item, index) {
             return {
               ...item,
               key: index + 1,
@@ -364,7 +374,7 @@ export default {
               szty: item.ctsz + item.ctty,
               holdPass: item.isportpass,
               passTime: U.isEmpty(item.passtime) ? '' : U.compactDateToNormal(item.passtime),
-              cabl: item.cabl?item.cabl.replace(/,/g, '<br/>'):'', //
+              cabl: item.cabl ? item.cabl.replace(/,/g, '<br/>') : '', //
               inTime: U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime),
               nzw: item.isnzwct
             };
@@ -380,7 +390,7 @@ export default {
             smwrap('国际中转', me.loadStatistcs.znum) +
             smwrap('内支中转', me.loadStatistcs.bnum);
           me.loadCntrs = data.list2 == null ? [] : data.list2;
-          me.loadCntrs = me.loadCntrs.map(function (item, index) {
+          me.loadCntrs = me.loadCntrs.map(function(item, index) {
             return {
               ...item,
               key: index + 1,
@@ -390,7 +400,7 @@ export default {
               vsLoc: item.vsba.padStart(2, '0') + item.vscl.padStart(2, '0') + item.vsel.padStart(2, '0'),
               holdPass: item.isportpass,
               passTime: U.isEmpty(item.passtime) ? '' : U.compactDateToNormal(item.passtime),
-              cabl: item.cabl?item.cabl.replace(/,/g, '<br/>'):'', //
+              cabl: item.cabl ? item.cabl.replace(/,/g, '<br/>') : '', //
               inTime: U.isEmpty(item.intime) ? '' : U.compactDateToNormal(item.intime),
               outTime: U.isEmpty(item.outtime) ? '' : U.compactDateToNormal(item.outtime),
               nzw: item.isnzwct
@@ -400,19 +410,19 @@ export default {
       });
       this.voyVisable = false;
     },
-    onChange () {
+    onChange() {
       this.exvsvy = this.exvsvy.toUpperCase();
     },
-    onSearch () {
+    onSearch() {
       this.determineVoy();
     },
-    voyList (params, fn) {
+    voyList(params, fn) {
       voyagelist(params).then(res => {
         let { flag, data, errMsg } = res;
         if (!flag) {
           this.$message.error(errMsg);
         } else {
-          let r = data.map(function (item, index) {
+          let r = data.map(function(item, index) {
             return {
               key: index,
               vscd: U.trim(item.vscdvy),
@@ -426,30 +436,30 @@ export default {
         }
       });
     },
-    companyVoyList () {
+    companyVoyList() {
       let me = this;
       let params = { vsvy: '', vsdr: 'E', lncd: me.companyId };
-      let fn = function (value) {
+      let fn = function(value) {
         me.companyVoys = value;
       };
       me.voyList(params, fn);
     },
-    weekVoyList () {
+    weekVoyList() {
       let me = this;
       let params = { vsvy: '', vsdr: 'E', lncd: '' };
-      let fn = function (value) {
+      let fn = function(value) {
         me.weekVoys = value;
       };
       me.voyList(params, fn);
     },
-    determineVoy () {
+    determineVoy() {
       let me = this;
       if (U.isEmpty(me.exvsvy)) {
         me.$message.warn('请输入航次查询');
         return;
       }
       let params = { vsvy: me.exvsvy, vsdr: 'E', lncd: '' };
-      let fn = function (value) {
+      let fn = function(value) {
         me.determineVoys = value;
       };
       me.voyList(params, fn);
@@ -458,7 +468,7 @@ export default {
   components: {
     nbctCompactTable
   },
-  mounted () {
+  mounted() {
     this.companyVoyList();
     this.weekVoyList();
     this.unloadColumns = loadColumns.filter(item => {
