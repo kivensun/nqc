@@ -290,7 +290,8 @@ export default {
               telephone: data.user.telephone,
               company: data.user.company,
               companyId: data.user.companyId,
-              address: data.user.address
+              address: data.user.address,
+              userType: data.user.userType
             }
             this.userForm.setFieldsValue(fieldsValue);
 
