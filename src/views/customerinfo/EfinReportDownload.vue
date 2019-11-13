@@ -155,7 +155,7 @@ export default {
       params.skey = skey;
       getEfinreportFile(params).then(response => {
         if (response) {
-          fs.saveAs(response, filename + '.xlsx');
+          fs.saveAs(response, filename);
         }
       });
     }
