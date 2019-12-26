@@ -5,13 +5,6 @@
         <a-layout>
           <a-layout-header class="global-header">
             <a-row>
-              <a-col :span="24"
-                     style="text-align: center;background-color: #55aaff;height:20px;line-height:20px">
-                <a href="http://www.nbct.com.cn/query/index.html"
-                   style="color:#fff;margin-top:5px;">回到旧版查询>>>>></a>
-              </a-col>
-            </a-row>
-            <a-row>
               <a-col :xs="{span: 7, offset:1}"
                      :sm="{span: 5, offset:1}"
                      :md="{span: 5, offset: 1}"
@@ -515,7 +508,7 @@ export default {
 }
 
 .global-header {
-  height: 85px;
+  height: 65px;
   padding: 0;
   position: fixed;
   width: 100%;
