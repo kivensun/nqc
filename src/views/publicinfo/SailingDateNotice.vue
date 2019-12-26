@@ -51,6 +51,7 @@
         <a-table :columns="columns"
                  :dataSource="tableData"
                  size="small"
+                 :pagination="false"
                  :rowClassName="setRowColor">
           <div slot="filterDropdown"
                slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }"
