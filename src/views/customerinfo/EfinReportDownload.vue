@@ -142,10 +142,10 @@ export default {
       getEfinreports(params).then(response => {
         let { flag, data } = response;
         if (flag) {
-          this.listDzdIData = data.filter(item => item.inIE === 'I');
+          this.listDzdIData = data === null ? [] : data.filter(item => item.inIE === 'I');
           console.log(this.listDzdIData);
-          this.listDzdEData = data.filter(item => item.inIE === 'E');
-          this.listYszkData = data.filter(item => item.inIE === 'K');
+          this.listDzdEData = data === null ? [] : data.filter(item => item.inIE === 'E');
+          this.listYszkData = data === null ? [] : data.filter(item => item.inIE === 'K');
         }
       })
     },
