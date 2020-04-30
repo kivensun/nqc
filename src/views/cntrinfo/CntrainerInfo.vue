@@ -43,10 +43,12 @@
                 <div class="wrap-content">{{container.imvsvy}}</div>
               </a-col>
               <a-col :span="3">
-                <div>出口船名/航次:</div>
+                <div>当前船名/航次:</div>
               </a-col>
               <a-col :span="5">
-                <div class="wrap-content">{{container.exvsvy}}</div>
+                <div class="wrap-content">{{container.curvscd 
+                  + '-'+ container.curvsvy 
+                  + '/' +container.curvsdr}}</div>
               </a-col>
               <a-col :span="3">
                 <div>是否装船:</div>
