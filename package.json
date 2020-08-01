@@ -14,7 +14,7 @@
     "axios": "^0.19.0",
     "core-js": "^2.6.5",
     "file-saver": "^2.0.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "nprogress": "^0.2.0",
     "utility": "^1.16.1",
